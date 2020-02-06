@@ -1,0 +1,9 @@
+body {
+  background-color: lightslategray;
+}
+.italic {
+  font-style: italic;
+}
+h1 {
+  color: aliceblue;
+}
