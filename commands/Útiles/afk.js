@@ -1,0 +1,32 @@
+module.exports = class command extends require('../../base/models/Command.js') {
+  constructor(client) {
+    super(client, {
+      name: 'afk',
+      description: 'Utilizalo cuando te pongas en estado ausente para que los demás sepan que no estás disponible.',
+      usage: prefix => `\`${prefix}afk [motivo]\``,
+      examples: prefix => `\`${prefix}afk Durmiendo 💤\``,
+      enabled: true,
+      cooldown: 3,
+      aliases: [],
+      botPermissions: [],
+      memberPermissions: [],
+      dirname: __dirname
+    });
+  }
+  async run(message, args, data, embed) {
+    let client = this.client;
+    try {
+      if (!client.afk.get(message.author.id)) {
+        client.afk.set(message.author.id, { reason: args[0] ? args.join(' ') : 'AFK' });
+        message.channel.send(`**${message.author.username}**, te has puesto AFK, por la razón: ${args[0] ? args.join(' ') : 'AFK'}`);
+      }
+    } catch (e) {
+      message.channel.send(message.error(e));
+      client.err({
+        type: 'command',
+        name: this.help.name,
+        error: e
+      });
+    }
+  }
+};
