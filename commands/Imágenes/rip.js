@@ -16,7 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let msg = await message.channel.send(client.replies.generatingSomething(message)),
+      let msg = await message.channel.send(client.replies.reply('generating', message)),
         img = await require('marsnpm').rip((message.mentions.users.first() || message.author).displayAvatarURL({ format: 'jpg', size: 2048 }));
       msg.delete();
       message.channel.send({ files: [img] });

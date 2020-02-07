@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       embed
         .setDescription('**' + message.author.username + '** se tiró un pedo. ¡Qué sucio!')
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setImage('https://thumbs.gfycat.com/ParchedSmallAmurstarfish-small.gif')
         .setFooter(client.config.bot + ' | Comandos oculto #2');
       message.channel.send({ embed });

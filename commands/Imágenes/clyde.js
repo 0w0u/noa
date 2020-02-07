@@ -22,7 +22,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         return message.channel.send('No puedes sobrepasar los 70 caracteres.');
       } else {
         let img = await require('node-superfetch').get(`https://nekobot.xyz/api/imagegen?type=clyde&text=${args.join(' ')}`),
-          msg = await message.channel.send(client.replies.generatingSomething(message));
+          msg = await message.channel.send(client.replies.reply('generating', message));
         msg.delete();
         message.channel.send({ files: [img.body.message] });
       }

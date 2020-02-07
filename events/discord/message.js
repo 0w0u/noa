@@ -6,8 +6,8 @@ module.exports = class event {
     let client = this.client,
       cooldowns = client.cooldowns,
       data = {},
-      embed = new (require('discord.js')).MessageEmbed(),
-      errE = await client.emojis.get('605488260361224208'),
+      embed = new (require('discord.js').MessageEmbed)(),
+      errE = await client.emojis.get('599396704193740838'),
       boostB = await client.emojis.get('669280929704968202'),
       Weez = require('weez'),
       weez = new Weez.WeezAPI(client.config.weezKey);
@@ -37,7 +37,7 @@ module.exports = class event {
         let hijo = client.afk.get(message.mentions.users.first().id);
         if (hijo) return message.channel.send('El usuario que has mencionado está afk por: ' + hijo.reason);
       }
-      if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
+      if (message.content.match(new RegExp(`^<@!?${client.config.botID}>( |)$`))) {
         message.channel.send('¡Hola! Soy ' + client.config.bot + ', para conocer más de mí puedes consultar con `' + message.prefix + 'help`.');
       }
       let prefix = client.functions.getPrefix(message, data);
@@ -50,7 +50,7 @@ module.exports = class event {
       let cmd = client.commands.get(cmD) || client.commands.get(client.aliases.get(cmD));
       if (!cmd) return;
       if (!cooldowns.has(cmd.help.name)) {
-        cooldowns.set(cmd.help.name, new (require('discord.js')).Collection());
+        cooldowns.set(cmd.help.name, new (require('discord.js').Collection)());
       }
       let now = Date.now(),
         timestamps = cooldowns.get(cmd.help.name),
@@ -74,7 +74,7 @@ module.exports = class event {
       if (cmd.config.guildOnly === true && !message.guild) return message.channel.send(`${client.demo.error} | **${message.author.username}**, este comando está destinado para ser utilizado vía servidor.`);
       if (cmd.config.nsfwOnly === true && !message.channel.nsfw) {
         let img = await require('node-superfetch').get('https://nekos.life/api/v2/img/meow'),
-          attach = new (require('discord.js')).MessageAttachment(img.body.url, 'meow.png');
+          attach = new (require('discord.js').MessageAttachment)(img.body.url, 'meow.png');
         message.channel.send(`${client.demo.error} | **${message.author.username}**, antes de volvernos locos, dirígete a un canal NSFW. Por mientras te dejo un lindo gatito.`, { files: [attach] });
         return;
       }
@@ -98,7 +98,7 @@ module.exports = class event {
       }
       try {
         cmd.run(message, args, data, embed);
-        let u = new (require('discord.js')).MessageEmbed()
+        let u = new (require('discord.js').MessageEmbed)()
           .setColor(client.functions.selectColor('lightcolors'))
           .addField('• Comando', `\`${cmd.help.name}\``)
           .addField('• Usuario', `\`[${message.author.tag}]\` \`(${message.author.id})\``)

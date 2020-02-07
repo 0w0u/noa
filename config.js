@@ -1,5 +1,7 @@
+require('dotenv').config();
 module.exports = {
-  bot: 'Noa',
+  bot: process.env.botName,
+  botID: '477950798949646336',
   token: process.env.token,
   mongo: process.env.mongo,
   prefix: process.env.prefix,

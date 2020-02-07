@@ -23,7 +23,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       } else if (args.join(' ').length > 150) {
         return message.channel.send(`El texto no debe rebasar los 150 caracteres.`);
       } else {
-        let msg = await message.channel.send(client.replies.generatingSomething(message)),
+        let msg = await message.channel.send(client.replies.reply('generating', message)),
           img = await client.weez.trump(args.join(' '));
         msg.delete();
         message.channel.send({ files: [img] });

@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() == client.user) return message.channel.send('Ahora mismo no quiero que me beses!');
       if (message.mentions.users.size < 1) return message.channel.send('El amor fluye... ¡Es hora de dar un beso! Así que menciona a tu pareja');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** le dio un beso a **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.kissGifs());
       message.channel.send({ embed });

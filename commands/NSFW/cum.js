@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (message.mentions.users.first() === message.author || !message.mentions.users.first()) {
         embed
-          .setColor('RANDOM')
+          .setColor(client.functions.selectColor('lightcolors'))
           .setDescription('**' + message.author.username + '** se corrió... O al menos lo intenta.')
           .setImage(client.replies.cumGifs());
         message.channel.send({ embed });
@@ -29,7 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         return message.channel.send('En mi no por favor >.<');
       } else {
         embed
-          .setColor('RANDOM')
+          .setColor(client.functions.selectColor('lightcolors'))
           .setDescription('**' + message.author.username + '** se corrió en **' + message.mentions.users.first().username + '**')
           .setImage(client.replies.biteGifs());
         message.channel.send({ embed });

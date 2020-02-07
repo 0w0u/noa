@@ -18,10 +18,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let msg = await message.channel.send(client.replies.generatingSomething(message)),
+      let msg = await message.channel.send(client.replies.reply('generating', message)),
         img = await require('node-superfetch').get(`https://nekos.life/api/v2/img/pussy`);
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('...')
         .setImage(img.body.url);
       msg.delete();

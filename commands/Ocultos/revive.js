@@ -22,7 +22,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.size < 1) return message.channel.send('Es hora de traer a aquellos que tanto amas... ¡Pero dime a quien!');
       embed
         .setDescription('**' + message.author.username + '** revivió a **' + message.mentions.users.first().username + '**')
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setImage(client.replies.reviveGifs());
       message.channel.send({ embed });
     } catch (e) {

@@ -17,7 +17,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send('Agrega el logro que quieres obtener.');
       else {
-        let msg = await message.channel.send(client.replies.generatingSomething(message)),
+        let msg = await message.channel.send(client.replies.reply('generating', message)),
           img = await client.weez.logro(args.join(' '));
         msg.delete();
         message.channel.send({ files: [img] });

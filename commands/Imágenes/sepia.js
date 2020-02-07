@@ -16,7 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let msg = await message.channel.send(client.replies.generatingSomething(message)),
+      let msg = await message.channel.send(client.replies.reply('generating', message)),
         i = (message.mentions.users.first() || message.author).displayAvatarURL({ format: 'png', size: 2048 }),
         img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/sepia?url=${i}`);
       msg.delete();

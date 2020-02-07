@@ -1,7 +1,4 @@
-let { Client, Collection, WebhookClient, MessageEmbed } = require('discord.js'),
-  express = require('express'),
-  app = express(),
-  port = 6969;
+let { Client, Collection, WebhookClient, MessageEmbed } = require('discord.js');
 module.exports = class client extends Client {
   constructor(options) {
     super(options);

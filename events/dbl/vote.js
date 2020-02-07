@@ -7,8 +7,8 @@ module.exports = class event {
     try {
       let user = await client.users.fetch(vote.user),
         bot = await client.users.fetch(vote.bot),
-        uwu = await client.dbl.getBot(client.user.id),
-        embed = new (require('discord.js')).MessageEmbed()
+        uwu = await client.dbl.getBot(client.config.botID),
+        embed = new (require('discord.js').MessageEmbed)()
           .setColor(client.functions.selectColor('lightcolors'))
           .setThumbnail(user.displayAvatarURL())
           .setTitle('<:upvote:651571911632879626> | ¡Un usuario ha votado por ' + bot.username + '!')

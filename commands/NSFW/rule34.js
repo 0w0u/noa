@@ -23,7 +23,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       } else {
         let deep = ['mon', 'loli', 'shota', 'cub', 'young', 'child', 'baby', 'guro', 'gore', 'vore'],
           img = await require('node-superfetch').get(`https://rule34.xxx?page=dapi&s=post&q=index&limit=100&tags=${encodeURI(`${args.join('_')}+rating:explicit`)}&json=1`),
-          msg = await message.channel.send(client.replies.generatingSomething(message));
+          msg = await message.channel.send(client.replies.reply('generating', message));
         let result;
         try {
           result = JSON.parse(img.body);

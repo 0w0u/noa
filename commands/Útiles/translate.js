@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) return message.channel.send('Necesitas ingresar el idioma al cual se traducirá tu mensaje. Utiliza `' + message.prefix + 'help translate` para ver las opciones de traducción posibles.');
       if (!args[1]) return message.channel.send('Falta el texto a traducir.');
-      let msg = await message.channel.send(client.replies.generatingSomething(message));
+      let msg = await message.channel.send(client.replies.reply('generating', message));
       require('yandex-translate-api')(client.config.yandexAPIkey).translate(args.slice(1).join(' '), { to: args[0] }, (err, res) => {
         if (err) return msg.edit(`Ocurrió un error al tratar de traducir el mensaje, error: ${err}`);
         if (args.slice(1).join(' ').length > 900) return msg.edit(`El texto a traducir no debe ser mayor a 900 caracteres.`);

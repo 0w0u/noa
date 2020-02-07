@@ -31,7 +31,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             .setDescription(`**${current.skytext}**`)
             .setAuthor(`Clima de ${current.observationpoint}`)
             .setThumbnail(current.imageUrl)
-            .setColor('RANDOM')
+            .setColor(client.functions.selectColor('lightcolors'))
             .addField('Coordenadas', `${location.lat}, ${location.long}`, true)
             .addField('Zona horaria', `UTC${location.timezone}`, true)
             .addField('Hora', `${current.observationtime}`, true)

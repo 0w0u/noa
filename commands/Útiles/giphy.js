@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         let gif = await require('gif-search').random(args[0]),
           randomcolor = (((1 << 24) * Math.random()) | 0).toString(16);
         embed
-          .setColor('RANDOM')
+          .setColor(client.functions.selectColor('lightcolors'))
           .setImage(gif)
           .setAuthor('🔍 ' + args.join(' ') + '', message.author.displayAvatarURL());
         message.channel.send({ embed });

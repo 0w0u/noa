@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === client.user) return message.reply('No seas demente... Busca otro adversario por que no quiero pelear contigo :p');
       if (message.mentions.users.size < 1) return message.channel.send('Si no eres raro... Debes decidir con quien pelear -n-');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** está peleando contra **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.fightGifs());
       message.channel.send({ embed });

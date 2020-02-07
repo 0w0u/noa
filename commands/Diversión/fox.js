@@ -16,7 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       let img = await require('node-superfetch').get('https://randomfox.ca/floof/'),
-        msg = await message.channel.send(new (require('discord.js')).MessageEmbed().setColor(client.functions.selectColor('lightcolors')).setDescription(client.replies.generatingSomething(message)));
+        msg = await message.channel.send(new (require('discord.js')).MessageEmbed().setColor(client.functions.selectColor('lightcolors')).setDescription(client.replies.reply('generating', message)));
       embed
         .setColor(client.functions.selectColor('lightcolors'))
         .setAuthor('¡Zorros!', 'https://i.imgur.com/FzagKZr.png')

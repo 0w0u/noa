@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === client.user) return message.channel.send('No me puedes asesinar o.o');
       if (message.mentions.users.size < 1) return message.channel.send('*- Tiene miedo-* Si quieres hacerlo... M... Menciona a alguien *- Llora -*');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** mató a **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.biteGifs());
       message.channel.send({ embed });

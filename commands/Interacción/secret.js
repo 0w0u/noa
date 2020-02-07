@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === client.user) return message.channel.send('No me gusta que me cuenten secretos... n.n');
       if (message.mentions.users.size < 1) return message.channel.send('¿Quién s-será la persona que sabrá el s-secreto?');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** le dijo un secreto a **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.secretGifs());
       message.channel.send({ embed });

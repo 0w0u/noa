@@ -18,15 +18,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (message.mentions.users.first() === message.author || !message.mentions.users.first()) {
         embed
-          .setColor('RANDOM')
-          .setDescription(client.replies.tickleRep(message))
+          .setColor(client.functions.selectColor('lightcolors'))
+          .setDescription(client.replies.reply('tickle', message))
           .setImage(client.replies.tickleGifs());
         message.channel.send({ embed });
         return;
       }
       if (message.mentions.users.first() === client.user) return message.channel.send('Las cosquillas son mi mayor débilidad, no lo hagas por favor :sob:');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** le está haciendo cosquillas a **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.tickleGifs());
       message.channel.send({ embed });

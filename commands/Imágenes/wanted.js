@@ -17,7 +17,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     const { sepia } = require('../../base/utils/Canvas');
     try {
-      let msg = await message.channel.send(client.replies.generatingSomething(message)),
+      let msg = await message.channel.send(client.replies.reply('generating', message)),
         avatar = await require('canvas').loadImage((message.mentions.users.first() || message.author).displayAvatarURL({ format: 'jpg' })),
         base = await require('canvas').loadImage('https://i.imgur.com/nW3Ta8p.png'),
         canvas = require('canvas').createCanvas(base.width, base.height),

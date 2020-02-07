@@ -19,7 +19,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       let img = await require('node-superfetch').get('https://nekos.life/api/v2/img/smug');
       embed
         .setDescription(client.replies.reply(this.help.name, message))
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setImage(img.body.url);
       message.channel.send({ embed });
     } catch (e) {

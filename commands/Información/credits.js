@@ -32,8 +32,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
         robbi = await client.users.fetch(obj.robbi);
       embed
         .setAuthor('Contribuidores al desarrollo de ' + client.config.bot, client.user.avatarURL())
-        .addField('» Desarrolladores', `~ ${javi.tag}\n~ ${mon.tag}\n~ ${devsi.tag}`, true)
-        .addField('» Diseñador', `~ ${dino.tag}\n~ ${devsi.tag}\n~ ${gameboy.tag}`, true)
+        .addField('» Desarrolladores', `~ ${javi.tag}\n~ ${mon.tag}`, true)
+        .addField('» Diseñadores', `~ ${dino.tag}\n~ ${devsi.tag}\n~ ${gameboy.tag}`, true)
         .addField('» Donadores', `~ ${mon.tag}\n~ ${robbi.tag}`, true)
         .addField('» Bot aliado', `~ ${kae.tag}`, true)
         .setColor(client.functions.selectColor('lightcolors'));

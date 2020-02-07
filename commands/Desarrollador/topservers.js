@@ -37,18 +37,20 @@ module.exports = class command extends require('../../base/models/Command.js') {
       backwards.on('collect', r => {
         if (page === 1) return;
         page--;
-        embed.setDescription(pages[page - 1]);
-        embed.setFooter(`Página ${page} de ${pages.length}`);
-        embed.setColor('RANDOM');
-        msg.edit(embed);
+        embed
+          .setDescription(pages[page - 1])
+          .setFooter(`Página ${page} de ${pages.length}`)
+          .setColor(client.functions.selectColor('lightcolors'));
+        msg.edit({ embed });
       });
       forwards.on('collect', r => {
         if (page === pages.length) return;
         page++;
-        embed.setDescription(pages[page - 1]);
-        embed.setColor('RANDOM');
-        embed.setFooter(`Página ${page} de ${pages.length}`);
-        msg.edit(embed);
+        embed
+          .setDescription(pages[page - 1])
+          .setColor(client.functions.selectColor('lightcolors'))
+          .setFooter(`Página ${page} de ${pages.length}`);
+        msg.edit({ embed });
       });
     } catch (e) {
       message.channel.send(message.error(e));

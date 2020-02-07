@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send('Ingresa una operación para calcular.');
       else {
-        let msg = await message.channel.send(client.replies.generatingSomething(message));
+        let msg = await message.channel.send(client.replies.reply('generating', message));
         try {
           var resp = require('mathjs').evaluate(args.join(' '));
         } catch (e) {

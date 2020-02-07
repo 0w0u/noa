@@ -48,12 +48,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setFooter(`Total de comandos: ${client.commands.size - client.commands.filter(C => C.help.category === 'Ocultos').size - client.commands.filter(C => C.help.category === 'Desarrollador').size} | Desarrollado por: ${jav.tag} y ${mon.tag}`)
         .setTimestamp();
       if (!args[0]) {
-        message.channel.send(client.replies.sendCommandListToDM(message));
+        message.channel.send(client.replies.reply('dm', message));
         message.author.send({ embed });
       } else if (args[0].toLowerCase() === '--nodm' || args[0].toLowerCase() === '--nodmhelp') {
         message.channel.send({ embed });
       } else {
-        message.channel.send(client.replies.sendCommandListToDM(message));
+        message.channel.send(client.replies.reply('dm', message));
         message.author.send({ embed });
       }
     } catch (e) {

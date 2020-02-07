@@ -23,7 +23,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === client.user) return message.channel.send('Conmigo no.');
       if (message.mentions.users.size < 1) return message.channel.send('Elige a quien mamarsela.');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** se la chupa a **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.suckGifs());
       message.channel.send({ embed });

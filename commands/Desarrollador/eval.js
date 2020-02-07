@@ -20,8 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let mon = 'Pero si le ponen la canción, le da una depresión, ton-ta',
-        author = message.author,
+      let author = message.author,
         member = message.member,
         guild = message.guild,
         channel = message.channel,
@@ -37,8 +36,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           message.channel.send('>>> ```js\n' + evalued + '\n```');
         }
       } catch (err) {
-        if (err.toString().includes(client.config.token || client.config.mongo)) err = err.toString().replace(client.config.token || client.config.mongo, 'T0K3N');
-        message.channel.send('>>> ```js\n' + (typeof err !== 'object' ? err.toString() : util.inspect(err, { depth: 0 })) + '\n```');
+        message.channel.send('>>> ```js\n' + err.toString() + '\n```');
       }
     } catch (e) {
       message.channel.send(message.error(e));

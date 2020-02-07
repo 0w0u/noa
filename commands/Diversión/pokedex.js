@@ -17,7 +17,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send(client.demo.error + ' **' + message.author.username + '**, debes proporcionar el nombre o número de un Pokémon.');
       else {
-        let msg = await message.channel.send(client.replies.pokedexGenerating(message)),
+        let msg = await message.channel.send(client.replies.reply('pokedex', message)),
           reqs;
         try {
           reqs = await require('node-superfetch').get(`https://pokeapi.glitch.me/v1/pokemon/${args.join('%20')}`, { json: true });

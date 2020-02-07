@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === client.user) return message.channel.send('¿En serio me quieres decir adiós? T-T');
       if (message.mentions.users.size < 1) return message.channel.send('D-decide a quién q-quieres decirle adiós T-T');
       embed
-        .setColor('RANDOM')
+        .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** se despidió de **' + message.mentions.users.first().username + '**')
         .setImage(client.replies.goodbyeGifs());
       message.channel.send({ embed });

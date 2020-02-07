@@ -17,7 +17,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client,
       { createCanvas, loadImage } = require('canvas');
     try {
-      let msg = await message.channel.send(client.replies.generatingSomething(message)),
+      let msg = await message.channel.send(client.replies.reply('generating', message)),
         base = await loadImage('https://i.imgur.com/NZiF9Md.png'),
         avatar = await loadImage((message.mentions.users.first() || message.author).displayAvatarURL({ format: 'png' })),
         canvas = createCanvas(base.width, base.height),
