@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         embed
           .setDescription(client.replies.reply('hug', message))
           .setColor(client.functions.selectColor('lightcolors'))
-          .setImage(client.replies.hugGifs());
+          .setImage(client.replies.gifs(this.help.name));
         message.channel.send(embed);
         return;
       }
@@ -29,7 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       embed
         .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** abrazó a **' + message.mentions.users.first().username + '**')
-        .setImage(client.replies.hugGifs());
+        .setImage(client.replies.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
       message.channel.send(message.error(e));

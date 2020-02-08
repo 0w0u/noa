@@ -19,7 +19,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       embed
         .setDescription(client.replies.reply(this.help.name, message))
         .setColor(client.functions.selectColor('lightcolors'))
-        .setImage(client.replies.cryGifs());
+        .setImage(client.replies.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
       message.channel.send(message.error(e));

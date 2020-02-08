@@ -1,6 +1,6 @@
 module.exports = {
   reply(option, message) {
-    let options = [],
+    let options = ['generating', 'pokedex', 'dm', 'angry', 'banghead', 'blush', 'bored', 'bye', 'confused', 'cry', 'dance', 'depressed', 'dizzy', 'eat', 'facepalm', 'hello', 'laugh', 'lewd', 'like', 'nervous', 'run', 'scream', 'shrug', 'sleep', 'smile', 'think', 'tired'],
       reps;
     if (!option) throw Error('Necesitas proporcionar una opción válida,\nOpciones válidas: ' + options.join(', '));
     if (typeof option !== 'string') throw Error('La opción necesita ser una cadena de texto');

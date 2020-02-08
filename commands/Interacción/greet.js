@@ -24,7 +24,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       embed
         .setColor(client.functions.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** saluda a **' + message.mentions.users.first().username + '**')
-        .setImage(client.replies.greetGifs());
+        .setImage(client.replies.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
       message.channel.send(message.error(e));
