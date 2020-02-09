@@ -10,7 +10,7 @@ module.exports = {
   weezKey: process.env.weezKey,
   dblKey: process.env.topggApi,
   dblSkey: process.env.dblSkey,
-  owners: ['608817245417898004', '427692173039894531', '579028049140514842'],
+  owners: ['608817245417898004', '427692173039894531'],
   support: 'https://discord.gg/wyVHNYc',
   invite: 'https://discordapp.com/oauth2/authorize?client_id=477950798949646336&scope=bot&permissions=2146958847',
   dbl: 'https://top.gg/bot/477950798949646336/',

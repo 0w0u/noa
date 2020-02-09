@@ -21,7 +21,7 @@ module.exports = {
     return !lean ? `#${a[Math.floor(Math.random() * a.length)]}` : `${a[Math.floor(Math.random() * a.length)]}`;
   },
   getPrefix(message, data) {
-    const mentionPrefix = new RegExp(`^<@!?${message.client.config.botID}>`).exec(message.content);
+    const mentionPrefix = new RegExp(`^<@!?${message.client.user.id}>`).exec(message.content);
     const prefixes = [`${mentionPrefix}`, message.guild ? data.guild.prefix : message.client.config.prefix];
     let prefix = undefined;
     prefixes.forEach(p => {

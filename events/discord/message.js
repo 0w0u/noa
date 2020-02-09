@@ -37,7 +37,7 @@ module.exports = class event {
         let hijo = client.afk.get(message.mentions.users.first().id);
         if (hijo) return message.channel.send('El usuario que has mencionado está afk por: ' + hijo.reason);
       }
-      if (message.content.match(new RegExp(`^<@!?${client.config.botID}>( |)$`))) {
+      if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
         message.channel.send('¡Hola! Soy ' + client.config.bot + ', para conocer más de mí puedes consultar con `' + message.prefix + 'help`.');
       }
       let prefix = client.functions.getPrefix(message, data);
