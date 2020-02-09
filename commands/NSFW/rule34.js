@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         let result;
         try {
           result = JSON.parse(img.body);
-        } catch {
+        } catch (e) {
           return msg.edit(client.demo.error + ' | No se encontraron resultados en tu búsqueda.');
         }
         if (!result) msg.edit(client.demo.error + ' | No se encontraron resultados en tu búsqueda.');

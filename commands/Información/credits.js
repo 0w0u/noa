@@ -21,7 +21,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
           kae: '431638353189011517',
           gameboy: '288032600705204225',
           devsi: '280985817097306113',
-          robbi: '284422355147554817'
+          robbi: '284422355147554817',
+          notin: '456567119794929684'
         },
         mon = await client.users.fetch(client.config.owners[0]),
         javi = await client.users.fetch(client.config.owners[1]),
@@ -29,12 +30,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
         kae = await client.users.fetch(obj.kae),
         devsi = await client.users.fetch(obj.devsi),
         gameboy = await client.users.fetch(obj.gameboy),
-        robbi = await client.users.fetch(obj.robbi);
+        robbi = await client.users.fetch(obj.robbi),
+        notin = await client.users.fetch(obj, notin);
       embed
         .setAuthor('Contribuidores al desarrollo de ' + client.config.bot, client.user.avatarURL())
         .addField('» Desarrolladores', `~ ${javi.tag}\n~ ${mon.tag}`, true)
         .addField('» Diseñadores', `~ ${dino.tag}\n~ ${devsi.tag}\n~ ${gameboy.tag}`, true)
         .addField('» Donadores', `~ ${mon.tag}\n~ ${robbi.tag}`, true)
+        .addField('» Publicista', `~ ${notin.tag}`, true)
         .addField('» Bot aliado', `~ ${kae.tag}`, true)
         .setColor(client.functions.selectColor('lightcolors'));
       message.channel.send({ embed });
