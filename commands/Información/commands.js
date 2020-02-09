@@ -49,12 +49,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setTimestamp();
       if (!args[0]) {
         message.channel.send(client.replies.reply('dm', message));
-        message.author.send({ embed });
+        message.author.send({ embed }).catch(e => message.channel.send(`**${message.author.username}**, parece que tienes los mensajes directos desactivados. Si de igual forma deseas ver la lista de comandos, ejecuta el comando \`${data.guild.prefix}commands --nodm\``));
       } else if (args[0].toLowerCase() === '--nodm' || args[0].toLowerCase() === '--nodmhelp') {
         message.channel.send({ embed });
       } else {
         message.channel.send(client.replies.reply('dm', message));
-        message.author.send({ embed });
+        message.author.send({ embed }).catch(e => message.channel.send(`**${message.author.username}**, parece que tienes los mensajes directos desactivados. Si de igual forma deseas ver la lista de comandos, ejecuta el comando \`${data.guild.prefix}commands --nodm\``));
       }
     } catch (e) {
       message.channel.send(message.error(e));
