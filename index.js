@@ -54,6 +54,7 @@ let readdir = require('util').promisify(require('fs').readdir),
         .get('/invite', (q, s) => s.redirect(client.config.invite)) // Redirección invite
         .get('/dbl', (q, s) => s.redirect(client.config.dbl)) // Redirección dbl
         .get('/vote', (q, s) => s.redirect(client.config.vote)) // Redirección dbl vote
+        .get('/github', (q, s) => s.redirect(client.config.github)) // Redirección github
         .use((req, res, next) => res.status(404).render('404')) // 404 not found
       server.listen(port, () => {
         console.log(`Escuchando en ${port}`);
@@ -65,9 +66,3 @@ let readdir = require('util').promisify(require('fs').readdir),
   };
 init();
 web();
-/* 
-client.on(e[0], (...args) => new (require(`./events/${e[0]}.js`))(client).run(...args));
-console.log(`[E] El evento ${e[0]} cargó con éxito.`);
-dbl.webhook.on(e[0], (...args) => new (require(`./dblEvents/${e[0]}.js`))(client).run(...args));
-        console.log(`[D] El evento ${e[0]}DBL cargó con éxito.`);
-*/
