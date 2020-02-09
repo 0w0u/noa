@@ -3,16 +3,16 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700';
 body {
   font-family: 'Montserrat', sans-serif;
-  background: #EEFFFF;
+  background: #eeffff;
 }
 footer {
   font-family: 'Montserrat', sans-serif;
-  background: #EEFFFF;
+  background: #eeffff;
 }
 /* Scroll */
 html {
-  --scrollbarBG: #EEFFFF;
-  --thumbBG: #F8BBD0;
+  --scrollbarBG: #eeffff;
+  --thumbBG: #f8bbd0;
 }
 body::-webkit-scrollbar {
   width: 11px;
@@ -34,7 +34,7 @@ p {
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
-  color: #45454D;
+  color: #45454d;
 }
 a,
 a:hover,
@@ -46,15 +46,15 @@ a:focus {
 }
 .navbar {
   padding: 15px 10px;
-  background: #FCE4EC;
+  background: #fce4ec;
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
-  box-shadow: 1px 1px 5px rgba(54, 49, 47); 
+  box-shadow: 1px 1px 5px rgba(54, 49, 47);
 }
 .navbar-btn {
   box-shadow: none;
-  background: #FCE4EC;
+  background: #fce4ec;
   outline: none !important;
   border: none;
 }
@@ -76,14 +76,14 @@ span {
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #FCE4EC;
-  color: #EEFFFF;
+  background: #fce4ec;
+  color: #eeffff;
   transition: all 0.3s;
 }
 #sidebar.active {
-    min-width: 110px;
-    max-width: 90px;
-    text-align: center;
+  min-width: 110px;
+  max-width: 90px;
+  text-align: center;
 }
 #sidebar.active .sidebar-header h3,
 #sidebar.active .CTAs {
@@ -119,7 +119,7 @@ span {
 }
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #F8BBD0;
+  background: #f8bbd0;
 }
 #sidebar .sidebar-header strong {
   display: none;
@@ -127,7 +127,7 @@ span {
 }
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #FCE4EC;
+  border-bottom: 1px solid #fce4ec;
 }
 #sidebar ul li a {
   padding: 10px;
@@ -135,16 +135,16 @@ span {
   display: block;
 }
 #sidebar ul li a:hover {
-  color: #F8BBD0;
-  background: #EEFFFF;
+  color: #f8bbd0;
+  background: #eeffff;
 }
 #sidebar ul li a i {
   margin-right: 10px;
 }
 #sidebar ul li.active > a,
 a[aria-expanded='true'] {
-  color: #EEFFFF;
-  background: #F8BBD0;
+  color: #eeffff;
+  background: #f8bbd0;
 }
 a[data-toggle='collapse'] {
   position: relative;
@@ -159,7 +159,7 @@ a[data-toggle='collapse'] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #FCE4EC;
+  background: #fce4ec;
 }
 ul.CTAs {
   padding: 20px;

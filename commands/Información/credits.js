@@ -31,9 +31,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         devsi = await client.users.fetch(obj.devsi),
         gameboy = await client.users.fetch(obj.gameboy),
         robbi = await client.users.fetch(obj.robbi),
-        notin = await client.users.fetch(obj, notin);
+        notin = await client.users.fetch(obj.notin);
       embed
-        .setAuthor('Contribuidores al desarrollo de ' + client.config.bot, client.user.avatarURL())
+        .setAuthor('Contribuidores al desarrollo de ' + client.config.bot, client.user.displayAvatarURL())
         .addField('» Desarrolladores', `~ ${javi.tag}\n~ ${mon.tag}`, true)
         .addField('» Diseñadores', `~ ${dino.tag}\n~ ${devsi.tag}\n~ ${gameboy.tag}`, true)
         .addField('» Donadores', `~ ${mon.tag}\n~ ${robbi.tag}`, true)
