@@ -22,7 +22,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         embed
           .setColor(client.functions.selectColor('lightcolors'))
           .setDescription('**' + message.author.username + '** se corrió... O al menos lo intenta.')
-          .setImage(client.replies.cumGifs());
+          .setImage(client.replies.gifs(this.help.name));
         message.channel.send({ embed });
         return;
       } else if (message.mentions.users.first() === client.user) {
