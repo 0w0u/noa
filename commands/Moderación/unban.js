@@ -1,4 +1,4 @@
-module.exports = class command extends require("../../base/models/Command.js") {
+module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
       name: 'unban',
@@ -18,23 +18,21 @@ module.exports = class command extends require("../../base/models/Command.js") {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      
-      if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
 
-      if(!args[0]) return message.channel.send('Por favor provee una ID para desbanear a un usuario.')
-      let bannedMember = await client.users.fetch(args[0])
-        if(!bannedMember) return message.channel.send(`Por favor ingresa la ID de un usuario para desbanear.`)
-        if(message.guild.members.get(bannedMember).deleted == false) return message.channel.send(`El usuario que intentas desbanear, no se encuentra baneado.`)
+      if (!args[0]) return message.channel.send('Por favor provee una ID para desbanear a un usuario.');
+      let bannedMember = await client.users.fetch(args[0]);
+      if (!bannedMember) return message.channel.send(`Por favor ingresa la ID de un usuario para desbanear.`);
+      if (message.guild.members.get(bannedMember).deleted == false) return message.channel.send(`El usuario que intentas desbanear, no se encuentra baneado.`);
 
-      /* Arreglar esto ->*/ let reason = args.slice(1).join(" ")
-        if(!reason) reason = 'No especificada';
+      /* Arreglar esto ->*/ let reason = args.slice(1).join(' ');
+      if (!reason) reason = 'No especificada';
 
-        if(!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send(`No tengo permisos para ejecutar este comando.`)
+      if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send(`No tengo permisos para ejecutar este comando.`);
 
-        message.guild.members.unban(bannedMember, reason)
-        message.channel.send(`**${bannedMember.tag}** fue desbaneado correctamente del servidor.`)
-      
-     } catch (e) {
+      message.guild.members.unban(bannedMember, reason);
+      message.channel.send(`**${bannedMember.tag}** fue desbaneado correctamente del servidor.`);
+    } catch (e) {
       message.channel.send(message.error(e));
       client.err({
         type: 'command',

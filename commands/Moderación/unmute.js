@@ -1,4 +1,4 @@
-module.exports = class command extends require("../../base/models/Command.js") {
+module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
       name: 'unmute',
@@ -18,55 +18,56 @@ module.exports = class command extends require("../../base/models/Command.js") {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      
-    if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.replies.noPerm(message))
-    let mUser = message.guild.member(message.mentions.users.first());
-    let pedir = message.mentions.users.first();
-    if (!mUser) return message.channel.send(`Menciona al usuario que al que debo remover su silenciamiento.`)
-  
-    if(pedir === message.author) return message.channel.send(client.replies.tryingAutoInfract(message))
-    if(pedir == client.user) return message.channel.send(`No puede hacer esto sobre mi, intenta con otro.`)
-    
-    let mutedrole = mUser.roles.find(`name`, "Silenciado");
+      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
+      let mUser = message.guild.member(message.mentions.users.first());
+      let pedir = message.mentions.users.first();
+      if (!mUser) return message.channel.send(`Menciona al usuario que al que debo remover su silenciamiento.`);
 
-    if (!message.guild.member(mUser).bannable) return message.channel.send(`No puedo quita el silencio al usuario mencionado. Es posible que no tenga el rango requerido o el usuario es superior a mí.`);
+      if (pedir === message.author) return message.channel.send(client.replies.tryingAutoInfract(message));
+      if (pedir == client.user) return message.channel.send(`No puede hacer esto sobre mi, intenta con otro.`);
 
-    let reason = message.content.split(" ").slice(2).join(" ");
-    if (!reason){
-        reason = "No específicada.";
-    }
+      let mutedrole = mUser.roles.find(`name`, 'Silenciado');
 
-    let muterole = message.guild.roles.find(`name`, "Silenciado");
+      if (!message.guild.member(mUser).bannable) return message.channel.send(`No puedo quita el silencio al usuario mencionado. Es posible que no tenga el rango requerido o el usuario es superior a mí.`);
 
-    if (!muterole) {
+      let reason = message.content
+        .split(' ')
+        .slice(2)
+        .join(' ');
+      if (!reason) {
+        reason = 'No específicada.';
+      }
+
+      let muterole = message.guild.roles.find(`name`, 'Silenciado');
+
+      if (!muterole) {
         try {
-            muterole = await message.guild.createRole({
-                name: "Silenciado",
-                color: "#000000",
-                permissions: []
-            })
-            message.guild.channels.forEach(async (channel, id) => {
-                await channel.overwritePermissions(muterole, {
-                    SEND_MESSAGES: false,
-                    ADD_REACTIONS: false
-                });
+          muterole = await message.guild.createRole({
+            name: 'Silenciado',
+            color: '#000000',
+            permissions: []
+          });
+          message.guild.channels.forEach(async (channel, id) => {
+            await channel.overwritePermissions(muterole, {
+              SEND_MESSAGES: false,
+              ADD_REACTIONS: false
             });
+          });
         } catch (e) {
-            console.log(e.stack);
+          console.log(e.stack);
         }
-    }
+      }
 
-    let mutetime = args[1];
+      let mutetime = args[1];
 
-    await (mUser.removeRole(muterole.id));
-    embed
-    .setColor(client.selectColor('green'))
-    .setAuthor(`[UNMUTE] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL)
-    .addField("Usuario", `<@${mUser.id}> (\`${mUser.id}\`)`, true)
-    .addField("Razón", reason, true)
-    .addField("Moderador", `<@${message.author.id}>`, true)
-    message.channel.send(embed)
-      
+      await mUser.removeRole(muterole.id);
+      embed
+        .setColor(client.selectColor('green'))
+        .setAuthor(`[UNMUTE] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL)
+        .addField('Usuario', `<@${mUser.id}> (\`${mUser.id}\`)`, true)
+        .addField('Razón', reason, true)
+        .addField('Moderador', `<@${message.author.id}>`, true);
+      message.channel.send(embed);
     } catch (e) {
       message.channel.send(message.error(e));
       client.err({

@@ -19,8 +19,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
       'abcdefghijklmnopqrstuvwxyz'.split('').forEach(c => {
         mapping[c] = mapping[c.toUpperCase()] = ` :regional_indicator_${c}:`;
       });
-      if(args.length < 1) message.channel.send('Escribe el texto para convertir');
-      if(args.length > 80) message.channel.send(`**${message.author.username}**, bajale un poco! Escribe un texto menor a 80 caracteres.`)
+      if (args.length < 1) message.channel.send('Escribe el texto para convertir');
+      if (args.length > 80) message.channel.send(`**${message.author.username}**, bajale un poco! Escribe un texto menor a 80 caracteres.`);
       message.channel.send(
         args
           .join(' ')

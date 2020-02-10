@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       if (!args[0]) {
-        return message.channel.send('Necesitas seleccionar una opción o mencionar a un rol para ver su información.')
+        return message.channel.send('Necesitas seleccionar una opción o mencionar a un rol para ver su información.');
       } else if (args[0].toLowerCase() === '--lista' || args[0].toLowerCase() === '--list') {
         embed.setColor(client.functions.selectColor('lightcolors'));
         if (message.guild.roles.size < 1) return message.channel.send('Este servidor no tienen ningún rol creado.');

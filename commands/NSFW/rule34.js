@@ -34,11 +34,17 @@ module.exports = class command extends require('../../base/models/Command.js') {
         else {
           result = result[Math.floor(Math.random() * result.length)];
           let tagString = result.tags.split(' ');
-          if(tagString.length > 2047) tagString = args.join(' ')
+          if (tagString.length > 2047) tagString = args.join(' ');
           if (tagString.length > 0) {
             if (tagString.some(x => deep.includes(x.toLowerCase()))) return msg.edit(`${client.demo.error} | La búsqueda que solicitas está baneada. Por favor intenta con otra cosa...`);
             else {
-              embed.setAuthor(`${message.author.tag}`, message.author.displayAvatarURL()).setTitle(`Imagen Original`).setURL(`https://rule34.xxx/images/${result.directory}/${result.image}`).setDescription(`**Puntaje:** ${result.score}\n**Tags:** ${tagString}`).setColor(client.functions.selectColor('lightcolors')).setImage(`https://rule34.xxx/images/${result.directory}/${result.image}`);
+              embed
+                .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                .setTitle(`Imagen Original`)
+                .setURL(`https://rule34.xxx/images/${result.directory}/${result.image}`)
+                .setDescription(`**Puntaje:** ${result.score}\n**Tags:** ${tagString}`)
+                .setColor(client.functions.selectColor('lightcolors'))
+                .setImage(`https://rule34.xxx/images/${result.directory}/${result.image}`);
               msg.edit('** **', { embed });
             }
           }
