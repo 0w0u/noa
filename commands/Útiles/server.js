@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (!args[0]) {
         let verifLevels = ['Ningúno', 'Bajo', 'Medio', '(╯°□°）╯︵  ┻━┻', '┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻'],
           owner = await client.users.fetch(guild.ownerID),
-          region = { europe: 'Europa :flag_eu:',brazil: 'Brasil :flag_br: ', hongkong: 'Hong Kong :flag_hk:', japan: 'Japón :flag_jp:', russia: 'Rusia :flag_ru:', singapore: 'Singapur :flag_sg:', southafrica: 'Sudáfrica :flag_za:', sydney: 'Sydney :flag_au:', 'us-central': 'Central US :flag_us:', 'us-east': 'Este US :flag_us:', 'us-south': 'Sur US :flag_us:', 'us-west': 'Oeste US :flag_us:', 'vip-us-east': 'VIP US Este :flag_us:', 'eu-central': 'Europa Central :flag_eu:', 'eu-west': 'Europa Oeste :flag_eu:', london: 'London :flag_gb:', amsterdam: 'Amsterdam :flag_nl:', india: 'India :flag_in:' };
+          region = { europe: 'Europa :flag_eu:', brazil: 'Brasil :flag_br: ', hongkong: 'Hong Kong :flag_hk:', japan: 'Japón :flag_jp:', russia: 'Rusia :flag_ru:', singapore: 'Singapur :flag_sg:', southafrica: 'Sudáfrica :flag_za:', sydney: 'Sydney :flag_au:', 'us-central': 'Central US :flag_us:', 'us-east': 'Este US :flag_us:', 'us-south': 'Sur US :flag_us:', 'us-west': 'Oeste US :flag_us:', 'vip-us-east': 'VIP US Este :flag_us:', 'eu-central': 'Europa Central :flag_eu:', 'eu-west': 'Europa Oeste :flag_eu:', london: 'London :flag_gb:', amsterdam: 'Amsterdam :flag_nl:', india: 'India :flag_in:' };
         embed
           .setColor(client.functions.selectColor('lightcolors'))
           .setAuthor(guild.name, guild.iconURL())

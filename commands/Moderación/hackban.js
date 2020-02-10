@@ -1,4 +1,4 @@
-module.exports = class command extends require("../../base/models/Command.js") {
+module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
       name: 'hackban',
@@ -19,22 +19,22 @@ module.exports = class command extends require("../../base/models/Command.js") {
     let client = this.client;
     try {
       // ACTUALMENTE ESTE COMANDO NO FUNKA
-      if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
 
-      if(!args[0]) return message.channel.send('Por favor provee una ID para banear a un usuario.')
-      let bannedMember = await client.users.fetch(args[0])
-        if(!bannedMember) return message.channel.send(`Por favor ingresa la ID de un usuario para banear.`)
+      if (!args[0]) return message.channel.send('Por favor provee una ID para banear a un usuario.');
+      let bannedMember = await client.users.fetch(args[0]);
+      if (!bannedMember) return message.channel.send(`Por favor ingresa la ID de un usuario para banear.`);
 
-      let reason = args.slice(1).join(" ")
-        if(!reason) reason = 'No especificada';
+      let reason = args.slice(1).join(' ');
+      if (!reason) reason = 'No especificada';
 
-      if(!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send(`No tengo permisos para ejecutar este comando.`)
+      if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send(`No tengo permisos para ejecutar este comando.`);
 
       try {
-        message.guild.members.ban({ days: 0, reason: `${reason} | Responsable: ${message.author.username}` })
-        message.channel.send(`**${bannedMember.tag}** fue baneado correctamente del servidor.`)
-      } catch(e){
-        message.channel.send(`:warning: Ocurrió un error: ${e.message}`)
+        message.guild.members.ban({ days: 0, reason: `${reason} | Responsable: ${message.author.username}` });
+        message.channel.send(`**${bannedMember.tag}** fue baneado correctamente del servidor.`);
+      } catch (e) {
+        message.channel.send(`:warning: Ocurrió un error: ${e.message}`);
       }
     } catch (e) {
       message.channel.send(message.error(e));
