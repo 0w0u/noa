@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .addField('• Prefijo', 'Para utilizar mis comandos debes poner el prefijo **`' + message.prefix + '`** antes de cada uno.\nTambién podrás mencionar a ' + client.config.bot + ' como prefix (' + client.user.toString() + ' help)')
           .addField('• Ayuda', 'Puedes ver la ayuda detallada de algún comando usando `' + message.prefix + 'help <comando>`')
           .addField('• Lista de comandos', 'Si quieres ver mi lista de comandos, utiliza **`' + message.prefix + 'commands`** y recibirás la lista de comandos por mensaje privado.')
-          .addField('• Enlaces:', '[Invítame a un servidor ❤️](https://noa.wwmon.xyz/invite) | [Servidor de soporte ❓](https://noa.wwmon.xyz/support) | [DBL 🤖](https://noa.wwmon.xyz/dbl) |\n[Vota por mí 📥](https://noa.wwmon.xyz/vote) | [Página web 🌐 (En desarrollo)](https://noa.wwmon.xyz/)')
+          .addField('• Enlaces:', '[Invítame ❤️](https://noa.wwmon.xyz/invite) | [Soporte ❓](https://noa.wwmon.xyz/support) | [Donaciones 💝](https://noa.wwmon.xyz/donate) | [top.gg 🤖](https://noa.wwmon.xyz/dbl) | [Vota 📥](https://noa.wwmon.xyz/vote) | [Web (WIP) 🌐](https://noa.wwmon.xyz/)')
           .setImage(client.config.banner)
           .setFooter('Desarrollado por: ' + o.tag + ' y ' + mon.tag)
           .setTimestamp();
