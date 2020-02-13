@@ -24,11 +24,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         i = await i.first();
         if (i.content.toLowerCase().includes('sí') || i.content.toLowerCase().includes('si')) {
           embed
-            .setColor(client.functions.selectColor('lightcolors'))
+            .setColor(client.fns.selectColor('lightcolors'))
             .setAuthor(`${message.author.tag} envió una sugerencia`, message.author.displayAvatarURL())
             .setDescription(args.join(' '))
             .setFooter(`Sugerencia envíada desde ${message.guild.name}`, message.guild.iconURL());
-          let msg = await client.channels.get('669009316191404037').send({ embed });
+          let msg = await client.channels.cache.get('669009316191404037').send({ embed });
           msg.react('487031865577046026');
           msg.react('487031865165873172');
           message.channel.send('Tu sugerencia ha sido enviada correctamente.');
@@ -39,11 +39,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

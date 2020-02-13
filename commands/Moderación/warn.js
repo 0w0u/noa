@@ -27,12 +27,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
         warns[message.guild.id] = {};
       }
 
-      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.fns.noPerm(message));
 
       let wUser = message.guild.member(message.mentions.users.first());
       if (message.mentions.users.first() === client.user) return message.channel.send(`No me puedes dar auto advertencia.`);
       if (!wUser) return message.channel.send('Menciona el usuario a warnear.');
-      if (message.mentions.users.first() == message.author) return message.channel.send(client.replies.tryingAutoInfract(message));
+      if (message.mentions.users.first() == message.author) return message.channel.send(client.fns.tryingAutoInfract(message));
       let reason = args.join(' ').slice(22);
       let warnserver = warns[message.guild.id];
       if (!reason) return message.channel.send('Específica la razón del warn.');
@@ -73,7 +73,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (warnserver[wUser.id].warns == 3) {
         if (!message.guild.member(wUser).bannable) return;
 
-        let muterole = message.guild.roles.find(`name`, 'Silenciado');
+        let muterole = message.guild.roles.cache.find(`name`, 'Silenciado');
         if (!muterole) {
           try {
             muterole = await message.guild.createRole({
@@ -81,7 +81,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
               color: '#000000',
               permissions: []
             });
-            message.guild.channels.forEach(async (channel, id) => {
+            message.guild.channels.cache.forEach(async (channel, id) => {
               await channel.overwritePermissions(muterole, {
                 SEND_MESSAGES: false,
                 ADD_REACTIONS: false

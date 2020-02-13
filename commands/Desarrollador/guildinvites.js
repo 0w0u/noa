@@ -3,7 +3,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'guildinvites',
       description: 'Encuentra todas las invitaciones de un servidor.',
-      usage: prefix => `\`${prefix}guildinvites <serv_id>\``,
+      usage: prefix => `\`${prefix}guildinvites <guild.id>\``,
       examples: prefix => `\`${prefix}guildinvites 470667860360822794\``,
       enabled: true,
       ownerOnly: true,
@@ -20,15 +20,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let s, i;
       if (!args[0]) s = message.guild;
-      else s = client.guilds.get(args[0]);
+      else s = client.guilds.cache.get(args[0]);
       i = await s.fetchInvites();
       message.channel.send('**Invitaciones encontradas en `' + s.name + '` [' + i.size + ']:**\n' + i.map(x => x.url).join('\n'));
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

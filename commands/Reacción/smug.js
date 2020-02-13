@@ -18,16 +18,16 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let img = await require('node-superfetch').get('https://nekos.life/api/v2/img/smug');
       embed
-        .setDescription(client.replies.reply(this.help.name, message))
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setDescription(client.fns.reply(this.help.name, message))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setImage(img.body.url);
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

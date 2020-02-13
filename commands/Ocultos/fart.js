@@ -18,16 +18,16 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       embed
         .setDescription('**' + message.author.username + '** se tiró un pedo. ¡Qué sucio!')
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setImage('https://thumbs.gfycat.com/ParchedSmallAmurstarfish-small.gif')
         .setFooter(client.config.bot + ' | Comandos oculto #2');
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

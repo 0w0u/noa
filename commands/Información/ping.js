@@ -17,7 +17,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       var ping = Math.floor(client.ws.ping);
       if (ping) {
-        embed.setDescription('Analizando resultados, por favor espere unos segundos...').setColor(client.functions.selectColor('lightcolors'));
+        embed.setDescription('Analizando resultados, por favor espere unos segundos...').setColor(client.fns.selectColor('lightcolors'));
         let m = await message.channel.send({ embed });
         if (message.guild) {
           embed.setAuthor(`| Ping del ${require('../../config').bot}`, client.user.displayAvatarURL());
@@ -43,11 +43,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

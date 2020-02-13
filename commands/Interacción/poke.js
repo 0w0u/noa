@@ -21,23 +21,23 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === message.author || !message.mentions.users.first()) {
         embed
           .setDescription('**' + message.author.username + '** me gusta molestarte :)')
-          .setColor(client.functions.selectColor('lightcolors'))
+          .setColor(client.fns.selectColor('lightcolors'))
           .setImage(img.body.url);
         message.channel.send(embed);
         return;
       }
       if (message.mentions.users.size < 1) return message.channel.send('¿A quién quieres molestar?');
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** mordió a **' + message.mentions.users.first().username + '**')
         .setImage(img.body.url);
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

@@ -21,11 +21,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         message.channel.send(`**${message.author.username}**, te has puesto AFK, por la razón: ${args[0] ? args.join(' ') : 'AFK'}`);
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

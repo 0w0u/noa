@@ -5,9 +5,8 @@ module.exports = class client extends Client {
     /* config */
     this.config = require('../config');
     /* Bot utils */
-    this.replies = require('./utils/replies');
     this.pokemon = require('./utils/pokemon');
-    this.functions = require('./utils/functions');
+    this.fns = new (require('./utils/functions'))(this);
     /* Discord utils */
     this.commands = new Collection();
     this.aliases = new Collection();
@@ -54,11 +53,12 @@ module.exports = class client extends Client {
   }
   /* Postea un error en un comando o evento */
   err(data) {
-    let embed = new MessageEmbed().setColor(this.functions.selectColor('lightcolors'));
+    let embed = new MessageEmbed().setColor(this.fns.selectColor('lightcolors')).setDescription(`\`\`\`js\n${data.error}\n\`\`\``);
     if (data.type === 'command') {
-      embed.setTitle(`\`comando\`: Error en \`${data.name}\``).setDescription(`\`\`\`js\n${data.error}\n\`\`\``);
+      data.message.channel.send(this.fns.message({ emoji: 'red', razón: `ha ocurrido un error\nPor favor repórtalo en mi servidor de soporte <https://noa.wwmon.xyz/support/>`, message: data.message }));
+      embed.setTitle(`\`comando\`: Error en \`${data.name}\``);
     } else if (data.type === 'event') {
-      embed.setTitle(`\`evento\`: Error en \`${data.name}\``).setDescription(`\`\`\`js\n${data.error}\n\`\`\``);
+      embed.setTitle(`\`evento\`: Error en \`${data.name}\``);
     }
     this.logs.send(embed);
     console.error(data.error);

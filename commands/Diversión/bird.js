@@ -16,18 +16,18 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       let img = await require('node-superfetch').get('http://random.birb.pw/tweet/'),
-        msg = await message.channel.send(new (require('discord.js').MessageEmbed)().setColor(client.functions.selectColor('lightcolors')).setDescription(client.replies.reply('generating', message)));
+      msg = await message.channel.send(client.fns.reply('generating', message));
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('¡Pío Pío! |⁰⊖⁰)', 'https://i.imgur.com/E8fKH5q.png')
         .setImage(`https://random.birb.pw/img/${img.body}`);
       msg.edit({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

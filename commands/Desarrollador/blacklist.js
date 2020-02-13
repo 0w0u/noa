@@ -19,9 +19,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       let opciones = ['add', 'remove'];
-      if (!args[0]) message.channel.send('Necesitas elegir una opción válida. Opciones: `' + opciones.join('`, `') + '`');
+      if (!args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'noargs', message }, this.help.usage(message.prefix)) + '\nOpciones: `' + opciones.join('`, `') + '`');
       else if (args[0].toLowerCase() === opciones[0]) {
-        if (!args[1]) message.channel.send('Necesitas proporcionar la ID de algún usuario válido.');
+        if (!args[1]) message.channel.send('Necesitas proporcionar la ID de algún usuario válido');
         else {
           let user = await client.users.fetch(args[1]);
           if (!user) message.channel.send('Ese no es un usuario válido');
@@ -52,11 +52,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

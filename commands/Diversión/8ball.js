@@ -15,36 +15,36 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (!args[0]) message.channel.send('¡Vamos! Anímate a preguntarle algo a la bola mágica.');
+      if (!args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'noargs pregúntale algo a la bola mágica', usage: this.help.usage(message.prefix), message }));
       else {
         let EightBall = Math.floor(Math.random() * 3) + 1;
         embed.setTitle(':8ball: La bola mágica').addField('Has preguntado:', args.join(' '));
         if (EightBall === 1) {
           embed
-            .setColor(client.functions.selectColor('green'))
-            .addField('Mi respuesta es:', client.replies.ball8('yes', 'text'))
-            .setImage(client.replies.ball8('yes', 'gif'));
+            .setColor(client.fns.selectColor('green'))
+            .addField('Mi respuesta es:', client.fns.ball8('yes', 'text'))
+            .setImage(client.fns.ball8('yes', 'gif'));
           message.channel.send({ embed });
         } else if (EightBall === 2) {
           embed
-            .setColor(client.functions.selectColor('red'))
-            .addField('Mi respuesta es:', client.replies.ball8('no', 'text'))
-            .setImage(client.replies.ball8('no', 'gif'));
+            .setColor(client.fns.selectColor('red'))
+            .addField('Mi respuesta es:', client.fns.ball8('no', 'text'))
+            .setImage(client.fns.ball8('no', 'gif'));
           message.channel.send({ embed });
         } else {
           embed
-            .setColor(client.functions.selectColor('yellow'))
-            .addField('Mi respuesta es:', client.replies.ball8('maybe', 'text'))
-            .setImage(client.replies.ball8('maybe', 'gif'));
+            .setColor(client.fns.selectColor('yellow'))
+            .addField('Mi respuesta es:', client.fns.ball8('maybe', 'text'))
+            .setImage(client.fns.ball8('maybe', 'gif'));
           message.channel.send({ embed });
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

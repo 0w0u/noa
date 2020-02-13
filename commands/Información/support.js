@@ -20,11 +20,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       message.channel.send(`Aquí está la invitación a mi servidor de soporte ヽ(^◇^*)/\n\n>> Únete: ${client.config.support}`);
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

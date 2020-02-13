@@ -5,7 +5,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       description: 'Genera un avatar con un avatar en un postér de "El más búscado".',
       usage: prefix => `\`${prefix}wanted [@usuario]\``,
       examples: prefix => `\`${prefix}wanted\``,
-      enabled: true,
+      enabled: false,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
@@ -15,9 +15,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
   }
   async run(message, args, data, embed) {
     let client = this.client;
-    const { sepia } = require('../../base/utils/Canvas');
     try {
-      let msg = await message.channel.send(client.replies.reply('generating', message)),
+      let msg = await message.channel.send(client.fns.reply('generating', message)),
         avatar = await require('canvas').loadImage((message.mentions.users.first() || message.author).displayAvatarURL({ format: 'jpg' })),
         base = await require('canvas').loadImage('https://i.imgur.com/nW3Ta8p.png'),
         canvas = require('canvas').createCanvas(base.width, base.height),
@@ -28,12 +27,23 @@ module.exports = class command extends require('../../base/models/Command.js') {
       msg.delete();
       message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: 'wanted.png' }] });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }
 };
+function sepia(ctx, x, y, width, height) {
+  const data = ctx.getImageData(x, y, width, height);
+  for (let i = 0; i < data.data.length; i += 4) {
+    const brightness = 0.34 * data.data[i] + 0.5 * data.data[i + 1] + 0.16 * data.data[i + 2];
+    data.data[i] = brightness + 100;
+    data.data[i + 1] = brightness + 50;
+    data.data[i + 2] = brightness;
+  }
+  ctx.putImageData(data, x, y);
+  return ctx;
+}

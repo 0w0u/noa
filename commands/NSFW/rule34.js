@@ -18,32 +18,31 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (!args[0]) {
-        message.channel.send('¡Vamos! Anímate a buscar lo que siempre quisiste...');
-      } else {
+      if (!args[0]) message.channel.send('¡Vamos! Anímate a buscar lo que siempre quisiste...');
+      else {
         let deep = ['mon', 'loli', 'shota', 'cub', 'young', 'child', 'baby', 'guro', 'gore', 'vore'],
           img = await require('node-superfetch').get(`https://rule34.xxx?page=dapi&s=post&q=index&limit=100&tags=${encodeURI(`${args.join('_')}+rating:explicit`)}&json=1`),
-          msg = await message.channel.send(client.replies.reply('generating', message));
+          msg = await message.channel.send(client.fns.reply('generating', message));
         let result;
         try {
           result = JSON.parse(img.body);
         } catch (e) {
-          return msg.edit(client.demo.error + ' | No se encontraron resultados en tu búsqueda.');
+          return msg.edit(client.fns.message({ emoji: 'red', razón: 'no se encontraron resultados', message }));
         }
-        if (!result) msg.edit(client.demo.error + ' | No se encontraron resultados en tu búsqueda.');
+        if (!result) msg.edit(client.fns.message({ emoji: 'red', razón: 'no se encontraron resultados', message }));
         else {
           result = result[Math.floor(Math.random() * result.length)];
           let tagString = result.tags.split(' ');
           if (tagString.length > 2047) tagString = args.join(' ');
           if (tagString.length > 0) {
-            if (tagString.some(x => deep.includes(x.toLowerCase()))) return msg.edit(`${client.demo.error} | La búsqueda que solicitas está baneada. Por favor intenta con otra cosa...`);
+            if (tagString.some(x => deep.includes(x.toLowerCase()))) return msg.edit(client.fns.message({ emoji: 'red', razón: 'tu búsqueda está vetada, intenta con otra cosa...', message }));
             else {
               embed
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
                 .setTitle(`Imagen Original`)
                 .setURL(`https://rule34.xxx/images/${result.directory}/${result.image}`)
                 .setDescription(`**Puntaje:** ${result.score}\n**Tags:** ${tagString}`)
-                .setColor(client.functions.selectColor('lightcolors'))
+                .setColor(client.fns.selectColor('lightcolors'))
                 .setImage(`https://rule34.xxx/images/${result.directory}/${result.image}`);
               msg.edit('** **', { embed });
             }
@@ -51,11 +50,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

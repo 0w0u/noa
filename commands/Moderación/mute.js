@@ -20,22 +20,22 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let member = message.mentions.members.first();
       if (!member || !args[0]) return message.channel.send('Mencioná al usuario que debo silenciar.');
-      if (member === message.member) return message.channel.send(client.replies.tryingAutoInfract(message));
+      if (member === message.member) return message.channel.send(client.fns.tryingAutoInfract(message));
       if (member === message.guild.me) return message.channel.send('No puedo auto-silenciarme, intenta con alguien más.');
       if (!member.roles.highest.comparePositionTo(message.guild.me.roles.highest) > 0) return message.channel.send('No puedo silenciar al usuario mencionado. Es posible que no tenga el rango requerido o el usuario es superior a mí.');
-      let role = message.guild.roles.get(data.guild.moderation.mute.role),
+      let role = message.guild.roles.cache.get(data.guild.moderation.mute.role),
         reason = args.slice(1).join(' ');
       if (role) {
         member.roles.add(role);
       } else {
-        let r = await message.guild.roles.create({
+        let r = await message.guild.roles.cache.create({
           data: {
             name: 'Silenciado',
             color: 0x000000
           },
           reason: 'Rol silenciado.'
         });
-        message.guild.channels.forEach(c => {
+        message.guild.channels.cache.forEach(c => {
           c.overwritePermissions({
             permissionOverwrites: [
               {

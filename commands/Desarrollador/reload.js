@@ -19,24 +19,23 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       if (!args[0]) {
-        message.channel.send(`<a:yuirefresh:651513015274962984> | **${message.author.username}**, refrescando datos... Por favor espera unos segundos.`);
+        message.channel.send(client.fns.message({ emoji: 'green', razón: 'reiniciando bot, esto puede durar unos segundos', message }));
         setTimeout(() => process.exit(), 1500);
       } else {
         let cmd = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
-        if (!cmd) {
-          return message.channel.send('Comando no encontrado.');
-        } else {
+        if (!cmd) message.channel.send(client.fns.message({ emoji: 'red', razón: 'comando no encontrado', message }));
+        else {
           await client.unloadCommand(cmd.config.location, cmd.help.name);
           await client.loadCommand(cmd.config.location, cmd.help.name);
-          return message.channel.send(':white_check_mark: **' + message.author.username + '**, ¡el comando `' + cmd.help.name + '` ha sido recargado!');
+          return message.channel.send(client.fns.message({ emoji: 'green', razón: 'el comando `' + cmd.help.name + '` se reinició correctamente', message }));
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

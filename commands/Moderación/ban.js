@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           }
         }
         if (message.mentions.users.size > 0) return await send(message.mentions.users.first());
-        let u = message.guild.members.array().filter(x => `${x.user.tag}||${x.displayName}`.toLowerCase().includes(args[0].toLowerCase()));
+        let u = message.guild.members.cache.array().filter(x => `${x.user.tag}||${x.displayName}`.toLowerCase().includes(args[0].toLowerCase()));
         if (u.length <= 0) return message.channel.send('No hay usuarios que coincidan con tu búsqueda, intenta ser más específico.');
         else if (u.length === 1) return await send(u[0].user);
         else if (u.length > 10) return message.channel.send('Muchos usuarios coinciden con tu búsqueda, intenta ser más específico.');
@@ -36,7 +36,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           for (let x = 0; x < u.length; x++) {
             m += `${x + 1} ~ ${u[x].nickname ? `${u[x].displayName} (${u[x].user.tag})` : `${u[x].user.tag}`}\n`;
           }
-          let msg = await message.channel.send({ embed: { color: client.functions.selectColor('lightcolors'), description: m + '```' } }),
+          let msg = await message.channel.send({ embed: { color: client.fns.selectColor('lightcolors'), description: m + '```' } }),
             i = await message.channel.awaitMessages(m => m.author.id === message.author.id && m.content > 0 && m.content < u.length + 1, { max: 1, time: 30000 });
           i = await i.first();
           if (!i) {

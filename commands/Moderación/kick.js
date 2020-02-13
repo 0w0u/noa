@@ -22,10 +22,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
       let kUser = message.guild.member(message.mentions.users.first());
       let reason = args.join(' ').slice(22);
 
-      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.fns.noPerm(message));
       if (!kUser) return message.channel.send('Menciona el usuario que será expulsado.');
       if (message.mentions.users.first() == client.user) return message.channel.send(`No puedo hacer esto, intenta con otro.`);
-      if (message.mentions.users.first() == message.author) return message.channel.send(client.replies.tryingAutoInfract(message));
+      if (message.mentions.users.first() == message.author) return message.channel.send(client.fns.tryingAutoInfract(message));
       if (!reason) return message.channel.send(`Específica la razón de la expulsion.`);
       if (!message.guild.member(kUser).bannable) return message.channel.send(`No puedo expulsar al usuario mencionado. Es posible que no tenga el rango requerido o el usuario es superior a mí.`);
 

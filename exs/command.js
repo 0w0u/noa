@@ -21,11 +21,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

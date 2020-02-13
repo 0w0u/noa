@@ -18,22 +18,20 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (!args[0]) {
-        return message.channel.send('Agrega el texto que trump nos dirá.');
-      } else if (args.join(' ').length > 150) {
-        return message.channel.send(`El texto no debe rebasar los 150 caracteres.`);
-      } else {
-        let msg = await message.channel.send(client.replies.reply('generating', message)),
+      if (!args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'noargs escribe la nueva ley', usage: this.help.usage(message.prefix), message }));
+      else if (args.join(' ').length > 150) message.channel.send({ emoji: 'red', razón: 'el texto no debe rebasar los 150 caracteres', message });
+      else {
+        let msg = await message.channel.send(client.fns.reply('generating', message)),
           img = await client.weez.trump(args.join(' '));
         msg.delete();
         message.channel.send({ files: [img] });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

@@ -17,12 +17,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let poke = Math.floor(Math.random() * 8) + 0,
+      let poke = Math.floor(Math.random() * 8),
         user = message.mentions.users.first(),
         ball = embed.setColor('FF0008').setFooter(client.config.bot + ' | Comandos oculto #1');
       if (!args[0] || !user) {
         let gifs = ['https://media.giphy.com/media/DFqVL9xH2g6Zy/giphy.gif', 'https://media.giphy.com/media/Eu75SA0s54toc/giphy.gif'];
-        let non = new (require('discord.js')).MessageEmbed().setDescription('**' + message.author.username + '** se está preparando para lanzar una pokéball');
+        let non = new (require('discord.js').MessageEmbed)().setDescription('**' + message.author.username + '** se está preparando para lanzar una pokéball');
         return message.channel.send({ embed: non });
       }
       if (user === message.author) return message.channel.send('No te puedes atrapar a ti mismo en una pokéball. Por que luego... ¿Cómo vas a salir?');
@@ -61,11 +61,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         message.channel.send(ball);
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

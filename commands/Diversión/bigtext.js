@@ -19,8 +19,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
       'abcdefghijklmnopqrstuvwxyz'.split('').forEach(c => {
         mapping[c] = mapping[c.toUpperCase()] = ` :regional_indicator_${c}:`;
       });
-      if (args.length < 1) message.channel.send('Escribe el texto para convertir');
-      if (args.length > 80) message.channel.send(`**${message.author.username}**, bajale un poco! Escribe un texto menor a 80 caracteres.`);
+      if (!args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'noargs escribe un texto para agrandar', usage: this.help.usage(message.prefix), message }));
+      else if (args.length > 80) message.channel.send(`**${message.author.username}**, bajale un poco! Escribe un texto menor a 80 caracteres.`);
       message.channel.send(
         args
           .join(' ')
@@ -29,11 +29,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .join('')
       );
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

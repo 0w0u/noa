@@ -17,11 +17,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send('Escribe el texto para repetirlo de reversa');
       else {
-        let sreverse = client.functions.reverseString(args.join(' '));
+        let sreverse = args
+          .join()
+          .split('')
+          .reverse()
+          .join('');
         if (args[0].toLowerCase() === sreverse) sreverse = `${args.join(' ')}... Espera... ¡Lo rompiste!`;
         embed
           .setAuthor(`${message.author.tag}`, message.author.avatarURL())
-          .setColor(client.functions.selectColor('lightcolors'))
+          .setColor(client.fns.selectColor('lightcolors'))
           .addField('Texto normal: ', '```\n' + `${args.join(' ')}` + '\n```')
           .addField('Texto en reversa: ', '```\n' + `${sreverse}` + '\n```');
         message.channel.send({ embed });

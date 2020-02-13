@@ -12,4 +12,3 @@ module.exports = model(
     }
   })
 );
-// Acá se pone lo que quieres que un usuario contenga. Si quieres que un usuario tenga "insignias" solo agregas otra cosa en el Objeto.

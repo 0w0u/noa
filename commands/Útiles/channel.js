@@ -54,20 +54,20 @@ module.exports = class command extends require('../../base/models/Command.js') {
         embed
           .setColor('#9C9C9C')
           .setAuthor(`Listado de canales en ${message.guild.name}`, message.guild.iconURL({ format: 'jpg', size: 2048 }))
-          .setTitle(`Se encontraron ${message.guild.channels.size} canales en este servidor.`)
+          .setTitle(`Se encontraron ${message.guild.channels.cache.size} canales en este servidor.`)
           .setDescription(texto.length > 2048 ? texto.slice(0, 2000) + '\n...' : texto.length > 0 ? '```' + texto + '```' : 'No datos.')
           .setThumbnail(message.guild.iconURL({ format: 'jpg', size: 2048 }));
         message.channel.send({ embed });
       } else {
         if (!isNaN(args[0])) {
           try {
-            return await send(message.guild.channels.get(args[0]));
+            return await send(message.guild.channels.cache.get(args[0]));
           } catch {
             return message.channel.send('Esa id no pertenece a ningún canal. (O al menos no de este servidor)');
           }
         }
         if (message.mentions.channels.size > 0) return await send(message.mentions.channels.first());
-        let c = message.guild.channels.array().filter(x => x.type !== 'category' && `${x.name}`.toLowerCase().includes(args[0].toLowerCase()));
+        let c = message.guild.channels.cache.array().filter(x => x.type !== 'category' && `${x.name}`.toLowerCase().includes(args[0].toLowerCase()));
         if (c.length <= 0) return message.channel.send('No hay canales que coincidan con tu búsqueda, intenta ser más específico.');
         else if (c.length === 1) return await send(c[0]);
         else if (c.length > 10) return message.channel.send('Muchos canales coinciden con tu búsqueda, intenta ser más específico.');
@@ -76,7 +76,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           for (let x = 0; x < c.length; x++) {
             m += `${x + 1} ~ ${c[x].name}\n`;
           }
-          let msg = await message.channel.send({ embed: { color: client.functions.selectColor('lightcolors'), description: m + '```' } }),
+          let msg = await message.channel.send({ embed: { color: client.fns.selectColor('lightcolors'), description: m + '```' } }),
             i = await message.channel.awaitMessages(m => m.author.id === message.author.id && m.content > 0 && m.content < c.length + 1, { max: 1, time: 30000 });
           i = await i.first();
           if (!i) {
@@ -94,26 +94,26 @@ module.exports = class command extends require('../../base/models/Command.js') {
           cra = cr.split(/ +/g);
         if (channel.type === 'text') {
           embed
-            .setColor(client.functions.selectColor('lightcolors'))
+            .setColor(client.fns.selectColor('lightcolors'))
             .setTitle('Información de ' + channel.name)
             .addField('Principal', `• ID: ${channel.id}\n• Tipo: Texto\n• Tópico: ${channel.topic ? (channel.topic.length > 250 ? 'Muy larga.' : channel.topic) : 'Sin descripción.'}`)
-            .addField('Más...', `• Posición: ${channel.rawPosition}\n• Creado el: ${cra[2]}/${cra[1]}/${cra[3]} (Hace ${client.functions.checkDays(channel.createdAt)})`);
+            .addField('Más...', `• Posición: ${channel.rawPosition}\n• Creado el: ${cra[2]}/${cra[1]}/${cra[3]} (Hace ${client.fns.checkDays(channel.createdAt)})`);
           message.channel.send({ embed });
         } else {
           embed
-            .setColor(client.functions.selectColor('lightcolors'))
+            .setColor(client.fns.selectColor('lightcolors'))
             .setTitle('Información de ' + channel.name)
             .addField('Principal', `• ID: ${channel.id}\n• Tipo: ${type[channel.type]}`)
-            .addField('Más...', `• Posición: ${channel.rawPosition}\n• Creado el: ${cra[2]}/${cra[1]}/${cra[3]} (Hace ${client.functions.checkDays(channel.createdAt)})`);
+            .addField('Más...', `• Posición: ${channel.rawPosition}\n• Creado el: ${cra[2]}/${cra[1]}/${cra[3]} (Hace ${client.fns.checkDays(channel.createdAt)})`);
           message.channel.send({ embed });
         }
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

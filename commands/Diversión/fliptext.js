@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'fliptext',
       description: '¡Dale un giro a tu texto!',
-      usage: prefix => `\`${prefix}fliptext\``,
-      examples: prefix => `\`${prefix}fliptext\``,
+      usage: prefix => `\`${prefix}fliptext <texto>\``,
+      examples: prefix => `\`${prefix}fliptext Hola gente\``,
       enabled: true,
       aliases: [],
       botPermissions: [],
@@ -17,9 +17,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let mapping = '¡"#$%⅋,)(*+\'-˙/0ƖᄅƐㄣϛ9ㄥ86:;<=>¿@∀qƆpƎℲפHIſʞ˥WNOԀQɹS┴∩ΛMX⅄Z[/]^_`ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz{|}~',
         OFFSET = '!'.charCodeAt(0);
-      if (!args[0]) {
-        return message.channel.send('**' + message.author.username + '**, anímate y escribe el texto que dará un giro 🔃');
-      } else {
+      if (!args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'noargs anímate y escribe el texto que dará un giro', usage: this.help.usage(message.prefix), message }));
+      else {
         message.channel.send(
           args
             .join(' ')
@@ -31,11 +30,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         );
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

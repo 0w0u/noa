@@ -31,7 +31,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             .setDescription(`**${current.skytext}**`)
             .setAuthor(`Clima de ${current.observationpoint}`)
             .setThumbnail(current.imageUrl)
-            .setColor(client.functions.selectColor('lightcolors'))
+            .setColor(client.fns.selectColor('lightcolors'))
             .addField('Coordenadas', `${location.lat}, ${location.long}`, true)
             .addField('Zona horaria', `UTC${location.timezone}`, true)
             .addField('Hora', `${current.observationtime}`, true)
@@ -44,11 +44,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

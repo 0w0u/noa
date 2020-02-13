@@ -18,25 +18,25 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (message.mentions.users.first() === message.author || !message.mentions.users.first()) {
         embed
-          .setDescription(client.replies.reply('hug', message))
-          .setColor(client.functions.selectColor('lightcolors'))
-          .setImage(client.replies.gifs(this.help.name));
+          .setDescription(client.fns.reply('hug', message))
+          .setColor(client.fns.selectColor('lightcolors'))
+          .setImage(client.fns.gifs(this.help.name));
         message.channel.send(embed);
         return;
       }
       if (message.mentions.users.first() == client.user) return message.channel.send('Aprecio tu cariño, pero no quiero un abrazo.');
       if (message.mentions.users.size < 1) return message.channel.send('¡Vamos, se cariñoso y menciona a alguien para abrazarlo!');
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** abrazó a **' + message.mentions.users.first().username + '**')
-        .setImage(client.replies.gifs(this.help.name));
+        .setImage(client.fns.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

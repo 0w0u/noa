@@ -26,21 +26,21 @@ module.exports = class command extends require('../../base/models/Command.js') {
       //Dos Opciones
       const poll2 = new Discord.MessageEmbed()
 
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('📊 **' + args[0] + '** \n\n\n🇦 ' + args[1] + ' \n🇧 ' + args[2] + '')
         .setFooter('Votaciones para ' + server.name + '', server.iconURL());
 
       //Tres Opciones
       const poll3 = new Discord.MessageEmbed()
 
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('📊 **' + args[0] + '** \n\n\n🇦 ' + args[1] + ' \n🇧 ' + args[2] + ' \n 🇨 ' + args[3] + '')
         .setFooter('Votaciones para ' + server.name + '', server.iconURL());
 
       //Cuatro Opciones
       const poll4 = new Discord.MessageEmbed()
 
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('📊 **' + args[0] + '** \n\n\n🇦 ' + args[1] + ' \n🇧 ' + args[2] + ' \n 🇨 ' + args[3] + ' \n 🇩 ' + args[4] + '')
         .setFooter('Votaciones para ' + server.name + '', server.iconURL());
 
@@ -50,9 +50,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setDescription('📊 **' + args[0] + '** \n\n\n🇦 ' + args[1] + ' \n🇧 ' + args[2] + ' \n🇨 ' + args[3] + ' \n🇩 ' + args[4] + ' \n🇪 ' + args[5] + '')
         .setFooter('Votaciones para ' + server.name + '', server.iconURL())
 
-        .setColor(client.functions.selectColor('lightcolors'));
+        .setColor(client.fns.selectColor('lightcolors'));
 
-      if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(client.fns.noPerm(message));
 
       if (args.length > 6) {
         return message.channel.send(`El máximo de opciones por votación es de cinco.`);

@@ -15,18 +15,17 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (!args[0]) {
-        message.channel.send('**' + message.author.username + '**, escribe el texto que dirá la vaca');
-      } else {
+      if (!args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'noargs escribe algo para que diga la vaca', usage: this.help.usage(message.prefix), message }));
+      else {
         message.channel.send(require('cowsay').think({ text: args.join(' '), eyes: 'Oo', T: 'u' }), { code: 'md' });
-        message.delete();
+        message.guild && message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES') ? message.delete() : null;
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

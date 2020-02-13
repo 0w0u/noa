@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         warns[message.guild.id] = {};
       }
 
-      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.fns.noPerm(message));
       let wUser = message.mentions.users.first();
       if (!wUser) return message.reply('Debes mencionar al usuario que se le borrará una advertencia.');
       if (message.mentions.users.first() == client.user) return message.channel.send(`No puedes hacerlo conmigo.`);

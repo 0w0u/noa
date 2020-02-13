@@ -22,15 +22,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.size < 1) return message.channel.send('Es hora de traer a aquellos que tanto amas... ¡Pero dime a quien!');
       embed
         .setDescription('**' + message.author.username + '** revivió a **' + message.mentions.users.first().username + '**')
-        .setColor(client.functions.selectColor('lightcolors'))
-        .setImage(client.replies.reviveGifs());
+        .setColor(client.fns.selectColor('lightcolors'))
+        .setImage(client.fns.gifs('revive'));
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

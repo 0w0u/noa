@@ -18,12 +18,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.replies.noPerm(message));
+      if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(client.fns.noPerm(message));
       let mUser = message.guild.member(message.mentions.users.first());
       let pedir = message.mentions.users.first();
       if (!mUser) return message.channel.send(`Menciona al usuario que al que debo remover su silenciamiento.`);
 
-      if (pedir === message.author) return message.channel.send(client.replies.tryingAutoInfract(message));
+      if (pedir === message.author) return message.channel.send(client.fns.tryingAutoInfract(message));
       if (pedir == client.user) return message.channel.send(`No puede hacer esto sobre mi, intenta con otro.`);
 
       let mutedrole = mUser.roles.find(`name`, 'Silenciado');
@@ -38,7 +38,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         reason = 'No específicada.';
       }
 
-      let muterole = message.guild.roles.find(`name`, 'Silenciado');
+      let muterole = message.guild.roles.cache.find(`name`, 'Silenciado');
 
       if (!muterole) {
         try {
@@ -47,7 +47,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             color: '#000000',
             permissions: []
           });
-          message.guild.channels.forEach(async (channel, id) => {
+          message.guild.channels.cache.forEach(async (channel, id) => {
             await channel.overwritePermissions(muterole, {
               SEND_MESSAGES: false,
               ADD_REACTIONS: false

@@ -17,17 +17,17 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('Pasos para votar en Discord Bot List', client.user.avatarURL())
         .setDescription('¡Gracias por interesarte en ayudarme! Lo único que debes hacer es [entrar al siguiente link.](https://discordbots.org/bot/477950798949646336/vote) y presionar el botón de `Vote for this bot`. Y listo, ya me habrás brindado un voto de apoyo :3')
         .setFooter(client.config.bot + ' | Cada vez que votas por mi, me apoyas mucho', message.author.avatarURL());
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

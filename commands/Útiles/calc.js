@@ -18,26 +18,26 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send('Ingresa una operación para calcular.');
       else {
-        let msg = await message.channel.send(client.replies.reply('generating', message));
+        let msg = await message.channel.send(client.fns.reply('generating', message));
         try {
           var resp = require('mathjs').evaluate(args.join(' '));
         } catch (e) {
           return msg.delete(), message.channel.send(`Ingresa una operación válida.\nUtiliza \`${message.prefix}help calc\` para ver todas las opciones de operación posibles.`);
         }
         embed
-          .setColor(client.functions.selectColor('lightcolors'))
+          .setColor(client.fns.selectColor('lightcolors'))
           .setTitle(':1234: Calculadora')
           .addField('Operación', `\`\`\`\n${args.join(' ')}\n\`\`\``)
           .addField('Resultado', `\`\`\`\n${resp}\n\`\`\``);
-        msg.delete();
+        
         message.channel.send({ embed });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

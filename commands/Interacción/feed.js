@@ -20,16 +20,16 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() == client.user) return message.channel.send('Muchas gracias por intentar darme de comer, pero no tengo hambre :(');
       if (message.mentions.users.size < 1) return message.channel.send('Antes que nada, ¡Gracias por tu solaridad!. Pero debes elegir a quién quieres dar de comer...');
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** le dio de comer a **' + message.mentions.users.first().username + '**')
-        .setImage(client.replies.gifs(this.help.name));
+        .setImage(client.fns.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

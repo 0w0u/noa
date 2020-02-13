@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       embed
         .setTitle('¿Cuál es este Pokémon?')
         .setImage(pokem.imageURL)
-        .setColor(client.functions.selectColor('green'));
+        .setColor(client.fns.selectColor('green'));
       let msg = await message.channel.send({ embed }),
         filter = m => m.author.id === message.author.id,
         attempts = await msg.channel.awaitMessages(filter, { time: 15000, max: 1 });
@@ -38,11 +38,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
       await msg.edit({ embed: { color: 0xc82828, title: '<:pokemonLeft:600412308912734262> ¿Cuál es este Pokémon?', image: { url: pokem.imageURL } } });
       return msg.channel.send('Oops, te has equivocado y el Pokémon se escapó.');
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

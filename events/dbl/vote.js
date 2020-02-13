@@ -9,7 +9,7 @@ module.exports = class event {
         bot = await client.users.fetch(vote.bot),
         uwu = await client.dbl.getBot(client.config.botID),
         embed = new (require('discord.js').MessageEmbed)()
-          .setColor(client.functions.selectColor('lightcolors'))
+          .setColor(client.fns.selectColor('lightcolors'))
           .setThumbnail(user.displayAvatarURL())
           .setTitle('<:upvote:651571911632879626> | ¡Un usuario ha votado por ' + bot.username + '!')
           .setDescription('¡Tú también vota por ' + bot.username + ' [haciendo clic aquí](https://top.gg/bot/' + bot.id + '/vote)!')

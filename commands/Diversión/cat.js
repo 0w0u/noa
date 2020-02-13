@@ -16,18 +16,18 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       let img = await require('node-superfetch').get('https://nekos.life/api/v2/img/meow'),
-        msg = await message.channel.send(new (require('discord.js').MessageEmbed)().setColor(client.functions.selectColor('lightcolors')).setDescription(client.replies.reply('generating', message)));
+        msg = await message.channel.send(client.fns.reply('generating', message));
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('¡Meow! ฅ^•ﻌ•^ฅ', 'https://i.imgur.com/mor5NWd.png')
         .setImage(img.body.url);
       msg.edit({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

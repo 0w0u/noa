@@ -55,6 +55,7 @@ let readdir = require('util').promisify(require('fs').readdir),
         .get('/dbl', (q, s) => s.redirect(client.config.dbl)) // Redirección dbl
         .get('/vote', (q, s) => s.redirect(client.config.vote)) // Redirección dbl vote
         .get('/github', (q, s) => s.redirect(client.config.github)) // Redirección github
+        .get('/donate', (q,s ) => s.redirect(client.config.donate)) // Redirección buymeacoffee
         .use((req, res, next) => res.status(404).render('404')); // 404 not found
       server.listen(port, () => {
         console.log(`Escuchando en ${port}`);

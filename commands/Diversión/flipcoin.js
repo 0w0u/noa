@@ -16,7 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       let roll = Math.floor(Math.random() * 2) + 1;
-      embed.setColor(client.functions.selectColor('lightcolors'));
+      embed.setColor(client.fns.selectColor('lightcolors'));
       if (roll === 1) {
         embed.setTitle(`${message.author.username}, obtuviste: Cruz`).setImage('https://i.imgur.com/s79TNS3.png');
         message.channel.send({ embed });
@@ -25,11 +25,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         message.channel.send({ embed });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

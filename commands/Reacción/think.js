@@ -17,16 +17,16 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       embed
-        .setDescription(client.replies.reply(this.help.name, message))
-        .setColor(client.functions.selectColor('lightcolors'))
-        .setImage(client.replies.gifs(this.help.name));
+        .setDescription(client.fns.reply(this.help.name, message))
+        .setColor(client.fns.selectColor('lightcolors'))
+        .setImage(client.fns.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

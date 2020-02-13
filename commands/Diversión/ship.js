@@ -4,7 +4,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       name: 'ship',
       description: 'Shippea a dos usuarios por sus apodos en el servidor.',
       usage: prefix => `\`${prefix}ship <@usuario1> <@usuario2>\``,
-      examples: prefix => `\`${prefix}ship Javi ϟ#3600 MyAlejo#5212\``,
+      examples: prefix => `\`${prefix}ship @Noa#3164 @Hinata#1200\``,
       enabled: true,
       guildOnly: true,
       aliases: [],
@@ -16,10 +16,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (message.mentions.members.size < 1 || !args[0]) message.channel.send(`${client.demo.error} | **${message.author.tag}** debes mencionar al menos un usuario para shippear.`);
-      else if (message.mentions.members.first() == message.member) {
-        return message.channel.send(`No te puedes mencionar a ti mismo cómo primer usuario.`);
-      } else {
+      if (message.mentions.members.size < 1 || !args[0]) message.channel.send(client.fns.message({ emoji: 'red', razón: 'debes de mencionar a 2 personas para shippear', message }));
+      else if (message.mentions.members.first() == message.member) message.channel.send(client.fns.message({ emoji: 'red', razón: 'tú no puedes ser el primer ship', message }));
+      else {
         let shipped = message.mentions.members.size === 2 ? message.mentions.members.array()[1] : message.member,
           shipper = message.mentions.members.size === 1 || message.mentions.members.size === 2 ? message.mentions.members.array()[0] : message.member,
           first_length = Math.round(shipper.displayName.length / 2),
@@ -30,11 +29,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         message.channel.send(`**${shipped.displayName} + ${shipper.displayName}**\n\nEl shippeo ideal es: **${final_name}**`);
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

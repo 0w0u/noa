@@ -20,16 +20,16 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (message.mentions.users.first() === client.user) return message.channel.send('No me puedes asesinar o.o');
       if (message.mentions.users.size < 1) return message.channel.send('*- Tiene miedo-* Si quieres hacerlo... M... Menciona a alguien *- Llora -*');
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setDescription('**' + message.author.username + '** mató a **' + message.mentions.users.first().username + '**')
-        .setImage(client.replies.gifs(this.help.name));
+        .setImage(client.fns.gifs(this.help.name));
       message.channel.send({ embed });
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

@@ -15,9 +15,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      if (!args[0]) {
-        return message.channel.send('Debes proporcionar el texto a puntuar.');
-      } else {
+      if (!args[0]) message.channel.send('Debes proporcionar el texto a puntuar.');
+      else {
         let punt = Math.floor(Math.random() * 11),
           stars = '';
         if (punt === 0) {
@@ -47,15 +46,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setTitle('📝 Puntuando el texto:')
           .setDescription(args.join(' '))
           .addField('Puntuación: ' + punt, stars)
-          .setColor(client.functions.selectColor('lightcolors'));
+          .setColor(client.fns.selectColor('lightcolors'));
         message.channel.send({ embed });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

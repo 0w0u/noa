@@ -20,7 +20,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         mon = await client.users.fetch(client.config.owners[0]);
       if (!args[0]) {
         embed
-          .setColor(client.functions.selectColor('lightcolors'))
+          .setColor(client.fns.selectColor('lightcolors'))
           .setThumbnail(client.user.avatarURL)
           .setAuthor('Comando de ayuda de ' + client.config.bot, client.user.avatarURL())
           .setDescription('¡Hola! Soy **' + client.config.bot + '** y por aquí te dejaré alguna información importante que debes saber por si necesitas ayuda.')
@@ -35,7 +35,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
       } else {
         let ayu = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
         if (!ayu) return message.channel.send('Ese comando no existe ewe');
-        if (ayu.help.category == 'hidden') return message.channel.send('Ehmmm... no sé de que me estás hablando! T-te juro q-que no... sé nada... 🙄');
+        if (ayu.help.category === 'Ocultos') return message.channel.send('Ehmmm... no sé de que me estás hablando! T-te juro q-que no... sé nada... 🙄');
+        if (ayu.config.cooldown === 0) ayu.config.cooldown = 2.5;
         embed
           .setTitle('Información del comando: ' + (ayu.help.name[0].toUpperCase() + ayu.help.name.slice(1)))
           .addField('• Descripción', ayu.help.description.length < 1 ? '**Sin descripción. Si ves esto, por favor reportalo en mi servidor de soporte: ' + client.config.support + ' **' : ayu.help.description)
@@ -44,16 +45,16 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .addField('• Alias(es)', ayu.config.aliases.length < 1 ? 'Ningúno' : `\`${ayu.config.aliases.join('`, `')}\``, true)
           .addField('• Cooldown', ayu.config.cooldown === 1 ? ayu.config.cooldown + ' segundo' : ayu.config.cooldown + ' segundos', true)
           .addField('• Categoría', `${ayu.help.category}`, true)
-          .setColor(client.functions.selectColor('lightcolors'))
+          .setColor(client.fns.selectColor('lightcolors'))
           .setFooter(client.config.bot + ' | <> = obligatorio, [] = opcional. No uses estos símbolos al momento de ejecutar el comando.', client.user.avatarURL());
         message.channel.send({ embed });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

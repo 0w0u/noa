@@ -17,7 +17,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      embed.setColor(client.functions.selectColor('lightcolors'));
+      embed.setColor(client.fns.selectColor('lightcolors'));
       let emoji = /((:|<:|<a:)((\w{1,64}:\d{17,18})|(\w{1,64}))(:|>))|(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi.exec(args.join(' '));
       if (!args[0]) {
         message.channel.send(`Debes especificar los argumentos o poner un emoji para hacerlo **Jumbo**. \n> **Uso correcto:** \`${message.prefix}emoji <add | remove | --lista | emoji [--info]>\``);
@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         let nitro = message.guild.emojis.filter(e => e.animated === true),
           classic = message.guild.emojis.filter(e => e.animated === false);
         if (classic.size > 0) {
-          embed.setColor(client.functions.selectColor('lightcolors')).setTitle('Emote' + (classic.size > 1 ? 's' : '') + ' clásico' + (classic.size > 1 ? 's' : '') + ' [' + classic.size + ']');
+          embed.setColor(client.fns.selectColor('lightcolors')).setTitle('Emote' + (classic.size > 1 ? 's' : '') + ' clásico' + (classic.size > 1 ? 's' : '') + ' [' + classic.size + ']');
           classic = classic.array();
           for (let i = 0; i < classic.length; i += 10) {
             embed.addField(
@@ -42,7 +42,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
         if (nitro.size > 0) {
           let embedd = new (require('discord.js')).MessageEmbed();
-          embedd.setColor(client.functions.selectColor('lightcolors')).setTitle('Emote' + (nitro.size > 1 ? 's' : '') + ' nitro [' + nitro.size + ']');
+          embedd.setColor(client.fns.selectColor('lightcolors')).setTitle('Emote' + (nitro.size > 1 ? 's' : '') + ' nitro [' + nitro.size + ']');
           nitro = nitro.array();
           for (let i = 0; i < nitro.length; i += 10) {
             embedd.addField(
@@ -56,7 +56,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           message.channel.send({ embed: embedd });
         }
       } else if (args[0].toLowerCase() === 'add' || args[0].toLowerCase() === 'agregar') {
-        if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.demo.error + ' | **' + message.author.username + '**, no tienes los suficientes permisos.');
+        if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.fns.message({ emoji: 'red', razón: 'no tienes los suficientes permisos', message }));
         else {
           if (!args[1]) message.channel.send('Necesitas elegir el nombre para el emoji a agregar.');
           else {
@@ -64,14 +64,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
             try {
               create = await message.guild.emojis.create(message.attachments.first() ? message.attachments.first().url : args[2] ? args[2] : 'awawa', args[1], `Acción cometida desde un comando por: ${message.author.tag}`);
             } catch {
-              return message.channel.send(client.demo.error + ' | **' + message.author.username + '**, necesitas elegir un formato de imagen válida o no puedes agregar más emojis.');
+              return message.channel.send(client.fns.message({ emoji: 'red', razón: 'parece que no pusiste bien la imagen o ya no hay más espacio para emojis', message }));
             }
             message.channel.send(`El emote \`:${args[1]}:\` fue agregado correctamente ${create.toString()}`);
           }
         }
         return;
       } else if (args[0].toLowerCase() === 'remove' || args[0].toLowerCase() === 'remover') {
-        if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.demo.error + ' | **' + message.author.username + '**, no tienes los suficientes permisos.');
+        if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.fns.message({ emoji: 'red', razón: 'no tienes los suficientes permisos', message }));
         else {
           if (!args[1]) message.channel.send('Necesitas especificar un emoji para borrar.');
           let emoji1 = message.guild.emojis.get(args[0]) || message.guild.emojis.find(x => x.name.includes(args[1])) || message.guild.emojis.find(x => x.toString() === args[1]);
@@ -102,7 +102,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
         return;
       } else if (args[0].toLowerCase() === 'rename' || args[0].toLowerCase() === 'renombrar') {
-        if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.demo.error + ' | **' + message.author.username + '**, no tienes los suficientes permisos.');
+        if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.fns.message({ emoji: 'red', razón: 'no tienes los suficientes permisos', message }));
         else {
           if (!args[1]) return message.channel.send('Necesitas especificar un emoji para renombrar.');
           let emoji1 = message.guild.emojis.get(args[0]) || message.guild.emojis.find(x => x.name.includes(args[1])) || message.guild.emojis.find(x => x.toString() === args[1]);
@@ -125,7 +125,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         else {
           if (args.pop() === '--info') {
             let emo = emoji[3].split(':');
-            let uwu = client.emojis.get(emo[1]);
+            let uwu = client.emojis.cache.get(emo[1]);
             if (!uwu) message.channel.send('Emoji no encontrado.');
             else {
               message.channel.send(
@@ -145,11 +145,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         return;
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

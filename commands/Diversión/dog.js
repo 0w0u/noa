@@ -15,8 +15,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let msg = await message.channel.send(new (require('discord.js').MessageEmbed)().setColor(client.functions.selectColor('lightcolors')).setDescription(client.replies.reply('generating', message)));
-      embed.setAuthor('Woof! ▼・ᴥ・▼', 'https://i.imgur.com/22903G7.png').setColor(client.functions.selectColor('lightcolors'));
+      let msg = await message.channel.send(client.fns.reply('generating', message));
+      embed.setAuthor('Woof! ▼・ᴥ・▼', 'https://i.imgur.com/22903G7.png').setColor(client.fns.selectColor('lightcolors'));
       if (!args[0]) {
         let img = await require('node-superfetch').get('https://random.dog/woof.json?filter=mp4,webm');
         embed.setImage(img.body.url);
@@ -47,11 +47,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         msg.edit({ embed });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }

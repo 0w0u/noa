@@ -41,28 +41,29 @@ module.exports = class command extends require('../../base/models/Command.js') {
         embed.addField('• ' + c + ' [' + cmds.size + ']', cmds.map(u => `\`${u.help.name}\``).join(', '));
       });
       embed
-        .setColor(client.functions.selectColor('lightcolors'))
+        .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('Comandos de ' + client.config.bot, client.user.displayAvatarURL())
         .addField('• Ocultos [??]', '¡Descúbrelos por ti mismo!')
         .setImage(client.config.banner)
         .setFooter(`Total de comandos: ${client.commands.size - client.commands.filter(C => C.help.category === 'Ocultos').size - client.commands.filter(C => C.help.category === 'Desarrollador').size} | Desarrollado por: ${jav.tag} y ${mon.tag}`)
         .setTimestamp();
       if (!args[0]) {
-        let msg = await message.channel.send(client.replies.reply('dm', message));
+        let msg = await message.channel.send(client.fns.reply('dm', message));
         try {
           await message.author.send({ embed });
         } catch (e) {
+          msg.edit(client.fns.message({ emoji: 'red', razón: 'noargs parece que tienes los mensajes directos desactivados', usage: this.help.usage(message.prefix), message }))
           msg.edit(`**${message.author.username}**, parece que tienes los mensajes directos desactivados. Si de igual forma deseas ver la lista de comandos, ejecuta el comando \`${message.prefix}commands --nodm\``);
         }
       } else if (args[0].toLowerCase() === '--nodm' || args[0].toLowerCase() === '--nodmhelp') {
         message.channel.send({ embed });
       }
     } catch (e) {
-      message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
+        message
       });
     }
   }
