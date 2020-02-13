@@ -62,7 +62,7 @@ module.exports = class event {
       }
       timestamps.set(message.author.id, now);
       setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-      if (data.user.blacklist.bl === true) return message.channel.send(client.fns.message({ emoji: 'red', razón: `¡estás en lista negra del bot! Si crees que esto es un error, dirígete al servidor de soporte <https://noa.wwmon.xyz/support/>`, message }));
+      if (data.user.blacklist.bl === true) return message.channel.send(client.fns.message({ emoji: 'red', razón: `¡estás en lista negra del bot! Si crees que esto es un error, dirígete al servidor de soporte <https://noa.wwmon.xyz/support>`, message }));
       if (!cmd.config.botPermissions.includes('SEND_MESSAGES' || 'EMBED_LINKS')) cmd.config.botPermissions.push('SEND_MESSAGES', 'EMBED_LINKS');
       if (!cmd.config.enabled) return message.channel.send(client.fns.message({ emoji: 'red', razón: 'este comando no se encuentra habilitado', message }));
       if (cmd.help.category === 'Moderación' && !client.config.owners.includes(message.author.id)) return message.channel.send(client.fns.message({ emoji: 'red', razón: 'el módulo de moderación está deshabilitado por el momento', message }));
