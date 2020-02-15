@@ -7,6 +7,7 @@ module.exports = class client extends Client {
     /* Bot utils */
     this.pokemon = require('./utils/pokemon');
     this.fns = new (require('./utils/functions'))(this);
+    this.sep = require('path').sep;
     /* Discord utils */
     this.commands = new Collection();
     this.aliases = new Collection();
@@ -22,7 +23,7 @@ module.exports = class client extends Client {
   /* Cargador de comandos */
   loadCommand(commandPath, commandName) {
     try {
-      let props = new (require(`.${commandPath}${require('path').sep}${commandName}`))(this);
+      let props = new (require(`.${commandPath}${this.sep}${commandName}`))(this);
       props.config.location = commandPath;
       if (props.init) props.init(this);
       this.commands.set(props.help.name, props);
@@ -36,10 +37,15 @@ module.exports = class client extends Client {
   /* Descarga un comando para 'relodearlo' */
   async unloadCommand(commandPath, commandName) {
     let command;
-    if (this.commands.has(commandName)) command = this.commands.get(commandName);
-    else if (this.aliases.has(commandName)) command = this.commands.get(this.aliases.get(commandName));
-    if (command.shutdown) await command.shutdown(this);
-    delete require.cache[require.resolve(`.${commandPath}${require('path').sep}${commandName}.js`)];
+    if (this.commands.has(commandName)) {
+      command = this.commands.get(commandName);
+    } else if (this.aliases.has(commandName)) {
+      command = this.commands.get(this.aliases.get(commandName));
+    }
+    if (command.shutdown) {
+      await command.shutdown(this);
+    }
+    delete require.cache[require.resolve(`.${commandPath}${this.sep}${commandName}.js`)];
     return false;
   }
   /* Postea un error en un comando o evento */
