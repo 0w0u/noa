@@ -26,7 +26,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       else {
         if (args[0].length >= 25) message.channel.send({ emoji: 'red', razón: 'el logro no puede exceder los 25 carácteres', message });
         else {
-          message.channel.send(new (require('discord.js').MessageAttachment)(`https://minecraftskinstealer.com/achievement/${random}/${args[1] ? (args[1].length < 25 ? args[1] : `Logro%20obtenido`) : `Logro%20obtenido`}/${args[0]}`, 'achievement.png'));
+          message.channel.send(new (require('discord.js')).MessageAttachment(`https://minecraftskinstealer.com/achievement/${random}/${args[1] ? (args[1].length < 25 ? args[1] : `Logro%20obtenido`) : `Logro%20obtenido`}/${args[0]}`, 'achievement.png'));
         }
       }
     } catch (e) {

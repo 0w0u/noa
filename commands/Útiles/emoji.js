@@ -136,7 +136,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             if (!emoji[0].includes('<' || '>')) message.channel.send('El emoji seleccionado es un emoji "default", no puedo hacerlo jumbo');
             else {
               let emo = emoji[3].split(':');
-              message.channel.send(new (require('discord.js').MessageAttachment)(`https://cdn.discordapp.com/emojis/${emo[1]}.${emoji[2].includes('a') ? 'gif' : 'png'}`));
+              message.channel.send(new (require('discord.js')).MessageAttachment(`https://cdn.discordapp.com/emojis/${emo[1]}.${emoji[2].includes('a') ? 'gif' : 'png'}`));
             }
           }
         }

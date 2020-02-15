@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .get(`https://www.weez.pw/api/triggered?avatar=${(message.mentions.users.first() || message.author).displayAvatarURL({ size: 2048 })}`)
           .set('clave', client.config.weezKey);
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.body, 'img.gif'));
+      message.channel.send(new (require('discord.js')).MessageAttachment(img.body, 'img.gif'));
     } catch (e) {
       client.err({
         type: 'command',
