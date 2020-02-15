@@ -7,6 +7,7 @@ module.exports = class client extends Client {
     /* Bot utils */
     this.pokemon = require('./utils/pokemon');
     this.fns = new (require('./utils/functions'))(this);
+    this.sep = require('path').sep;
     /* Discord utils */
     this.commands = new Collection();
     this.aliases = new Collection();

@@ -26,7 +26,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
         filter = m => m.author.id === message.author.id,
         attempts = await msg.channel.awaitMessages(filter, { time: 15000, max: 1 });
       attempts = await attempts.first();
-      attempts = attempts.content.toLowerCase();
       if (!attempts) {
         msg.edit({ embed: { color: 0xc82828, title: '<:pokemonLeft:600412308912734262> ¿Cuál es este Pokémon?', image: { url: pokem.imageURL } } });
         message.channel.send(client.message({ emoji: 'red', razón: 'tardaste mucho en escribir, ¡al pókemon le dio tiempo a huir!', usage: this.help.usage(message.prefix), message }));
