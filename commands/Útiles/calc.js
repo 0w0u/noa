@@ -29,8 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setTitle(':1234: Calculadora')
           .addField('Operación', `\`\`\`\n${args.join(' ')}\n\`\`\``)
           .addField('Resultado', `\`\`\`\n${resp}\n\`\`\``);
-        message.delete();
-        message.channel.send({ embed });
+          msg.edit('** **', { embed });
       }
     } catch (e) {
       client.err({
