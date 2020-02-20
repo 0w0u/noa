@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs debes escribir tu sugerencia', usage: this.help.usage(message.prefix), message }));
       else {
-        message.channel.send(client.message({ emoji: 'gray', razón: '¿seguro que quieres mandar ésta sugerencia?', usage: this.help.usage(message.prefix), message }))
+        message.channel.send(client.message({ emoji: 'gray', razón: '¿seguro que quieres mandar ésta sugerencia?', usage: this.help.usage(message.prefix), message }));
         let i = await message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, errors: ['cancelar'] });
         i = await i.first();
         if (i.content.toLowerCase().includes('sí') || i.content.toLowerCase().includes('si')) {

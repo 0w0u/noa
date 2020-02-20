@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs agrega el nombre del GIF que quieres busar', usage: this.help.usage(message.prefix), message }));
       else {
-        let gif = await require('gif-search').random(args[0])
+        let gif = await require('gif-search').random(args[0]);
         embed
           .setColor(client.fns.selectColor('lightcolors'))
           .setImage(gif)

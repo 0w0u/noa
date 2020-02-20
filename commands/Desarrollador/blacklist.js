@@ -32,7 +32,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
               blreason: args[2] ? args.slice(2).join(' ') : 'Sin razón'
             };
             u.save();
-            message.channel.send(client.message({ emoji: 'green', razón: 'se ha agregado correctamente a ' + user.tag + ' a la lista negra del bot' + (args[2] ? '\nPor la razón: ' + args.slice(2).join(' ') : ''), usage: this.help.usage(message.prefix), message }))
+            message.channel.send(client.message({ emoji: 'green', razón: 'se ha agregado correctamente a ' + user.tag + ' a la lista negra del bot' + (args[2] ? '\nPor la razón: ' + args.slice(2).join(' ') : ''), usage: this.help.usage(message.prefix), message }));
           }
         }
       } else if (args[0].toLowerCase() === opciones[1]) {
