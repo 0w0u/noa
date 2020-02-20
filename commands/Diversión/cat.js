@@ -2,7 +2,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
       name: 'cat',
-      description: 'Lindos gatitos para todos. 🐱',
+      description: 'Lindos gatitos para todos 🐱',
       usage: prefix => `\`${prefix}cat\``,
       examples: prefix => `\`${prefix}cat\``,
       enabled: true,
@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('¡Meow! ฅ^•ﻌ•^ฅ', 'https://i.imgur.com/mor5NWd.png')
         .setImage(img.body.url);
-      msg.edit({ embed });
+      msg.edit('** **', { embed });
     } catch (e) {
       client.err({
         type: 'command',

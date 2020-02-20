@@ -1,12 +1,13 @@
 module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
-      name: 'fox',
-      description: 'Genera un lindo y agradable zorro 🦊',
-      usage: prefix => `\`${prefix}fox\``,
-      examples: prefix => `\`${prefix}fox\``,
+      name: 'scared',
+      description: 'Carece de valor en ciertas situaciones y demuestra tu poca resistencia al terror...',
+      usage: prefix => `\`${prefix}scared\``,
+      examples: prefix => `\`${prefix}scared\``,
       enabled: true,
-      aliases: [],
+      cooldown: 3,
+      aliases: ['asustado'],
       botPermissions: [],
       memberPermissions: [],
       dirname: __dirname
@@ -15,13 +16,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let img = await require('node-superfetch').get('https://randomfox.ca/floof/'),
-        msg = await message.channel.send(client.fns.reply('generating', message));
       embed
+        .setDescription(client.fns.reply(this.help.name, message))
         .setColor(client.fns.selectColor('lightcolors'))
-        .setAuthor('¡Zorros!', 'https://i.imgur.com/FzagKZr.png')
-        .setImage(img.body.image);
-      msg.edit('** **', { embed });
+        .setImage(client.fns.gifs(this.help.name));
+      message.channel.send({ embed });
     } catch (e) {
       client.err({
         type: 'command',

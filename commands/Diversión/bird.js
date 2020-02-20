@@ -2,7 +2,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
       name: 'bird',
-      description: 'Genera un lindo pájaro. 🐦',
+      description: 'Genera un lindo pájaro 🐦',
       usage: prefix => `\`${prefix}bird\``,
       examples: prefix => `\`${prefix}bird\``,
       enabled: true,
@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('¡Pío Pío! |⁰⊖⁰)', 'https://i.imgur.com/E8fKH5q.png')
         .setImage(`https://random.birb.pw/img/${img.body}`);
-      msg.edit({ embed });
+      msg.edit('** **', { embed });
     } catch (e) {
       client.err({
         type: 'command',
