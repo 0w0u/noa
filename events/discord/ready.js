@@ -7,11 +7,11 @@ module.exports = class event {
       prefix = client.config.prefix;
     try {
       let number = 0;
-      client.guilds.client.guilds.cache.forEach(x => {
+      client.guilds.cache.forEach(x => {
         number += x.memberCount;
       });
       client.userCount = number;
-      let elementos = [`gg-botinfo`, `¡Ahora tenemos web!`, `Mon ❤️`, `gg-fox | gg-bigtext`, `${client.guilds.cache.size} servidores con ${client.userCount.toLocaleString()} usuarios`, `${client.commands.size} comandos`, `${prefix}help | V. ${require('../../package.json').version}`, `${prefix}commands | ${prefix}commands --nodm`, `¡Nuevos alias en comandos!`, `${prefix}help <comando | alias>`, `${prefix}botsuggestion`, `@${client.user.tag}help`, `@${client.user.tag}`, client.config.support, `${prefix}invite`, `ser feliz`, `Kae ❤`, `${client.guilds.cache.size} servidores | ${prefix}help`, `${client.userCount.toLocaleString()} usuarios | ${prefix}help`];
+      let elementos = [`❤️ ~ ${client.guilds.cache.size.toLocaleString()} servidores, ${client.userCount.toLocaleString()} usuarios`, `❤️ ~ ${client.config.invite}`, `❤️ ~ ${client.config.dbl}`, `❤️ ~ ${client.config.vote}`, `❤️ ~ ${client.config.donate}`, `❓ ~ ${prefix}help`, `❓ ~ ${client.config.support}`, `❓ ~ ${client.config.github}`, '❓ ~ https://noa.wwmon.xyz', 'e'];
       setInterval(() => {
         client.user.setActivity(elementos[Math.floor(elementos.length * Math.random())]);
       }, 30000);
