@@ -54,15 +54,23 @@ module.exports = class command extends require('../../base/models/Command.js') {
           message.channel.send({ embed: embedd });
         }
       } else if (args[0].toLowerCase() === 'add' || args[0].toLowerCase() === 'agregar') {
+        if (!client.config.owners.includes(message.author.id)) return message.channel.send(client.message({ emoji: 'red', razón: 'esta función está deshabilitada por el momento', message }));
         if (!message.member.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.message({ emoji: 'red', razón: 'no tienes los suficientes permisos', message }));
         else {
           if (!args[1]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitas agregar un nombre', usage: this.help.usage(message.prefix), message }));
           else {
+            if (args[1].length < 2) return message.channel.send(client.message({ emoji: 'red', razón: 'el nombre del emoji debe tener más de 2 carácteres', message }));
+            if (args[1].length > 32) return message.channel.send(client.message({ emoji: 'red', razón: 'el nombre del emoji no puede exceder los 32 carácteres', message }));
+            if ((message.attachments.first() ? message.attachments.first().url : args[2]).split(/[.]/g).pop() === 'gif') {
+            }
+            if (args[2]) {
+              if (!args[2].endsWith('.gif') || !args[2].endsWith('.png') || !args[2].endsWith('.jpg')) return message.channel.send(client.message({ emoji: 'red', razón: 'el formato de imagen es inválido', message }));
+            }
             let create;
             try {
-              create = await message.guild.emojis.cache.create(message.attachments.first() ? message.attachments.first().url : args[2] ? args[2] : 'awawa', args[1], `Acción cometida desde un comando por: ${message.author.tag}`);
-            } catch {
-              return message.channel.send(client.message({ emoji: 'red', razón: 'parece que no pusiste bien la imagen o ya no hay más espacio para emojis', message }));
+              create = await message.guild.emojis.create(message.attachments.first() ? message.attachments.first().url : args[2] ? args[2] : 'awawa', args[1]);
+            } catch (e) {
+              return message.channel.send(client.message({ emoji: 'red', razón: 'parece que no pusiste bien la imagen', message }));
             }
             message.channel.send(client.message({ emoji: 'green', razón: 'el emoji ha sido creado correctamente ' + create.toString(), usage: this.help.usage(message.prefix), message }));
           }
@@ -108,6 +116,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
           else {
             if (!args[2]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitas elegir un nuevo nombre', usage: this.help.usage(message.prefix), message }));
             else {
+              if (args[2].length < 2) return message.channel.send(client.message({ emoji: 'red', razón: 'el nombre del emoji debe tener más de 2 carácteres', message }));
+              if (args[2].length > 32) return message.channel.send(client.message({ emoji: 'red', razón: 'el nombre del emoji no puede exceder los 32 carácteres', message }));
               try {
                 await emoji1.edit({ name: args[2] });
                 message.channel.send(client.message({ emoji: 'green', razón: 'he cambiado el nombre del emoji correctamente', usage: this.help.usage(message.prefix), message }));
