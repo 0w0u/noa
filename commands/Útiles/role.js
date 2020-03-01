@@ -73,7 +73,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setColor(role.color)
           .addField('Nombre', `${role.toString()} \`[${role.name}]\``)
           .addField('ID', role.id, true)
-          .addField('Usuarios con el rol', role.members.cache.size, true)
+          .addField('Usuarios con el rol', role.members.size, true)
           .addField('Posición', role.position, true)
           .addField('Color', role.hexColor, true)
           .addField('Separado', role.hoist ? 'Sí' : 'No', true)
