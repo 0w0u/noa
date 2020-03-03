@@ -28,10 +28,10 @@ module.exports = class client extends Client {
       if (props.init) props.init(this);
       this.commands.set(props.help.name, props);
       props.config.aliases.forEach(alias => this.aliases.set(alias, props.help.name));
-      return `Comando ${props.help.name} cargado`;
+      console.log(`Comando ${props.help.name} cargado`);
     } catch (e) {
       console.error(e);
-      return `Error cargando comando ${commandName}`;
+      console.log(`Error cargando comando ${commandName}`);
     }
   }
   /* Descarga un comando para 'relodearlo' */
