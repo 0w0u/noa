@@ -20,11 +20,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      let author = message.author,
-        member = message.member,
-        guild = message.guild,
-        channel = message.channel,
-        msg = message;
+      let msg = message,
+        author = msg.author,
+        member = msg.member,
+        guild = msg.guild,
+        channel = msg.channel,
+        { send } = channel;
       try {
         let evalued = await eval(args.join(' '));
         if (typeof evalued !== 'string') evalued = util.inspect(evalued, { depth: 0 });
@@ -33,6 +34,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         else if (evalued.includes(client.config.token || client.config.mongo || client.dbl.token)) message.channel.send(client.message({ emoji: 'red', razón: 'el resultado contiene un token', message }));
         else message.channel.send(client.message({ emoji: 'green', razón: 'código evaluado correctamente', message }) + '```js\n' + evalued + '\n```');
       } catch (err) {
+        console.error(err);
         message.channel.send(client.message({ emoji: 'red', razón: 'error en el código', message }) + '```js\n' + err.toString() + '\n```');
       }
     } catch (e) {
