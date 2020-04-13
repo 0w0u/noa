@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'unmute',
       description: 'Revoca el silencio de un usuario en el servidor',
-      usage: prefix => `\`${prefix}unmute <@usuario> [razón]\``,
-      examples: prefix => `\`${prefix}unmute @mon#6969\``,
+      usage: (prefix) => `\`${prefix}unmute <@usuario> [razón]\``,
+      examples: (prefix) => `\`${prefix}unmute @mon#6969\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: ['MANAGE_ROLES', 'MANAGE_CHANNELS'],
       memberPermissions: ['KICK_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -30,10 +30,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
 
       if (!message.guild.member(mUser).bannable) return message.channel.send(`No puedo quita el silencio al usuario mencionado. Es posible que no tenga el rango requerido o el usuario es superior a mí`);
 
-      let reason = message.content
-        .split(' ')
-        .slice(2)
-        .join(' ');
+      let reason = message.content.split(' ').slice(2).join(' ');
       if (!reason) {
         reason = 'No específicada';
       }
@@ -45,12 +42,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
           muterole = await message.guild.createRole({
             name: 'Silenciado',
             color: '#000000',
-            permissions: []
+            permissions: [],
           });
           message.guild.channels.cache.forEach(async (channel, id) => {
             await channel.overwritePermissions(muterole, {
               SEND_MESSAGES: false,
-              ADD_REACTIONS: false
+              ADD_REACTIONS: false,
             });
           });
         } catch (e) {
@@ -61,19 +58,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
       let mutetime = args[1];
 
       await mUser.removeRole(muterole.id);
-      embed
-        .setColor(client.selectColor('green'))
-        .setAuthor(`[UNMUTE] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL)
-        .addField('Usuario', `<@${mUser.id}> (\`${mUser.id}\`)`, true)
-        .addField('Razón', reason, true)
-        .addField('Moderador', `<@${message.author.id}>`, true);
+      embed.setColor(client.selectColor('green')).setAuthor(`[UNMUTE] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL).addField('Usuario', `<@${mUser.id}> (\`${mUser.id}\`)`, true).addField('Razón', reason, true).addField('Moderador', `<@${message.author.id}>`, true);
       message.channel.send(embed);
     } catch (e) {
       message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

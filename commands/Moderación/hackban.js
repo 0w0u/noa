@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'hackban',
       description: 'Banea a un usuario por ID',
-      usage: prefix => `\`${prefix}hackban <id>\``,
-      examples: prefix => `\`${prefix}hackban 431447823616180225\``,
+      usage: (prefix) => `\`${prefix}hackban <id>\``,
+      examples: (prefix) => `\`${prefix}hackban 431447823616180225\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: ['BAN_MEMBERS'],
       memberPermissions: ['BAN_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -40,7 +40,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

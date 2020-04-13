@@ -10,7 +10,7 @@ module.exports = class event {
       client.err({
         type: 'event',
         name: 'readyDBL',
-        error: e
+        error: e,
       });
     }
   }

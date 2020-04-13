@@ -3,15 +3,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'channel',
       description: 'Muestra la información sobre algún canal\n> **Parámetros:**\n• `--lista`, `--list`: Mira la lista de los canales del servidor',
-      usage: prefix => `\`${prefix}channel [canal]\``,
-      examples: prefix => `\`${prefix}channel reglas\``,
+      usage: (prefix) => `\`${prefix}channel [canal]\``,
+      examples: (prefix) => `\`${prefix}channel reglas\``,
       enabled: true,
       guildOnly: true,
       cooldown: 4,
       aliases: ['ch'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -26,15 +26,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
           no_categorias = [],
           categorias = [];
         message.guild.channels.cache
-          .filter(x => x.type === 'category')
+          .filter((x) => x.type === 'category')
           .array()
-          .map(c => categorias.push({ nombre: c.name, parseID: c.id, posicion: c.position, canales: [] }));
+          .map((c) => categorias.push({ nombre: c.name, parseID: c.id, posicion: c.position, canales: [] }));
         message.guild.channels.cache
-          .filter(x => x.type !== 'category')
+          .filter((x) => x.type !== 'category')
           .array()
-          .map(c => {
+          .map((c) => {
             if (c.parent) {
-              let index = categorias.findIndex(h => h.parseID === c.parent.id);
+              let index = categorias.findIndex((h) => h.parseID === c.parent.id);
               if (index !== -1) categorias[index].canales.push({ nombre: c.name, posicion: c.position, tipo: c.type });
               return;
             }
@@ -67,7 +67,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           }
         }
         if (message.mentions.channels.size > 0) return await send(message.mentions.channels.first());
-        let c = message.guild.channels.cache.array().filter(x => x.type !== 'category' && `${x.name}`.toLowerCase().includes(args[0].toLowerCase()));
+        let c = message.guild.channels.cache.array().filter((x) => x.type !== 'category' && `${x.name}`.toLowerCase().includes(args[0].toLowerCase()));
         if (c.length <= 0) return message.channel.send(client.message({ emoji: 'red', razón: 'no hay canales coinciden con tu búsqueda, intenta ser más específico', message }));
         else if (c.length === 1) return await send(c[0]);
         else if (c.length > 10) return message.channel.send(client.message({ emoji: 'red', razón: 'muchos canales coinciden con tu búsqueda, intenta ser más específico', message }));
@@ -77,7 +77,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             m += `${x + 1} ~ ${c[x].name}\n`;
           }
           let msg = await message.channel.send({ embed: { color: client.fns.selectColor('lightcolors'), description: m + '```' } }),
-            i = await message.channel.awaitMessages(m => m.author.id === message.author.id && m.content > 0 && m.content < c.length + 1, { max: 1, time: 30000 });
+            i = await message.channel.awaitMessages((m) => m.author.id === message.author.id && m.content > 0 && m.content < c.length + 1, { max: 1, time: 30000 });
           i = await i.first();
           if (!i) {
             message.channel.send(client.message({ emoji: 'red', razón: 'no se recibió respuesta', message }));
@@ -113,7 +113,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

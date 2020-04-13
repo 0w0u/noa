@@ -27,7 +27,7 @@ module.exports = class client extends Client {
       props.config.location = commandPath;
       if (props.init) props.init(this);
       this.commands.set(props.help.name, props);
-      props.config.aliases.forEach(alias => this.aliases.set(alias, props.help.name));
+      props.config.aliases.forEach((alias) => this.aliases.set(alias, props.help.name));
       console.log(`Comando ${props.help.name} cargado`);
     } catch (e) {
       console.error(e);
@@ -82,7 +82,7 @@ module.exports = class client extends Client {
   /* Encuentra o crea un usuario en la base de datos */
   async findOrCreateUser(param, isLean) {
     let usersData = this.usersData;
-    return new Promise(async function(resolve, reject) {
+    return new Promise(async function (resolve, reject) {
       let userData = isLean ? await usersData.findOne(param).lean() : await usersData.findOne(param);
       if (userData) {
         resolve(userData);
@@ -97,7 +97,7 @@ module.exports = class client extends Client {
   async findOrCreateMember(param, isLean) {
     let membersData = this.membersData;
     let guildsData = this.guildsData;
-    return new Promise(async function(resolve, reject) {
+    return new Promise(async function (resolve, reject) {
       let memberData = isLean ? await membersData.findOne(param).lean() : await membersData.findOne(param);
       if (memberData) {
         resolve(memberData);
@@ -116,13 +116,8 @@ module.exports = class client extends Client {
   /* Encuentra o crea un servidor en la base de datos */
   async findOrCreateGuild(param, isLean) {
     let guildsData = this.guildsData;
-    return new Promise(async function(resolve, reject) {
-      let guildData = isLean
-        ? await guildsData
-            .findOne(param)
-            .populate('members')
-            .lean()
-        : await guildsData.findOne(param).populate('members');
+    return new Promise(async function (resolve, reject) {
+      let guildData = isLean ? await guildsData.findOne(param).populate('members').lean() : await guildsData.findOne(param).populate('members');
       if (guildData) {
         resolve(guildData);
       } else {

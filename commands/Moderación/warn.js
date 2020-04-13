@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'warn',
       description: '',
-      usage: prefix => `\`${prefix}warn <@usuario> <razón>\``,
-      examples: prefix => `\`${prefix}warn Hyp#9293 Irrespeto a los demás\``,
+      usage: (prefix) => `\`${prefix}warn <@usuario> <razón>\``,
+      examples: (prefix) => `\`${prefix}warn Hyp#9293 Irrespeto a los demás\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['w'],
       botPermissions: [],
       memberPermissions: ['KICK_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -39,34 +39,21 @@ module.exports = class command extends require('../../base/models/Command.js') {
 
       if (!warnserver[wUser.id]) {
         warnserver[wUser.id] = {
-          warns: 0
+          warns: 0,
         };
       }
 
       warnserver[wUser.id].warns++;
 
-      fs.writeFile('./assets/jsonFiles/warnings.json', JSON.stringify(warns), err => {
+      fs.writeFile('./assets/jsonFiles/warnings.json', JSON.stringify(warns), (err) => {
         if (err) console.log(err);
       });
 
-      let warnEmbed = new Discord.MessageEmbed()
-        .setColor(client.selectColor('blue'))
-        .setAuthor(`[WARN] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL)
-        .addField('Usuario', `<@${wUser.id}> (\`${wUser.id}\`)`, true)
-        .addField('Moderador', `<@${message.author.id}>`, true)
-        .addField('Razón', reason, true)
-        .setFooter(`Este usuario lleva acumulado ${warnserver[wUser.id].warns} advertencias`);
+      let warnEmbed = new Discord.MessageEmbed().setColor(client.selectColor('blue')).setAuthor(`[WARN] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL).addField('Usuario', `<@${wUser.id}> (\`${wUser.id}\`)`, true).addField('Moderador', `<@${message.author.id}>`, true).addField('Razón', reason, true).setFooter(`Este usuario lleva acumulado ${warnserver[wUser.id].warns} advertencias`);
 
       message.channel.send(warnEmbed);
 
-      let dmAdv = new Discord.MessageEmbed()
-        .setAuthor('¡Fuiste advertido!', message.guild.iconURL)
-        .setDescription(`Recibiste una advertencia desde \`${message.guild.name}\`. Ten mucho cuidado por que si acumulas 3 advertencias podrías muteado del servidor`)
-        .addField('Razón', reason)
-        .addField('Responsable', message.author.tag)
-        .setTimestamp()
-        .setFooter(`Contador de advertencias: ${warnserver[wUser.id].warns}/5`)
-        .setColor(client.selectColor('blue'));
+      let dmAdv = new Discord.MessageEmbed().setAuthor('¡Fuiste advertido!', message.guild.iconURL).setDescription(`Recibiste una advertencia desde \`${message.guild.name}\`. Ten mucho cuidado por que si acumulas 3 advertencias podrías muteado del servidor`).addField('Razón', reason).addField('Responsable', message.author.tag).setTimestamp().setFooter(`Contador de advertencias: ${warnserver[wUser.id].warns}/5`).setColor(client.selectColor('blue'));
 
       wUser.send(dmAdv);
 
@@ -79,12 +66,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
             muterole = await message.guild.createRole({
               name: 'Silenciado',
               color: '#000000',
-              permissions: []
+              permissions: [],
             });
             message.guild.channels.cache.forEach(async (channel, id) => {
               await channel.overwritePermissions(muterole, {
                 SEND_MESSAGES: false,
-                ADD_REACTIONS: false
+                ADD_REACTIONS: false,
               });
             });
           } catch (e) {
@@ -96,7 +83,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         await wUser.addRole(muterole.id);
         message.channel.send(`<@${wUser.id}> fue muteado temporalmente por acumulación de advertencias`);
 
-        setTimeout(function() {
+        setTimeout(function () {
           wUser.removeRole(muterole.id);
           message.channel.send(`<@${wUser.id}> ha sido desmuteado por ${client.user}`);
         }, ms(mutetime));
@@ -112,7 +99,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

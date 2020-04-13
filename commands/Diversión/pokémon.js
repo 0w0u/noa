@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'pokémon',
       description: 'Adivina el Pokémon',
-      usage: prefix => `\`${prefix}pokemon\``,
-      examples: prefix => `\`${prefix}pokemon\``,
+      usage: (prefix) => `\`${prefix}pokemon\``,
+      examples: (prefix) => `\`${prefix}pokemon\``,
       enabled: true,
       aliases: ['pokemon'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -18,12 +18,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
       let rand = Math.floor(Math.random() * 802),
         poke = rand > 0 ? rand : Math.floor(Math.random() * 802),
         pokem = client.pokemon[poke];
-      embed
-        .setTitle('¿Cuál es este Pokémon?')
-        .setImage(pokem.imageURL)
-        .setColor(client.fns.selectColor('green'));
+      embed.setTitle('¿Cuál es este Pokémon?').setImage(pokem.imageURL).setColor(client.fns.selectColor('green'));
       let msg = await message.channel.send({ embed }),
-        filter = m => m.author.id === message.author.id,
+        filter = (m) => m.author.id === message.author.id,
         attempts = await msg.channel.awaitMessages(filter, { time: 15000, max: 1 });
       attempts = await attempts.first();
       if (!attempts) {
@@ -44,7 +41,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,15 +3,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'user',
       description: 'Revisa la información de un usuario\n> **Parámetros:**\n• `--random`: Obtén un miembro del servidor al azar',
-      usage: prefix => `\`${prefix}user [usuario | opcion]\``,
-      examples: prefix => `\`${prefix}user @Tok#3934\n${prefix}user --random\``,
+      usage: (prefix) => `\`${prefix}user [usuario | opcion]\``,
+      examples: (prefix) => `\`${prefix}user @Tok#3934\n${prefix}user --random\``,
       enabled: true,
       guildOnly: true,
       cooldown: 4,
       aliases: ['whois', 'userinfo', 'u'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -33,7 +33,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           }
         }
         if (message.mentions.users.size > 0) return await send(message.mentions.users.first());
-        let u = message.guild.members.cache.array().filter(x => `${x.user.tag}||${x.displayName}`.toLowerCase().includes(args[0].toLowerCase()));
+        let u = message.guild.members.cache.array().filter((x) => `${x.user.tag}||${x.displayName}`.toLowerCase().includes(args[0].toLowerCase()));
         if (u.length <= 0) return message.channel.send(client.message({ emoji: 'red', razón: 'no hay usuarios que coincidan con tu búsqueda, intenta ser más específico', usage: this.help.usage(message.prefix), message }));
         else if (u.length === 1) return await send(u[0].user);
         else if (u.length > 10) return message.channel.send(client.message({ emoji: 'red', razón: 'muchos usuarios coinciden con tu búsqueda, intenta ser más específico', usage: this.help.usage(message.prefix), message }));
@@ -43,7 +43,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             m += `${x + 1} ~ ${u[x].nickname ? `${u[x].displayName} (${u[x].user.tag})` : `${u[x].user.tag}`}\n`;
           }
           let msg = await message.channel.send({ embed: { color: client.fns.selectColor('lightcolors'), description: m + '```' } }),
-            i = await message.channel.awaitMessages(m => m.author.id === message.author.id && m.content > 0 && m.content < u.length + 1, { max: 1, time: 30000 });
+            i = await message.channel.awaitMessages((m) => m.author.id === message.author.id && m.content > 0 && m.content < u.length + 1, { max: 1, time: 30000 });
           i = await i.first();
           if (!i) {
             message.channel.send(client.message({ emoji: 'red', razón: 'no se recibió respuesta', usage: this.help.usage(message.prefix), message }));
@@ -63,8 +63,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
           ca = user.createdAt.toDateString().split(' '),
           ja = member.joinedAt.toDateString().split(' '),
           roles = member.roles.cache
-            .filter(r => r.name != '@everyone')
-            .map(r => r.toString())
+            .filter((r) => r.name != '@everyone')
+            .map((r) => r.toString())
             .join(' | ');
         if (roles.length >= 1000) roles = `La cantidad de roles es muy extensa, por lo tanto su cifra exacta es: ${member.roles.size}`;
         let activities = user.presence.activities[0];
@@ -73,7 +73,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setColor(colorEmbed[user.presence.status])
           .setAuthor(`${user.tag}`, user.displayAvatarURL())
           .addField('Identificación', `• Nombre y discriminador: ${user.tag}\n• ID: ${user.id}\n• Apodo: ${member.displayName}`)
-          .addField('Cuenta', `• Creada el: ${ca[2]}/${ca[1]}/${ca[3]} (Hace ${days})\n• Ingreso al servidor: ${ja[2]}/${ja[1]}/${ja[3]} (Hace ${client.fns.checkDays(member.joinedAt)})\n• Servidores en común: ${client.guilds.cache.filter(g => g.members.cache.has(user.id)).size}`)
+          .addField('Cuenta', `• Creada el: ${ca[2]}/${ca[1]}/${ca[3]} (Hace ${days})\n• Ingreso al servidor: ${ja[2]}/${ja[1]}/${ja[3]} (Hace ${client.fns.checkDays(member.joinedAt)})\n• Servidores en común: ${client.guilds.cache.filter((g) => g.members.cache.has(user.id)).size}`)
           //.addField('Actividad', `• Jugando a: ${activities.name}\n• Estado: ${activities.toString()}`)
           .addField('Actividad', `• Jugando a: ${activities ? activities.name : 'Nada'}\n• Estado: ${status[user.presence.status]}`)
           .addField('Roles', `• Rol destacado: ${member.roles.highest}\n• Listado de roles:\n${roles}\n`);
@@ -86,7 +86,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

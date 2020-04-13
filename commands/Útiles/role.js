@@ -3,15 +3,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'role',
       description: 'Proporciona la información sobre un rol\n> **Parámetros:**\n• `--lista`, `--list`: Muestra la lista de roles en el servidor',
-      usage: prefix => `\`${prefix}role <@rol>\``,
-      examples: prefix => `\`${prefix}role Dueños\``,
+      usage: (prefix) => `\`${prefix}role <@rol>\``,
+      examples: (prefix) => `\`${prefix}role Dueños\``,
       enabled: true,
       guildOnly: true,
       cooldown: 4,
       aliases: ['rl'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -23,8 +23,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (message.guild.roles.cache.size < 1) return message.channel.send(client.message({ emoji: 'red', razón: 'este servidor no tiene roles creados', usage: this.help.usage(message.prefix), message }));
         let roles = message.guild.roles.cache
             .sort((a, b) => b.position - a.position)
-            .filter(r => r.id !== message.guild.roles.cache.everyone.id)
-            .map(r => `• ${r.name}`),
+            .filter((r) => r.id !== message.guild.roles.cache.everyone.id)
+            .map((r) => `• ${r.name}`),
           rolesSize = message.guild.roles.cache.size - 1,
           page = parseInt(args[1]),
           pages = Math.ceil(rolesSize / 20) === 0 ? 1 : Math.ceil(rolesSize / 20);
@@ -45,7 +45,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           }
         }
         if (message.mentions.roles.size > 0) return await send(message.mentions.roles.first());
-        let r = message.guild.roles.cache.array().filter(x => `${x.name}`.toLowerCase().includes(args[0].toLowerCase()));
+        let r = message.guild.roles.cache.array().filter((x) => `${x.name}`.toLowerCase().includes(args[0].toLowerCase()));
         if (r.length <= 0) return message.channel.send(client.message({ emoji: 'red', razón: 'no hay roles que coincidan con tu búsqueda, intenta ser más específico', usage: this.help.usage(message.prefix), message }));
         else if (r.length === 1) return await send(r[0]);
         else if (r.length > 10) return message.channel.send(client.message({ emoji: 'red', razón: 'hay muchos roles que coinciden con tu búsqueda, intenta ser más específico', usage: this.help.usage(message.prefix), message }));
@@ -55,7 +55,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             m += `${x + 1} ~ ${r[x].name}\n`;
           }
           let msg = await message.channel.send({ embed: { color: client.fns.selectColor('lightcolors'), description: m + '```' } }),
-            i = await message.channel.awaitMessages(m => m.author.id === message.author.id && m.content > 0 && m.content < r.length + 1, { max: 1, time: 30000 });
+            i = await message.channel.awaitMessages((m) => m.author.id === message.author.id && m.content > 0 && m.content < r.length + 1, { max: 1, time: 30000 });
           i = await i.first();
           if (!i) {
             message.channel.send(client.message({ emoji: 'red', razón: 'no se recibió respuesta', usage: this.help.usage(message.prefix), message }));
@@ -86,7 +86,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

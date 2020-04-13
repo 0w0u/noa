@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'cum',
       description: 'Corre como un caballo >.<',
-      usage: prefix => `\`${prefix}cum [@usuario]\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}cum [@usuario]\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       nsfwOnly: true,
       voteOnly: true,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['happyend'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -37,7 +37,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

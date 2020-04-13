@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'fliptext',
       description: '¡Dale un giro a tu texto!',
-      usage: prefix => `\`${prefix}fliptext <texto>\``,
-      examples: prefix => `\`${prefix}fliptext Hola gente\``,
+      usage: (prefix) => `\`${prefix}fliptext <texto>\``,
+      examples: (prefix) => `\`${prefix}fliptext Hola gente\``,
       enabled: true,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -23,8 +23,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
           args
             .join(' ')
             .split('')
-            .map(c => c.charCodeAt(0) - OFFSET)
-            .map(c => mapping[c] || ' ')
+            .map((c) => c.charCodeAt(0) - OFFSET)
+            .map((c) => mapping[c] || ' ')
             .reverse()
             .join('')
         );
@@ -34,7 +34,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

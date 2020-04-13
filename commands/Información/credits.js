@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'credits',
       description: 'Muestra todos los usuarios honoríficos que contribuyeron por ' + require('../../config').bot,
-      usage: prefix => `\`${prefix}credits\``,
-      examples: prefix => `\`${prefix}credits\``,
+      usage: (prefix) => `\`${prefix}credits\``,
+      examples: (prefix) => `\`${prefix}credits\``,
       enabled: true,
       cooldown: 2.5,
       aliases: ['acknowledgements'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -39,7 +39,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

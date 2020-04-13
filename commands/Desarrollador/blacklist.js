@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'blacklist',
       description: 'Agrega o remueve a un usuario de la lista negra del bot',
-      usage: prefix => `\`${prefix}blacklist <add | remove> <id> [razón]\``,
-      examples: prefix => `\`${prefix}blacklist add 532818617457311744 Mal uso de comandos para soporte\``,
+      usage: (prefix) => `\`${prefix}blacklist <add | remove> <id> [razón]\``,
+      examples: (prefix) => `\`${prefix}blacklist add 532818617457311744 Mal uso de comandos para soporte\``,
       enabled: true,
       ownerOnly: true,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['bl'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -29,7 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             let u = await client.findOrCreateUser({ id: args[1] });
             u.blacklist = {
               bl: true,
-              blreason: args[2] ? args.slice(2).join(' ') : 'Sin razón'
+              blreason: args[2] ? args.slice(2).join(' ') : 'Sin razón',
             };
             u.save();
             message.channel.send(client.message({ emoji: 'green', razón: 'se ha agregado correctamente a ' + user.tag + ' a la lista negra del bot' + (args[2] ? '\nPor la razón: ' + args.slice(2).join(' ') : ''), usage: this.help.usage(message.prefix), message }));
@@ -44,7 +44,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             let u = await client.findOrCreateUser({ id: args[1] });
             u.blacklist = {
               bl: false,
-              blreason: 'Sin razón'
+              blreason: 'Sin razón',
             };
             u.save();
             message.channel.send(client.message({ emoji: 'green', razón: 'se ha removido correctamente a ' + user.tag + ' de la lista negra del bot', usage: this.help.usage(message.prefix), message }));
@@ -56,7 +56,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

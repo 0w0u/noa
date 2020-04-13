@@ -27,7 +27,7 @@ module.exports = class fns {
     const mentionPrefix = new RegExp(`^<@!?${message.client.user.id}>`).exec(message.content);
     const prefixes = [`${mentionPrefix}`, message.guild ? data.guild.prefix : message.client.config.prefix];
     let prefix = undefined;
-    prefixes.forEach(p => {
+    prefixes.forEach((p) => {
       if (message.content.startsWith(p)) {
         message.guild ? (prefix = p) : (prefix = message.client.config.prefix);
       }

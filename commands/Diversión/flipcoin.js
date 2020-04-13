@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'flipcoin',
       description: 'Juega a tirar la moneda para obtener cara o cruz',
-      usage: prefix => `\`${prefix}flipcoin\``,
-      examples: prefix => `\`${prefix}flipcoin\``,
+      usage: (prefix) => `\`${prefix}flipcoin\``,
+      examples: (prefix) => `\`${prefix}flipcoin\``,
       enabled: true,
       aliases: ['coinflip', 'coin'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -29,7 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

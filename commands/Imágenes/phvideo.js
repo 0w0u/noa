@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'phvideo',
       description: 'Genera una imagen de un video de PornHub. (Non-NSFW)',
-      usage: prefix => `\`${prefix}phvideo [@usuario]\``,
-      examples: prefix => `\`${prefix}phvideo\``,
+      usage: (prefix) => `\`${prefix}phvideo [@usuario]\``,
+      examples: (prefix) => `\`${prefix}phvideo\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -26,7 +26,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

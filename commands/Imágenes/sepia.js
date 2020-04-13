@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'sepia',
       description: 'Genera una imagen con un avatar y un efecto sepia',
-      usage: prefix => `\`${prefix}sepia [@usuario]\``,
-      examples: prefix => `\`${prefix}sepia\``,
+      usage: (prefix) => `\`${prefix}sepia [@usuario]\``,
+      examples: (prefix) => `\`${prefix}sepia\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -26,7 +26,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

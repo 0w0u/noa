@@ -11,9 +11,9 @@ module.exports = model(
       mute: {
         type: Object,
         default: {
-          role: { type: String, default: undefined }
-        }
-      }
-    }
+          role: { type: String, default: undefined },
+        },
+      },
+    },
   })
 );

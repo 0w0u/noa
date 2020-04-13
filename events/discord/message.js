@@ -31,10 +31,7 @@ module.exports = class event {
       if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) message.channel.send(client.message({ emoji: 'heart', razón: `¡hola! Mi nombre es ${client.config.bot}, para conocer más sobre mí puedes consultar con \`${message.prefix}help\``, message }));
       let prefix = client.fns.getPrefix(message, data);
       if (!prefix) return;
-      let args = message.content
-        .slice(prefix.length)
-        .trim()
-        .split(/ +/g);
+      let args = message.content.slice(prefix.length).trim().split(/ +/g);
       let cmD = args.shift().toLowerCase();
       let cmd = client.commands.get(cmD) || client.commands.get(client.aliases.get(cmD));
       if (!cmd) return;
@@ -69,20 +66,20 @@ module.exports = class event {
       if (cmd.config.voteOnly && !(await client.dbl.hasVoted(message.author.id))) return message.channel.send(client.message({ emoji: 'red', razón: `necesitas votar por ${client.config.bot} en \`top.gg\` para tener acceso a este comando. <https://noa.wwmon.xyz/vote/>`, message }));
       if (message.guild) {
         let a = [];
-        cmd.config.memberPermissions.forEach(p => {
+        cmd.config.memberPermissions.forEach((p) => {
           if (!message.channel.permissionsFor(message.member).has(p)) {
             a.push(p);
           }
         });
-        if (a.length > 0) return message.channel.send(client.message({ emoji: 'red', razón: `necesitas los siguientes permisos para usar este comando: ${a.map(p => `\`${p}\``).join('`, `')}`, message }));
+        if (a.length > 0) return message.channel.send(client.message({ emoji: 'red', razón: `necesitas los siguientes permisos para usar este comando: ${a.map((p) => `\`${p}\``).join('`, `')}`, message }));
         a = [];
-        cmd.config.botPermissions.forEach(p => {
+        cmd.config.botPermissions.forEach((p) => {
           if (!message.channel.permissionsFor(message.guild.me).has(p)) {
             a.push(p);
           }
         });
 
-        if (a.length > 0) return message.channel.send(client.message({ emoji: 'red', razón: `necesito los siguientes permisos para usar este comando: ${a.map(p => `\`${p}\``).join('`, `')}`, message }));
+        if (a.length > 0) return message.channel.send(client.message({ emoji: 'red', razón: `necesito los siguientes permisos para usar este comando: ${a.map((p) => `\`${p}\``).join('`, `')}`, message }));
       }
       try {
         cmd.run(message, args, data, embed);

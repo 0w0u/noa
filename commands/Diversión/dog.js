@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'dog',
       description: 'Se encarga de buscar perros hermosos 🐶\n> **Parámetros:**\n~ `--shiba`: Genera un perro raza Shiba\n~ `--husky`: Genera un perro raza Husky\n~ `--boxer`: Genera un perro raza Boxer\n~ `--dalmata` | `--dalmatian`: Genera un perro Dálmata\n~ `--chihuaha`: Genera un perrito Chihuahua',
-      usage: prefix => `\`${prefix}dog\``,
-      examples: prefix => `\`${prefix}dog --shiba\``,
+      usage: (prefix) => `\`${prefix}dog\``,
+      examples: (prefix) => `\`${prefix}dog --shiba\``,
       enabled: true,
       aliases: ['perro'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -51,7 +51,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

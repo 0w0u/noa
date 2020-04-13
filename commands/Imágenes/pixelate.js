@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'pixelate',
       description: 'Genera un filtro de imagen que vuelve pixelado un avatar',
-      usage: prefix => `\`${prefix}pixelate [@usuario]\``,
-      examples: prefix => `\`${prefix}pixelate\``,
+      usage: (prefix) => `\`${prefix}pixelate [@usuario]\``,
+      examples: (prefix) => `\`${prefix}pixelate\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'cowsay',
       description: 'Una vaca repetirá el texto que desees',
-      usage: prefix => `\`${prefix}cowsay <texto>\``,
-      examples: prefix => `\`${prefix}cowsay Leroy Jenkins!\``,
+      usage: (prefix) => `\`${prefix}cowsay <texto>\``,
+      examples: (prefix) => `\`${prefix}cowsay Leroy Jenkins!\``,
       enabled: true,
       aliases: ['lavacadice'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

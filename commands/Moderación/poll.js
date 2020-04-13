@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'poll',
       description: 'Crea una votación con las opciones que tú elijas',
-      usage: prefix => `\`${prefix}poll <pregunta> ;; <opción1> ;; <opción2> ;; [opción3] ;; [opción4] ;; [opción5]\``,
-      examples: prefix => `\`${prefix}poll ¿Qué prefieren? ;; Comer Pizza ;; Comer Ensalada\n${prefix}poll ¿Cuántos años tienes? ;; Menos de 10 años ;; 11-13 años ;; 14-16 años ;; Más de 17 años\n${prefix}poll ¿Cuánto tiempo llevas en Discord? ;; Menos de 2 meses ;; 3-4 meses ;; 5-6 meses ;; Más de 7 meses\n${prefix}poll ¿Que prefieren? ;;Frutas ;; Verduras ;; Carnes ;; Lacteos ;; Ninguna opción\``,
+      usage: (prefix) => `\`${prefix}poll <pregunta> ;; <opción1> ;; <opción2> ;; [opción3] ;; [opción4] ;; [opción5]\``,
+      examples: (prefix) => `\`${prefix}poll ¿Qué prefieren? ;; Comer Pizza ;; Comer Ensalada\n${prefix}poll ¿Cuántos años tienes? ;; Menos de 10 años ;; 11-13 años ;; 14-16 años ;; Más de 17 años\n${prefix}poll ¿Cuánto tiempo llevas en Discord? ;; Menos de 2 meses ;; 3-4 meses ;; 5-6 meses ;; Más de 7 meses\n${prefix}poll ¿Que prefieren? ;;Frutas ;; Verduras ;; Carnes ;; Lacteos ;; Ninguna opción\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -67,7 +67,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       }
 
       if (!args[3]) {
-        return message.channel.send(poll2).then(m => {
+        return message.channel.send(poll2).then((m) => {
           setTimeout(() => {
             m.react('🇦');
           }, 1000);
@@ -78,7 +78,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       }
 
       if (!args[4]) {
-        return message.channel.send(poll3).then(m => {
+        return message.channel.send(poll3).then((m) => {
           setTimeout(() => {
             m.react('🇦');
           }, 1000);
@@ -92,7 +92,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       }
 
       if (!args[5]) {
-        return message.channel.send(poll4).then(m => {
+        return message.channel.send(poll4).then((m) => {
           setTimeout(() => {
             m.react('🇦');
           }, 1000);
@@ -109,7 +109,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       }
 
       if (!args[6]) {
-        return message.channel.send(poll5).then(m => {
+        return message.channel.send(poll5).then((m) => {
           setTimeout(() => {
             m.react('🇦');
           }, 1000);
@@ -132,7 +132,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

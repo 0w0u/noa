@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'help',
       description: 'Te mostraré un mensaje de ayuda con información básica de su uso. También muestra la ayuda especializada de un comando',
-      usage: prefix => `\`${prefix}help [comando]\``,
-      examples: prefix => `\`${prefix}help help\``,
+      usage: (prefix) => `\`${prefix}help [comando]\``,
+      examples: (prefix) => `\`${prefix}help help\``,
       enabled: true,
       cooldown: 2,
       aliases: ['h'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -54,7 +54,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }
