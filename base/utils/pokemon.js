@@ -800,5 +800,5 @@ module.exports = [
   { name: 'guzzlord', imageURL: 'https://www.serebii.net/sunmoon/pokemon/799.png' },
   { name: 'necrozma', imageURL: 'https://www.serebii.net/sunmoon/pokemon/800.png' },
   { name: 'magearna', imageURL: 'https://www.serebii.net/sunmoon/pokemon/801.png' },
-  { name: 'marshadow', imageURL: 'https://www.serebii.net/sunmoon/pokemon/802.png' }
+  { name: 'marshadow', imageURL: 'https://www.serebii.net/sunmoon/pokemon/802.png' },
 ];

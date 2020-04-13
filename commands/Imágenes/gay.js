@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'gay',
       description: 'Genera una imagen con un avatar arcoíris, representando la bandera LGTB',
-      usage: prefix => `\`${prefix}gay [@usuario]\``,
-      examples: prefix => `\`${prefix}gay\``,
+      usage: (prefix) => `\`${prefix}gay [@usuario]\``,
+      examples: (prefix) => `\`${prefix}gay\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

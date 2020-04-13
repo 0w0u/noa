@@ -7,8 +7,8 @@ module.exports = model(
       type: Object,
       default: {
         bl: false,
-        blreason: 'Sin razón'
-      }
-    }
+        blreason: 'Sin razón',
+      },
+    },
   })
 );

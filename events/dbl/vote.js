@@ -23,7 +23,7 @@ module.exports = class event {
       client.err({
         type: 'event',
         name: 'voteDBL',
-        error: e
+        error: e,
       });
     }
   }

@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'roll',
       description: 'Lanza un dado y obtén un número al azar',
-      usage: prefix => `\`${prefix}roll\``,
-      examples: prefix => `\`${prefix}roll\``,
+      usage: (prefix) => `\`${prefix}roll\``,
+      examples: (prefix) => `\`${prefix}roll\``,
       enabled: true,
       aliases: ['throwdice', 'dice'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -64,7 +64,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

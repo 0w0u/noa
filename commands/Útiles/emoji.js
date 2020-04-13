@@ -3,15 +3,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'emoji',
       description: 'Muestra la información de un emoji seleccionado\n> **Opciones de usuario:**\n• `<emoji> --info`: Muestra toda la información relacionada con el emoji\n• `--lista`: Mira la lista de emojis en el servidor\n> **Opciones de administración:**\n• `add <nombre> <imagen>`: Agrega un emoji al servidor donde lo utilizas sin necesidad de acceder a la configuración del servidor\n• `remove <emoji>`: Elimina un emoji del servidor donde se utiliza, sin necesidad de acceder a la configuración del servidor\n• `rename <emoji> <nuevoNombre>`: Cambia el nombre de un emoji del servidor donde se utiliza, sin necesidad de acceder a la configuración del servidor',
-      usage: prefix => `\`${prefix}emoji <add <nombre> <img/url> | remove <nombre> | --lista | emoji [--info]>\``,
-      examples: prefix => `${prefix}emoji <a:AnoaClap:674435170119712778> --info\n${prefix}emoji remove <:DBL:489519574698426369>`,
+      usage: (prefix) => `\`${prefix}emoji <add <nombre> <img/url> | remove <nombre> | --lista | emoji [--info]>\``,
+      examples: (prefix) => `${prefix}emoji <a:AnoaClap:674435170119712778> --info\n${prefix}emoji remove <:DBL:489519574698426369>`,
       enabled: true,
       guildOnly: true,
       cooldown: 5,
       aliases: ['emote', 'e'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -22,8 +22,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitas proporcionar alguna opción', usage: this.help.usage(message.prefix), message }));
       else if (args[0].toLowerCase() === '--lista' || args[0].toLowerCase() === '--list') {
         embed.setTitle('Emotes del servidor');
-        let nitro = message.guild.emojis.cache.filter(e => e.animated === true),
-          classic = message.guild.emojis.cache.filter(e => e.animated === false);
+        let nitro = message.guild.emojis.cache.filter((e) => e.animated === true),
+          classic = message.guild.emojis.cache.filter((e) => e.animated === false);
         if (classic.size > 0) {
           embed.setColor(client.fns.selectColor('lightcolors')).setTitle('Emote' + (classic.size > 1 ? 's' : '') + ' clásico' + (classic.size > 1 ? 's' : '') + ' [' + classic.size + ']');
           classic = classic.array();
@@ -32,7 +32,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
               'Clásicos...',
               classic
                 .slice(i, i + 10)
-                .map(x => x.toString())
+                .map((x) => x.toString())
                 .join(' | ')
             );
           }
@@ -47,7 +47,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
               'Nitro...',
               nitro
                 .slice(i, i + 10)
-                .map(x => x.toString())
+                .map((x) => x.toString())
                 .join(' | ')
             );
           }
@@ -81,11 +81,11 @@ module.exports = class command extends require('../../base/models/Command.js') {
         else if (!message.guild.me.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.message({ emoji: 'red', razón: 'no tengo los suficientes permisos', message }));
         else {
           if (!args[1]) return message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitas proporcionar un emoji para borrar', usage: this.help.usage(message.prefix), message }));
-          let emoji1 = message.guild.emojis.cache.get(args[0]) || message.guild.emojis.cache.find(x => x.name.includes(args[1])) || message.guild.emojis.cache.find(x => x.toString() === args[1]);
+          let emoji1 = message.guild.emojis.cache.get(args[0]) || message.guild.emojis.cache.find((x) => x.name.includes(args[1])) || message.guild.emojis.cache.find((x) => x.toString() === args[1]);
           if (!emoji1) message.channel.send(client.message({ emoji: 'red', razón: 'emoji no encontrado', usage: this.help.usage(message.prefix), message }));
           else {
             let msg = await message.channel.send(client.message({ emoji: 'gray', razón: '¿seguro que quieres borrar este emoji?\nResponde `sí` o `no`', usage: this.help.usage(message.prefix), message })),
-              index = await message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 30000 });
+              index = await message.channel.awaitMessages((m) => m.author.id === message.author.id, { max: 1, time: 30000 });
             index = index.first();
             if (!index) message.channel.send(client.message({ emoji: 'red', razón: 'no se recibió respuesta', usage: this.help.usage(message.prefix), message }));
             else {
@@ -110,7 +110,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         else if (!message.guild.me.permissions.has('MANAGE_EMOJIS')) message.channel.send(client.message({ emoji: 'red', razón: 'no tengo los suficientes permisos', message }));
         else {
           if (!args[1]) return message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitas especificar un emoji para renombrar', usage: this.help.usage(message.prefix), message }));
-          let emoji1 = message.guild.emojis.cache.get(args[0]) || message.guild.emojis.cache.find(x => x.name.includes(args[1])) || message.guild.emojis.cache.find(x => x.toString() === args[1]);
+          let emoji1 = message.guild.emojis.cache.get(args[0]) || message.guild.emojis.cache.find((x) => x.name.includes(args[1])) || message.guild.emojis.cache.find((x) => x.toString() === args[1]);
           if (!emoji1) message.channel.send(client.message({ emoji: 'red', razón: 'emoji no encotrado', usage: this.help.usage(message.prefix), message }));
           else {
             if (!args[2]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitas elegir un nuevo nombre', usage: this.help.usage(message.prefix), message }));
@@ -135,17 +135,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
             let uwu = client.emojis.cache.get(emo[1]);
             if (!uwu) message.channel.send(client.message({ emoji: 'red', razón: 'emoji no encontrado', usage: this.help.usage(message.prefix), message }));
             else {
-              message.channel.send(
-                `• Nombre: ${uwu.name}\n• ID: ${uwu.id}\n• Vista previa: ${uwu.toString()}\n• Creado el: ${require('moment')
-                  .utc(emoji.createdAt)
-                  .format('DD/MM/YYYY, h:mm A')}`
-              );
+              message.channel.send(`• Nombre: ${uwu.name}\n• ID: ${uwu.id}\n• Vista previa: ${uwu.toString()}\n• Creado el: ${require('moment').utc(emoji.createdAt).format('DD/MM/YYYY, h:mm A')}`);
             }
           } else {
             if (!emoji[0].includes('<' || '>')) message.channel.send(client.message({ emoji: 'red', razón: 'el emoji seleccionado es "default", no lo puedo hacer jumbo', usage: this.help.usage(message.prefix), message }));
             else {
               let emo = emoji[3].split(':');
-              message.channel.send(new (require('discord.js').MessageAttachment)(`https://cdn.discordapp.com/emojis/${emo[1]}.${emoji[2].includes('a') ? 'gif' : 'png'}`));
+              message.channel.send(new (require('discord.js')).MessageAttachment(`https://cdn.discordapp.com/emojis/${emo[1]}.${emoji[2].includes('a') ? 'gif' : 'png'}`));
             }
           }
         }
@@ -156,7 +152,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

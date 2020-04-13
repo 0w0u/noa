@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'shortlink',
       description: 'Acorta una URL de manera segura',
-      usage: prefix => `\`${prefix}shortlink <url> <título>\``,
-      examples: prefix => `\`${prefix}shortlink www.youtube.com MiVideoEnYT\``,
+      usage: (prefix) => `\`${prefix}shortlink <url> <título>\``,
+      examples: (prefix) => `\`${prefix}shortlink www.youtube.com MiVideoEnYT\``,
       enabled: true,
       cooldown: 4,
       aliases: ['shorten'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -20,12 +20,12 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs', usage: this.help.usage(message.prefix), message }));
       else {
         if (!args[1]) {
-          shorten.shorten(args[0], res => {
+          shorten.shorten(args[0], (res) => {
             if (res.startsWith('Error:')) message.channel.send(client.message({ emoji: 'red', razón: 'ingresa un enlace válido', usage: this.help.usage(message.prefix), message }));
             else message.channel.send(client.message({ emoji: 'green', razón: 'enlace acortado: <' + res + '>', usage: this.help.usage(message.prefix), message }));
           });
         } else {
-          shorten.custom(args[0], args[1], res => {
+          shorten.custom(args[0], args[1], (res) => {
             if (res.startsWith('Error:')) message.channel.send(client.message({ emoji: 'red', razón: '<' + res + '>', usage: this.help.usage(message.prefix), message }));
             else message.channel.send(client.message({ emoji: 'green', razón: 'enlace acortado con etiqueta <' + res + '>', usage: this.help.usage(message.prefix), message }));
           });
@@ -36,7 +36,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

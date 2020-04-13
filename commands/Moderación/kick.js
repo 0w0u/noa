@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'kick',
       description: 'Expulsa a un servidor del usuario',
-      usage: prefix => `\`${prefix}kick <@usuario> <razón>\``,
-      examples: prefix => `\`${prefix}kick @Pepito#8293 Avatar inapropiado\``,
+      usage: (prefix) => `\`${prefix}kick <@usuario> <razón>\``,
+      examples: (prefix) => `\`${prefix}kick @Pepito#8293 Avatar inapropiado\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: ['KICK_MEMBERS'],
       memberPermissions: ['KICK_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -31,27 +31,17 @@ module.exports = class command extends require('../../base/models/Command.js') {
 
       kUser.kick(`${reason} | Responsable: ${message.author.tag}`);
 
-      const finalEmbed = new Discord.MessageEmbed()
-        .setColor(client.selectColor('orange'))
-        .setAuthor(`[KICK] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL())
-        .addField('Usuario', `<@${kUser.id}> (\`${kUser.id}\`)`, true)
-        .addField('Razón', reason, true)
-        .addField('Moderador', `<@${message.author.id}>`, true);
+      const finalEmbed = new Discord.MessageEmbed().setColor(client.selectColor('orange')).setAuthor(`[KICK] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL()).addField('Usuario', `<@${kUser.id}> (\`${kUser.id}\`)`, true).addField('Razón', reason, true).addField('Moderador', `<@${message.author.id}>`, true);
       message.channel.send(finalEmbed);
 
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(`Fuiste expulsado de un servidor`, message.guild.iconURL())
-        .addField(`Servidor`, `${message.guild.name}`, true)
-        .addField(`Razón`, `${reason}`, true)
-        .addField(`Moderador`, `${message.author.tag}`, true)
-        .setColor(client.selectColor('orange'));
+      const embed = new Discord.MessageEmbed().setAuthor(`Fuiste expulsado de un servidor`, message.guild.iconURL()).addField(`Servidor`, `${message.guild.name}`, true).addField(`Razón`, `${reason}`, true).addField(`Moderador`, `${message.author.tag}`, true).setColor(client.selectColor('orange'));
       kUser.send(embed);
     } catch (e) {
       message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

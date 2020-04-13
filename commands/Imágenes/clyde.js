@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'clyde',
       description: 'Genera una imagen donde clyde escribe un mensaje',
-      usage: prefix => `\`${prefix}clyde <texto>\``,
-      examples: prefix => `\`${prefix}clyde\``,
+      usage: (prefix) => `\`${prefix}clyde <texto>\``,
+      examples: (prefix) => `\`${prefix}clyde\``,
       enabled: true,
       cooldown: 4,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -29,7 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

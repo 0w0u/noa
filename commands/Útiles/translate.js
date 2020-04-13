@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'translate',
       description: 'Traduce un texto\nRevisa la lista de lenguajes soportados [entrando aquí](https://tech.yandex.com/translate/doc/dg/concepts/api-overview-docpage/#api-overview__languages)',
-      usage: prefix => `\`${prefix}translate <lenguajeAtraducir> <texto>\``,
-      examples: prefix => `\`${prefix}translate en Hola soy hermoso\``,
+      usage: (prefix) => `\`${prefix}translate <lenguajeAtraducir> <texto>\``,
+      examples: (prefix) => `\`${prefix}translate en Hola soy hermoso\``,
       enabled: true,
       cooldown: 4,
       aliases: ['ts'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,11 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
             if (err) msg.edit(client.message({ emoji: 'red', razón: 'ocurrió un error intentando traducir', usage: this.help.usage(message.prefix), message }));
             else if (args.slice(1).join(' ').length > 900) msg.edit(client.message({ emoji: 'red', razón: 'el texto traducido no puede exceder los 900 carácteres', usage: this.help.usage(message.prefix), message }));
             else {
-              embed
-                .setColor(client.fns.selectColor('lightcolors'))
-                .setTitle('🗣 Traductor')
-                .addField('Texto original', args.slice(1).join(' '))
-                .addField('Texto traducido', res.text);
+              embed.setColor(client.fns.selectColor('lightcolors')).setTitle('🗣 Traductor').addField('Texto original', args.slice(1).join(' ')).addField('Texto traducido', res.text);
               message.channel.send({ embed });
             }
           });
@@ -40,7 +36,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

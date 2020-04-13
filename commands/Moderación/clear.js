@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'clear',
       description: 'Borra varios mensajes en una sola tanda\n\n> **NOTA:**\nSolo puedes eliminar un máximo de `100` mensajes a la vez, y un mínimo de `2`',
-      usage: prefix => `\`${prefix}clear <cantidadMsg>\``,
-      examples: prefix => `\`${prefix}clear 56\``,
+      usage: (prefix) => `\`${prefix}clear <cantidadMsg>\``,
+      examples: (prefix) => `\`${prefix}clear 56\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['purge', 'prune'],
       botPermissions: ['MANAGE_MESSAGES'],
       memberPermissions: ['MANAGE_MESSAGES'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -28,9 +28,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (messageCount >= 2 && messageCount <= 100) {
         message.channel.messages
           .fetch({ limit: messageCount })
-          .then(messages => message.channel.bulkDelete(messages))
-          .then(m => {
-            m.channel.send('Se borraron ' + args[0] + ' mensajes correctamente').then(m => m.delete(1000000));
+          .then((messages) => message.channel.bulkDelete(messages))
+          .then((m) => {
+            m.channel.send('Se borraron ' + args[0] + ' mensajes correctamente').then((m) => m.delete(1000000));
           });
         //if (deletedMessages === -1) deletedMessages = 0;
       }
@@ -39,7 +39,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

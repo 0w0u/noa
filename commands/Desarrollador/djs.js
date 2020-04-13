@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'djs',
       description: 'Obten resultados relacionados con Discord.js-master de la documentación oficial',
-      usage: prefix => `\`${prefix}djs <búsqueda>\``,
-      examples: prefix => `\`${prefix}djs message#\``,
+      usage: (prefix) => `\`${prefix}djs <búsqueda>\``,
+      examples: (prefix) => `\`${prefix}djs message#\``,
       enabled: true,
       ownerOnly: true,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['docs'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -30,7 +30,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

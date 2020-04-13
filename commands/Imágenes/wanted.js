@@ -3,35 +3,42 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'wanted',
       description: 'Genera un avatar con un avatar en un postér de "El más búscado"',
-      usage: prefix => `\`${prefix}wanted [@usuario]\``,
-      examples: prefix => `\`${prefix}wanted\``,
+      usage: (prefix) => `\`${prefix}wanted [@usuario]\``,
+      examples: (prefix) => `\`${prefix}wanted\``,
       enabled: false,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      console.log(1);
       let msg = await message.channel.send(client.fns.reply('generating', message)),
         avatar = await require('canvas').loadImage((message.mentions.users.first() || message.author).displayAvatarURL({ format: 'jpg' })),
         base = await require('canvas').loadImage('https://i.imgur.com/nW3Ta8p.png'),
-        canvas = require('canvas').createCanvas(base.width, base.height),
+        canvas = await require('canvas').createCanvas(base.width, base.height),
         ctx = canvas.getContext('2d');
+      console.log(2);
       ctx.drawImage(base, 0, 0);
+      console.log(3);
       ctx.drawImage(avatar, 150, 360, 430, 430);
+      console.log(4);
       sepia(ctx, 150, 360, 430, 430);
+      console.log(5);
       msg.delete();
+      console.log(6);
       message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: 'wanted.png' }] });
+      console.log(7);
     } catch (e) {
       client.err({
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

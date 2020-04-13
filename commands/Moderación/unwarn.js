@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'unwarn',
       description: 'Remueve una advertencia a un usuario',
-      usage: prefix => `\`${prefix}unwarn <@usuario> [razón]\``,
-      examples: prefix => `\`${prefix}unwarn Hyp#9293 Apelación exitosa\``,
+      usage: (prefix) => `\`${prefix}unwarn <@usuario> [razón]\``,
+      examples: (prefix) => `\`${prefix}unwarn Hyp#9293 Apelación exitosa\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: [],
       memberPermissions: ['KICK_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -40,24 +40,18 @@ module.exports = class command extends require('../../base/models/Command.js') {
 
       if (!warnserver[wUser.id]) {
         warnserver[wUser.id] = {
-          warns: 0
+          warns: 0,
         };
       }
 
       if (warnserver[wUser.id].warns <= 0) return message.channel.send('No puedes remover una advertencia a este usuario por que no posee ningúna');
       warnserver[wUser.id].warns--;
 
-      fs.writeFile('./assets/jsonFiles/warnings.json', JSON.stringify(warns), err => {
+      fs.writeFile('./assets/jsonFiles/warnings.json', JSON.stringify(warns), (err) => {
         if (err) console.log(err);
       });
 
-      let warnEmbed = new Discord.MessageEmbed()
-        .setColor('BLUE')
-        .setAuthor(`[UNWARN] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL)
-        .addField('Usuario', `<@${wUser.id}> (\`${wUser.id}\`)`, true)
-        .addField('Moderador', `<@${message.author.id}>`, true)
-        .addField('Razón', reason, true)
-        .setFooter(`Número de advertencias: ${warnserver[wUser.id].warns}`);
+      let warnEmbed = new Discord.MessageEmbed().setColor('BLUE').setAuthor(`[UNWARN] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL).addField('Usuario', `<@${wUser.id}> (\`${wUser.id}\`)`, true).addField('Moderador', `<@${message.author.id}>`, true).addField('Razón', reason, true).setFooter(`Número de advertencias: ${warnserver[wUser.id].warns}`);
 
       message.channel.send(warnEmbed);
 
@@ -78,7 +72,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

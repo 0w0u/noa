@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'fart',
       description: 'Comando oculto #2\n\n¡Se tan sucio y tirate un pedo!',
-      usage: prefix => `\`${prefix}fart\``,
-      examples: prefix => `\`${prefix}fart\``,
+      usage: (prefix) => `\`${prefix}fart\``,
+      examples: (prefix) => `\`${prefix}fart\``,
       enabled: true,
       cooldown: 3,
       aliases: ['flatulence'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

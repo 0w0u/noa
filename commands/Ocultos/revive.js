@@ -3,15 +3,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'revive',
       description: 'Comando Oculto #3\n\n¡Revive a tus aliados!',
-      usage: prefix => `\`${prefix}revive <@usuario>\``,
-      examples: prefix => `\`${prefix}revive Javi ϟ#3600\``,
+      usage: (prefix) => `\`${prefix}revive <@usuario>\``,
+      examples: (prefix) => `\`${prefix}revive Javi ϟ#3600\``,
       enabled: true,
       guildOnly: true,
       cooldown: 3,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -30,7 +30,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

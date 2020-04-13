@@ -19,10 +19,10 @@ module.exports = {
   donate: '',
   logs: {
     token: '',
-    id: ''
+    id: '',
   },
   votes: {
     token: '',
-    id: ''
-  }
+    id: '',
+  },
 };

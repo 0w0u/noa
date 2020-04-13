@@ -3,19 +3,20 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'wet',
       description: 'Moja a un usuario',
-      usage: prefix => `\`${prefix}wet <@usuario>\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}wet <@usuario>\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       guildOnly: true,
       aliases: ['splash', 'mojar'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       if (message.mentions.users.first() === message.author) return message.channel.send(client.message({ emoji: 'red', razón: 'si te mojas, te regañarán', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.first() == client.user) return message.channel.send(client.message({ emoji: '<:noaMonGun:672934974319493150>', razón: 'no te atrevas...', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.size < 1) return message.channel.send(client.message({ emoji: ':sweat_drops:', razón: 'noargs menciona a quien mojarás', usage: this.help.usage(message.prefix), message }));
@@ -29,7 +30,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

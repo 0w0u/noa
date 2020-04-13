@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'afk',
       description: 'Utilizalo cuando te pongas en estado ausente para que los demás sepan que no estás disponible',
-      usage: prefix => `\`${prefix}afk [motivo]\``,
-      examples: prefix => `\`${prefix}afk Durmiendo 💤\``,
+      usage: (prefix) => `\`${prefix}afk [motivo]\``,
+      examples: (prefix) => `\`${prefix}afk Durmiendo 💤\``,
       enabled: true,
       cooldown: 3,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'pokedex',
       description: 'Busca un pokémon en la pokedex',
-      usage: prefix => `\`${prefix}pokedex <pokémon | número>\``,
-      examples: prefix => `\`${prefix}pokedex Manaphy\`\n\`${prefix}pokedex 34\``,
+      usage: (prefix) => `\`${prefix}pokedex <pokémon | número>\``,
+      examples: (prefix) => `\`${prefix}pokedex Manaphy\`\n\`${prefix}pokedex 34\``,
       enabled: true,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -32,10 +32,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
           embed
             .setTitle(`Principal: __**${poke.name} | #${poke.number} | Generación ${poke.gen}**__`)
             .addField('Descripción:', res.text)
-            .addField('Tipo:', Array.isArray(poke.types) ? poke.types.map(tipos => tipo[tipos]).join('\n ') : tipo[poke.types], true)
+            .addField('Tipo:', Array.isArray(poke.types) ? poke.types.map((tipos) => tipo[tipos]).join('\n ') : tipo[poke.types], true)
             .addField('Especie:', poke.species, true)
             .addField('Habilidades:', `• Normal: \`${poke.abilities.normal}\` \n• Oculta: \`${poke.abilities.hidden.length <= 0 ? 'Ninguna' : poke.abilities.hidden.join(', ')}\``, true)
-            .addField('Grupos Huevos:', Array.isArray(poke.eggGroups) ? poke.eggGroups.map(huevos => huevo[huevos]).join('\n ') : huevo[poke.eggGroups], true)
+            .addField('Grupos Huevos:', Array.isArray(poke.eggGroups) ? poke.eggGroups.map((huevos) => huevo[huevos]).join('\n ') : huevo[poke.eggGroups], true)
             .addField('Altura y peso:', `\`${poke.height}\`/\`${poke.weight}\``, true)
             .addField('Evolución:', `${poke.family.evolutionLine.join(' ➔ ')}\nEtapa:\`${poke.family.evolutionStage}\``, true)
             .addField('Rareza:', `• Inicial: \`${poke.starter ? 'Si' : 'No'}\`\n• Legendario: \`${poke.legendary ? 'Si' : 'No'}\`\n• Mítico: \`${poke.mythical ? 'Si' : 'No'}\`\n• Ultraente: \`${poke.ultraBeast ? 'Si' : 'No'}\`\n• Mega: \`${poke.mega ? 'Si' : 'No'}\``, true)
@@ -49,7 +49,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

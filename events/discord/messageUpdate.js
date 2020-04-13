@@ -12,7 +12,7 @@ module.exports = class event {
       client.err({
         type: 'event',
         name: 'messageUpdate',
-        error: e
+        error: e,
       });
     }
   }

@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'yuri',
       description: 'Mira a hermosas chicas o///o',
-      usage: prefix => `\`${prefix}yuri\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}yuri\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       nsfwOnly: true,
       voteOnly: true,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['lesbian'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -20,17 +20,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let msg = await message.channel.send(client.fns.reply('generating', message)),
         img = await require('node-superfetch').get(`https://nekos.life/api/v2/img/les`);
-      embed
-        .setColor(client.fns.selectColor('lightcolors'))
-        .setDescription('...')
-        .setImage(img.body.url);
+      embed.setColor(client.fns.selectColor('lightcolors')).setDescription('...').setImage(img.body.url);
       msg.edit('** **', { embed });
     } catch (e) {
       client.err({
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

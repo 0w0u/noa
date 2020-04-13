@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'ping',
       description: 'Revisa la latencia del bot y la API',
-      usage: prefix => `\`${prefix}ping\``,
-      examples: prefix => `\`${prefix}ping\``,
+      usage: (prefix) => `\`${prefix}ping\``,
+      examples: (prefix) => `\`${prefix}ping\``,
       enabled: true,
       aliases: ['latency'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -47,7 +47,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }
