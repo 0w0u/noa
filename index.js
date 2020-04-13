@@ -10,16 +10,16 @@ let readdir = require('util').promisify(require('fs').readdir),
     try {
       let Commands = await readdir('./commands'),
         Events = await readdir('./events/discord');
-      Commands.forEach(async cmds => {
+      Commands.forEach(async (cmds) => {
         let commands = await readdir('./commands/' + cmds + '/');
         commands
-          .filter(cmd => cmd.split('.').pop() === 'js')
-          .forEach(cmd => {
+          .filter((cmd) => cmd.split('.').pop() === 'js')
+          .forEach((cmd) => {
             let response = client.loadCommand('./commands/' + cmds, cmd);
             if (response) console.log(response);
           });
       });
-      Events.forEach(ev => {
+      Events.forEach((ev) => {
         ev = ev.split('.');
         client.on(ev[0], (...args) => new (require(`./events/discord/${ev[0]}.js`))(client).run(...args));
         console.log(`[E] El evento ${ev[0]} cargó con éxito`);
@@ -39,7 +39,7 @@ let readdir = require('util').promisify(require('fs').readdir),
   web = async () => {
     try {
       let DBLEvents = await readdir('./events/dbl');
-      DBLEvents.forEach(ev => {
+      DBLEvents.forEach((ev) => {
         ev = ev.split('.');
         dbl.webhook.on(ev[0], (...args) => new (require(`./events/dbl/${ev[0]}.js`))(client).run(...args));
         console.log(`[D] El evento ${ev[0]}DBL cargó con éxito`);

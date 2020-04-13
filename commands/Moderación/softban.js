@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'softban',
       description: 'Banea a un usuario y elimina sus mensajes en los últimos 7 días',
-      usage: prefix => `\`${prefix}softban <@usuario> <razón>\``,
-      examples: prefix => `\`${prefix}softban @Hula#9293 Traición al servidor\``,
+      usage: (prefix) => `\`${prefix}softban <@usuario> <razón>\``,
+      examples: (prefix) => `\`${prefix}softban @Hula#9293 Traición al servidor\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: ['BAN_MEMBERS'],
       memberPermissions: ['BAN_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -31,27 +31,17 @@ module.exports = class command extends require('../../base/models/Command.js') {
 
       bUser.ban({ days: 7, reason: `${reason} | Responsable: ${message.author.tag}` });
 
-      const finalEmbed = new Discord.MessageEmbed()
-        .setColor(client.selectColor('red'))
-        .setAuthor(`[SOFTBAN] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL())
-        .addField('Usuario', `<@${bUser.id}> (\`${bUser.id}\`)`, true)
-        .addField('Razón', reason, true)
-        .addField('Moderador', `<@${message.author.id}>`, true);
+      const finalEmbed = new Discord.MessageEmbed().setColor(client.selectColor('red')).setAuthor(`[SOFTBAN] ${message.mentions.users.first().username}#${message.mentions.users.first().discriminator}`, message.mentions.users.first().displayAvatarURL()).addField('Usuario', `<@${bUser.id}> (\`${bUser.id}\`)`, true).addField('Razón', reason, true).addField('Moderador', `<@${message.author.id}>`, true);
       message.channel.send(finalEmbed);
 
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(`Fuiste baneado de un servidor`, message.guild.iconURL())
-        .addField(`Servidor`, `${message.guild.name}`, true)
-        .addField(`Razón`, `${reason}`, true)
-        .addField(`Moderador`, `${message.author.tag}`, true)
-        .setColor(client.selectColor('red'));
+      const embed = new Discord.MessageEmbed().setAuthor(`Fuiste baneado de un servidor`, message.guild.iconURL()).addField(`Servidor`, `${message.guild.name}`, true).addField(`Razón`, `${reason}`, true).addField(`Moderador`, `${message.author.tag}`, true).setColor(client.selectColor('red'));
       bUser.send(embed);
     } catch (e) {
       message.channel.send(message.error(e));
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

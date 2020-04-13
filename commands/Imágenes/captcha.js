@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'captcha',
       description: 'Genera una imagen para resolver un captcha con el avatar de un usuario',
-      usage: prefix => `\`${prefix}captcha [@usuario]\``,
-      examples: prefix => `\`${prefix}captcha\``,
+      usage: (prefix) => `\`${prefix}captcha [@usuario]\``,
+      examples: (prefix) => `\`${prefix}captcha\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -26,7 +26,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

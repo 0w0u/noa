@@ -3,15 +3,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'setprefix',
       description: 'Cambia el prefijo del servidor',
-      usage: prefix => `\`${prefix}setprefix <prefijo>\``,
-      examples: prefix => `\`${prefix}setprefix !!\``,
+      usage: (prefix) => `\`${prefix}setprefix <prefijo>\``,
+      examples: (prefix) => `\`${prefix}setprefix !!\``,
       enabled: true,
       guildOnly: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: ['MANAGE_GUILD'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -31,7 +31,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

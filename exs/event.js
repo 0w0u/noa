@@ -9,7 +9,7 @@ module.exports = class event {
       client.err({
         type: 'event',
         name: 'event',
-        error: e
+        error: e,
       });
     }
   }

@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: '3000years',
       description: 'Genera una imagen de Pokémon con el meme "3000 años han pasado"',
-      usage: prefix => `\`${prefix}3000years [@usuario]\``,
-      examples: prefix => `\`${prefix}3000years\``,
+      usage: (prefix) => `\`${prefix}3000years [@usuario]\``,
+      examples: (prefix) => `\`${prefix}3000years\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -31,7 +31,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

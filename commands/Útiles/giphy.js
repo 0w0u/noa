@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'giphy',
       description: 'Encuentra un gif al azar de tu elección. (No siempre encuentra lo que buscas)',
-      usage: prefix => `\`${prefix}giphy <busqueda>\``,
-      examples: prefix => `\`${prefix}giphy Leones\``,
+      usage: (prefix) => `\`${prefix}giphy <busqueda>\``,
+      examples: (prefix) => `\`${prefix}giphy Leones\``,
       enabled: true,
       cooldown: 4,
       aliases: ['gif'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -30,7 +30,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

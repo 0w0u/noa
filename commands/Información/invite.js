@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'invite',
       description: '¡Invita a ' + require('../../config').bot + ' a tu servidor!',
-      usage: prefix => `\`${prefix}invite\``,
-      examples: prefix => `\`${prefix}invite\``,
+      usage: (prefix) => `\`${prefix}invite\``,
+      examples: (prefix) => `\`${prefix}invite\``,
       enabled: true,
       cooldown: 2.5,
       aliases: ['iwannahavethisamazingbotinmyserver', 'inv'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -29,7 +29,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

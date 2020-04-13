@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'whatpoke',
       description: 'Genera una imagen la cual mete tu avatar en el meme "¿Cuál es este Pokémon?"',
-      usage: prefix => `\`${prefix}whatpoke [@usuario]\``,
-      examples: prefix => `\`${prefix}whatpoke\``,
+      usage: (prefix) => `\`${prefix}whatpoke [@usuario]\``,
+      examples: (prefix) => `\`${prefix}whatpoke\``,
       enabled: true,
       cooldown: 5,
       aliases: ['whosthatpkm', 'whatspokemon'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

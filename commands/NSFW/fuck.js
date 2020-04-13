@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'fuck',
       description: 'Ve un paso más adelante con otra personas',
-      usage: prefix => `\`${prefix}fuck <@usuario>\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}fuck <@usuario>\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       guildOnly: true,
       nsfwOnly: true,
@@ -13,7 +13,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -33,7 +33,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

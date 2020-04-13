@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'invert',
       description: 'Genera un filtro de imagen que invierte los colores de un avatar',
-      usage: prefix => `\`${prefix}invert [@usuario]\``,
-      examples: prefix => `\`${prefix}invert\``,
+      usage: (prefix) => `\`${prefix}invert [@usuario]\``,
+      examples: (prefix) => `\`${prefix}invert\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

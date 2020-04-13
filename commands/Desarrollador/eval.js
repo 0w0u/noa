@@ -6,15 +6,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'eval',
       description: 'Evalúa código',
-      usage: prefix => `\`${prefix}eval <código>\``,
-      examples: prefix => `\`${prefix}eval client.ws.ping\``,
+      usage: (prefix) => `\`${prefix}eval <código>\``,
+      examples: (prefix) => `\`${prefix}eval client.ws.ping\``,
       enabled: true,
       ownerOnly: true,
       guildOnly: false,
       cooldown: 0.1,
       aliases: ['ev'],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -42,7 +42,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

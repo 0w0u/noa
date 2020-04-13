@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'unban',
       description: 'Revoca el baneo de un usuario en el servidor',
-      usage: prefix => `\`${prefix}unban <@usuario> [razón]\``,
-      examples: prefix => `\`${prefix}unban \``,
+      usage: (prefix) => `\`${prefix}unban <@usuario> [razón]\``,
+      examples: (prefix) => `\`${prefix}unban \``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: ['BAN_MEMBERS'],
       memberPermissions: ['BAN_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -36,7 +36,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

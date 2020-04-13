@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'reload',
       description: 'Recarga todos los comandos o uno en específico',
-      usage: prefix => `\`${prefix}reload [comando]\``,
-      examples: prefix => `\`${prefix}reload\n${prefix}reload blacklist\``,
+      usage: (prefix) => `\`${prefix}reload [comando]\``,
+      examples: (prefix) => `\`${prefix}reload\n${prefix}reload blacklist\``,
       enabled: true,
       ownerOnly: true,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['refresh', 'restart', 'r'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -35,7 +35,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

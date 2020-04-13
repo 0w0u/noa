@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'kirby',
       description: 'Comando especial de: fayaarx#8479. ¡Obtén tu propio comando especial donando al bot o en el servidor de soporte!',
-      usage: prefix => `\`${prefix + this.help.name}\``,
-      examples: prefix => `\`${prefix + this.help.name}\``,
+      usage: (prefix) => `\`${prefix + this.help.name}\``,
+      examples: (prefix) => `\`${prefix + this.help.name}\``,
       enabled: true,
       cooldown: 4,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -26,7 +26,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

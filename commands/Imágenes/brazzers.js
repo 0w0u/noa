@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'brazzers',
       description: 'Genera una imagen con un avatar con el logo de Brazzers',
-      usage: prefix => `\`${prefix}brazzers [@usuario]\``,
-      examples: prefix => `\`${prefix}brazzers @Pepito#8492\``,
+      usage: (prefix) => `\`${prefix}brazzers [@usuario]\``,
+      examples: (prefix) => `\`${prefix}brazzers @Pepito#8492\``,
       enabled: true,
       cooldown: 5,
       aliases: ['thisisnotpornhub'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

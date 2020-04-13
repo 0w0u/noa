@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'say',
       description: 'Repetiré el texto que digas',
-      usage: prefix => `\`${prefix}say <texto>\``,
-      examples: prefix => `\`${prefix}say ¡Los amo a todos! :heart:\``,
+      usage: (prefix) => `\`${prefix}say <texto>\``,
+      examples: (prefix) => `\`${prefix}say ¡Los amo a todos! :heart:\``,
       enabled: true,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

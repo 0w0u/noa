@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'ship',
       description: 'Shippea a dos usuarios por sus apodos en el servidor',
-      usage: prefix => `\`${prefix}ship <@usuario1> <@usuario2>\``,
-      examples: prefix => `\`${prefix}ship @Noa#3164 @Hinata#1200\``,
+      usage: (prefix) => `\`${prefix}ship <@usuario1> <@usuario2>\``,
+      examples: (prefix) => `\`${prefix}ship @Noa#3164 @Hinata#1200\``,
       enabled: true,
       guildOnly: true,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -32,7 +32,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'blur',
       description: 'Genera una imagen con un avatar que tiene desenfoque',
-      usage: prefix => `\`${prefix}blur [@usuario]\``,
-      examples: prefix => `\`${prefix}blur\``,
+      usage: (prefix) => `\`${prefix}blur [@usuario]\``,
+      examples: (prefix) => `\`${prefix}blur\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -24,7 +24,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

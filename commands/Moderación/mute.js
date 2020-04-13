@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'mute',
       description: 'Silencia al usuario mencionado de casi todos los canales del servidor',
-      usage: prefix => `\`${prefix}mute <@usuario> [razón]\``,
-      examples: prefix => `\`${prefix}mute @Kayak#8292 Lenguaje inapropiado\``,
+      usage: (prefix) => `\`${prefix}mute <@usuario> [razón]\``,
+      examples: (prefix) => `\`${prefix}mute @Kayak#8292 Lenguaje inapropiado\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['silenciar'],
       botPermissions: ['MANAGE_CHANNELS', 'MANAGE_ROLES'],
       memberPermissions: ['KICK_MEMBERS'],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -31,18 +31,18 @@ module.exports = class command extends require('../../base/models/Command.js') {
         let r = await message.guild.roles.cache.create({
           data: {
             name: 'Silenciado',
-            color: 0x000000
+            color: 0x000000,
           },
-          reason: 'Rol silenciado'
+          reason: 'Rol silenciado',
         });
-        message.guild.channels.cache.forEach(c => {
+        message.guild.channels.cache.forEach((c) => {
           c.overwritePermissions({
             permissionOverwrites: [
               {
                 id: r.id,
-                deny: ['SEND_MESSAGES', 'ADD_REACTIONS']
-              }
-            ]
+                deny: ['SEND_MESSAGES', 'ADD_REACTIONS'],
+              },
+            ],
           });
         });
         data.guild.moderation.mute.role = r.id;
@@ -61,7 +61,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       client.err({
         type: 'command',
         name: this.help.name,
-        error: e
+        error: e,
       });
     }
   }

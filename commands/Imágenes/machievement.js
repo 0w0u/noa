@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'machievement',
       description: '¡Genera un logro del Minecraft!',
-      usage: prefix => `\`${prefix}machievement <logro>/[título]\``,
-      examples: prefix => `\`${prefix}machievement Utiliza 700 comandos/Aficionado\``,
+      usage: (prefix) => `\`${prefix}machievement <logro>/[título]\``,
+      examples: (prefix) => `\`${prefix}machievement Utiliza 700 comandos/Aficionado\``,
       enabled: true,
       cooldown: 3,
       aliases: ['mach'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -21,7 +21,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       args = args
         .join('%20')
         .split('/')
-        .map(arg => arg.trim());
+        .map((arg) => arg.trim());
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs escribe el logro de tus sueños', usage: this.help.usage(message.prefix), message }));
       else {
         if (args[0].length >= 25) message.channel.send({ emoji: 'red', razón: 'el logro no puede exceder los 25 carácteres', message });
@@ -34,7 +34,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

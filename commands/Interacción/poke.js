@@ -3,19 +3,20 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'poke',
       description: 'Molesta un poco al que tú quieras',
-      usage: prefix => `\`${prefix}poke <@usuario>\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}poke <@usuario>\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       guildOnly: true,
       aliases: ['molestar', 'disturb'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       let img = await require('node-superfetch').get('https://nekos.life/api/v2/img/poke');
       if (message.mentions.users.first() === client.user) return message.channel.send(client.message({ emoji: '<:noaMonGun:672934974319493150>', razón: 'que ni se te ocurra', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.first() === message.author) {
@@ -37,7 +38,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: '',
       description: '',
-      usage: prefix => `\`${prefix}\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -14,7 +14,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -25,7 +25,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'topservers',
       description: 'Muestra el top 30 servidores con más usuarios de ' + require('../../config').bot,
-      usage: prefix => `\`${prefix}topservers\``,
-      examples: prefix => `\`${prefix}topservers\``,
+      usage: (prefix) => `\`${prefix}topservers\``,
+      examples: (prefix) => `\`${prefix}topservers\``,
       enabled: true,
       ownerOnly: true,
       guildOnly: false,
@@ -12,7 +12,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -34,7 +34,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       msg.react('⏩');
       let backwards = msg.createReactionCollector((reaction, user) => reaction.emoji.name === '⏪' && user.id === message.author.id, { time: 60000 }),
         forwards = msg.createReactionCollector((reaction, user) => reaction.emoji.name === '⏩' && user.id === message.author.id, { time: 60000 });
-      backwards.on('collect', r => {
+      backwards.on('collect', (r) => {
         if (page === 1) return;
         page--;
         embed
@@ -43,7 +43,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setColor(client.fns.selectColor('lightcolors'));
         msg.edit('** **', { embed });
       });
-      forwards.on('collect', r => {
+      forwards.on('collect', (r) => {
         if (page === pages.length) return;
         page++;
         embed
@@ -57,7 +57,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

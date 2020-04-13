@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'commands',
       description: 'Muestra la lista de comandos\n> **Parámetros:**\n• `--nodm`, `--nodmhelp`: Cancela el envío de la lista de comandos al mensaje privado y lo hace en el canal que se utilice',
-      usage: prefix => `\`${prefix}commands\``,
-      examples: prefix => `\`${prefix}commands\``,
+      usage: (prefix) => `\`${prefix}commands\``,
+      examples: (prefix) => `\`${prefix}commands\``,
       enabled: true,
       cooldown: 15,
       aliases: ['comandos', 'c'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -27,25 +27,25 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (message.member.permissions.has('MANAGE_GUILD')) order.ADMINISTRACIÓN = 100;
       }
       if (client.config.owners.includes(message.author.id)) order.DESARROLLADOR = 110;
-      client.commands.forEach(cmd => {
+      client.commands.forEach((cmd) => {
         if (!cats.includes(cmd.help.category)) cats.push(cmd.help.category);
       });
       let temp = [];
       for (let i = 0; i < cats.length; i++) temp.push(null);
       for (let cat of cats) temp[order[cat.toUpperCase()]] = cat;
-      cats = temp.filter(x => x !== null);
+      cats = temp.filter((x) => x !== null);
       let jav = await client.users.fetch(client.config.owners[1]),
         mon = await client.users.fetch(client.config.owners[0]);
-      cats.forEach(c => {
-        let cmds = client.commands.filter(C => C.help.category === c);
-        embed.addField('• ' + c + ' [' + cmds.size + ']', cmds.map(u => `\`${u.help.name}\``).join(', '));
+      cats.forEach((c) => {
+        let cmds = client.commands.filter((C) => C.help.category === c);
+        embed.addField('• ' + c + ' [' + cmds.size + ']', cmds.map((u) => `\`${u.help.name}\``).join(', '));
       });
       embed
         .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('Comandos de ' + client.config.bot, client.user.displayAvatarURL())
         .addField('• Ocultos [??]', '¡Descúbrelos por ti mismo!')
         .setImage(client.config.banner)
-        .setFooter(`Total de comandos: ${client.commands.size - client.commands.filter(C => C.help.category === 'Ocultos').size - client.commands.filter(C => C.help.category === 'Desarrollador').size} | Desarrollado por: ${jav.tag} y ${mon.tag}`)
+        .setFooter(`Total de comandos: ${client.commands.size - client.commands.filter((C) => C.help.category === 'Ocultos').size - client.commands.filter((C) => C.help.category === 'Desarrollador').size} | Desarrollado por: ${jav.tag} y ${mon.tag}`)
         .setTimestamp();
       if (!args[0]) {
         let msg = await message.channel.send(client.fns.reply('dm', message));
@@ -62,7 +62,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

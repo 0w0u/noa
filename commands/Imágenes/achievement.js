@@ -3,13 +3,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'achievement',
       description: '¡Escribe cualquier logro que quisieras tener en Xbox!',
-      usage: prefix => `\`${prefix}achievement <texto>\``,
-      examples: prefix => `\`${prefix}achievement Utilizar ${require('../../config').bot} durante por un mes\``,
+      usage: (prefix) => `\`${prefix}achievement <texto>\``,
+      examples: (prefix) => `\`${prefix}achievement Utilizar ${require('../../config').bot} durante por un mes\``,
       enabled: true,
       aliases: ['logro'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'greet',
       description: 'Saluda a uno de tus compas, como buen amigo que eres',
-      usage: prefix => `\`${prefix}greet <@usuario>\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}greet <@usuario>\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
@@ -12,12 +12,13 @@ module.exports = class command extends require('../../base/models/Command.js') {
       aliases: ['wave', 'saludar'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       if (message.mentions.users.first() === message.author) return message.channel.send(client.message({ emoji: 'heart', razón: `si solamente quieres saludar usa \`${message.prefix}hello ^^\``, usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.first() === client.user) return message.channel.send(client.message({ emoji: 'heart', razón: 'holiii~', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.size < 1) return message.channel.send(client.message({ emoji: 'red', razón: 'noargs menciona a esa persona que quieres ', usage: this.help.usage(message.prefix), message }));
@@ -31,7 +32,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

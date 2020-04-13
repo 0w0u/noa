@@ -3,14 +3,14 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'drake',
       description: 'Genera el meme de Drake "Yes / No" con tu avatar y el de otro usuario mencionado',
-      usage: prefix => `\`${prefix}drake <@usuario>\``,
-      examples: prefix => `\`${prefix}drake @Momo#8289\``,
+      usage: (prefix) => `\`${prefix}drake <@usuario>\``,
+      examples: (prefix) => `\`${prefix}drake @Momo#8289\``,
       enabled: true,
       cooldown: 4,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
@@ -30,7 +30,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }
