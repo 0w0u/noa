@@ -16,6 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       let img = await require('node-superfetch').get('https://nekos.life/api/v2/img/pat');
       if (message.mentions.users.first() === message.author) return message.channel.send(client.message({ emoji: 'red', razón: 'no te puedes acariciar a ti mism@, sería **extraño**', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.first() === client.user) return message.channel.send(client.message({ emoji: 'heart', razón: 'uwu', usage: this.help.usage(message.prefix), message }));

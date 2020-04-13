@@ -16,6 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       if (message.mentions.users.first() === message.author) return message.channel.send(client.message({ emoji: 'red', razón: 'jeje, qué raro', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.first() == client.user) return message.channel.send(client.message({ emoji: 'red', razón: 'waaat, no quiero besos', usage: this.help.usage(message.prefix), message }));
       if (message.mentions.users.size < 1) return message.channel.send(client.message({ emoji: 'red', razón: 'noargs menciona a quien quieres besar', usage: this.help.usage(message.prefix), message }));

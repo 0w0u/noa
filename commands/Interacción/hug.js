@@ -3,24 +3,22 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'hug',
       description: 'Demuestra tu cariño, abrazando a un usuario',
-      usage: prefix => `\`${prefix}hug <@usuario>\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}hug <@usuario>\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       guildOnly: true,
       aliases: [],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       if (message.mentions.users.first() === message.author) {
-        embed
-          .setDescription(client.fns.reply('hug', message))
-          .setColor(client.fns.selectColor('lightcolors'))
-          .setImage(client.fns.gifs(this.help.name));
+        embed.setDescription(client.fns.reply('hug', message)).setColor(client.fns.selectColor('lightcolors')).setImage(client.fns.gifs(this.help.name));
         message.channel.send({ embed });
         return;
       }
@@ -36,7 +34,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }

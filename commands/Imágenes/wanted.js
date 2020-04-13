@@ -16,16 +16,18 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      console.log(1);
       let msg = await message.channel.send(client.fns.reply('generating', message)),
         avatar = await require('canvas').loadImage((message.mentions.users.first() || message.author).displayAvatarURL({ format: 'jpg' })),
         base = await require('canvas').loadImage('https://i.imgur.com/nW3Ta8p.png'),
-        canvas = require('canvas').createCanvas(base.width, base.height),
+        canvas = await require('canvas').createCanvas(base.width, base.height),
         ctx = canvas.getContext('2d');
-      ctx.drawImage(base, 0, 0);
-      ctx.drawImage(avatar, 150, 360, 430, 430);
-      sepia(ctx, 150, 360, 430, 430);
-      msg.delete();
-      message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: 'wanted.png' }] });
+        console.log(2);
+      ctx.drawImage(base, 0, 0);console.log(3);
+      ctx.drawImage(avatar, 150, 360, 430, 430);console.log(4);
+      sepia(ctx, 150, 360, 430, 430);console.log(5);
+      msg.delete();console.log(6);
+      message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: 'wanted.png' }] });console.log(7);
     } catch (e) {
       client.err({
         type: 'command',

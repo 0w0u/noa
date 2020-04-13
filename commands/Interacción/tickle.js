@@ -3,24 +3,22 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: 'tickle',
       description: 'Hazle cosquillas a tus amigos',
-      usage: prefix => `\`${prefix}tickle <@usuario>\``,
-      examples: prefix => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix}tickle <@usuario>\``,
+      examples: (prefix) => `\`${prefix}\``,
       enabled: true,
       guildOnly: true,
       aliases: ['cosquillas'],
       botPermissions: [],
       memberPermissions: [],
-      dirname: __dirname
+      dirname: __dirname,
     });
   }
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
       if (message.mentions.users.first() === message.author || !message.mentions.users.first()) {
-        embed
-          .setColor(client.fns.selectColor('lightcolors'))
-          .setDescription(client.fns.reply('tickle', message))
-          .setImage(client.fns.gifs(this.help.name));
+        embed.setColor(client.fns.selectColor('lightcolors')).setDescription(client.fns.reply('tickle', message)).setImage(client.fns.gifs(this.help.name));
         message.channel.send({ embed });
         return;
       }
@@ -35,7 +33,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         type: 'command',
         name: this.help.name,
         error: e,
-        message
+        message,
       });
     }
   }
