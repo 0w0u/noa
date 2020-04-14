@@ -1,0 +1,45 @@
+@media (max-width: 1000px) {
+  .header {
+    width: 100vw;
+    left: 0;
+    justify-content: space-evenly;
+  }
+
+  .nav {
+    left: 100vw;
+    z-index: 200;
+  }
+
+  .main {
+    left: 0;
+  }
+
+  .btn-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    &__owners-container {
+      display: none;
+    }
+  }
+
+  .nav {
+    width: 100vw;
+  }
+  .main {
+    padding: 4rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .header {
+    &__stats-container {
+      & .stats {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
