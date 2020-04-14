@@ -41,6 +41,7 @@ body {
   flex-direction: column;
   box-shadow: inset -1rem 0 0rem rgba(227, 27, 100, 0.15);
   background-color: #ff8082;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav__logo-box {
   width: 100%;
@@ -258,7 +259,7 @@ body {
   }
 
   .nav {
-    left: 100vw;
+    left: -100vw;
     z-index: 200;
   }
 
@@ -275,10 +276,6 @@ body {
     display: none;
   }
 
-  .nav {
-    width: 100vw;
-  }
-
   .main {
     padding: 4rem;
   }
@@ -286,6 +283,27 @@ body {
 @media (max-width: 320px) {
   .header__stats-container .stats {
     font-size: 1.2rem;
+  }
+}
+@media (orientation: landscape) and (max-width: 900px) {
+  .header {
+    max-height: none;
+  }
+
+  .nav {
+    overflow-y: overlay;
+  }
+
+  .main {
+    padding: 4rem 5rem;
+  }
+}
+@media (orientation: landscape) and (max-width: 600px) {
+  .header {
+    max-height: none;
+  }
+  .header__owners-container {
+    display: none;
   }
 }
 

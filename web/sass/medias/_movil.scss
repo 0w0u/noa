@@ -6,7 +6,7 @@
   }
 
   .nav {
-    left: 100vw;
+    left: -100vw;
     z-index: 200;
   }
 
@@ -26,9 +26,6 @@
     }
   }
 
-  .nav {
-    width: 100vw;
-  }
   .main {
     padding: 4rem;
   }
@@ -39,6 +36,32 @@
     &__stats-container {
       & .stats {
         font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (orientation: landscape) {
+  @media (max-width: 900px) {
+    .header {
+      max-height: none;
+    }
+
+    .nav {
+      overflow-y: overlay;
+    }
+
+    .main {
+      padding: 4rem 5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .header {
+      max-height: none;
+
+      &__owners-container {
+        display: none;
       }
     }
   }
