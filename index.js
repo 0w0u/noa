@@ -4,7 +4,6 @@ let readdir = require('util').promisify(require('fs').readdir),
   http = require('http'),
   app = express(),
   server = http.createServer(app),
-  io = io.listen(server),
   port = 80,
   dbl = new (require('dblapi.js'))(client.config.dblKey, { webhookServer: server, webhookAuth: client.config.dblSkey }),
   init = async () => {
