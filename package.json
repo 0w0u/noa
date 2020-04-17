@@ -1,6 +1,6 @@
 {
   "name": "noa",
-  "version": "3.1.6",
+  "version": "3.1.65",
   "description": "Noa Discord Bot",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "gif-search": "^2.1.0",
     "isgd": "^1.1.3",
     "marsnpm": "^0.5.1",
-    "mathjs": "^6.6.3",
+    "mathjs": "^6.6.4",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.9.7",
