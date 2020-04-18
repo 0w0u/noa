@@ -16,7 +16,7 @@
     "cowsay": "^1.4.0",
     "cpu-stat": "^2.0.1",
     "dblapi.js": "^2.4.0",
-    "discord.js": "^12.1.1",
+    "discord.js": "^12.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "gif-search": "^2.1.0",
