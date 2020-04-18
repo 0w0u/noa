@@ -17,7 +17,8 @@
     max-height: 20rem;
     padding: 3rem 0;
     text-align: center;
-    & img {
+
+    img {
       width: 60%;
       max-width: 20rem;
     }
@@ -32,21 +33,25 @@
     color: $color-primary-light;
   }
 
-  & .menu__item {
+  .menu__item {
+    width: 100%;
+    height: 5.5rem;
     position: relative;
-    display: flex;
-    justify-content: start;
-    align-items: stretch;
-    padding: 2rem 15%;
 
-    & span {
-      width: 20%;
-    }
-
-    & a {
-      width: 90%;
+    &--link {
+      width: inherit;
+      height: inherit;
+      padding-left: 3rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       text-decoration: none;
       color: inherit;
+
+      .item__icon {
+        width: 2rem;
+        margin-right: 1rem;
+      }
     }
 
     &:hover::after {
@@ -63,16 +68,14 @@
     &.active {
       &::before {
         content: '';
-        width: 10%;
-        height: 50%;
+        width: 2rem;
+        height: 3rem;
         top: 50%;
         right: 0;
         transform: translate(0, -50%);
         position: absolute;
         background-color: $color-white-light;
-
         clip-path: polygon(0% 50%, 100% 0, 100% 100%, 0% 50%);
-        border-radius: 100;
       }
     }
   }
