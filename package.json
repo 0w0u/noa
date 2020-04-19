@@ -1,6 +1,6 @@
 {
   "name": "noa",
-  "version": "3.1.67",
+  "version": "3.1.68",
   "description": "Noa Discord Bot",
   "main": "index.js",
   "scripts": {
@@ -36,5 +36,8 @@
   "repository": {
     "url": "https://glitch.com/@ai-mon"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.26.3"
+  }
 }
