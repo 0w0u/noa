@@ -1,10 +1,11 @@
 {
   "name": "noa",
-  "version": "3.1.67",
+  "version": "3.1.68",
   "description": "Noa Discord Bot",
   "main": "index.js",
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=1536 --gc_interval=100 index-shard.js"
+    "start": "node --optimize_for_size --max_old_space_size=1536 --gc_interval=100 index-shard.js",
+    "compile:sass": "sass --watch web/sass:web/css"
   },
   "engines": {
     "node": "12.x"
@@ -36,5 +37,8 @@
   "repository": {
     "url": "https://glitch.com/@ai-mon"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.26.3"
+  }
 }
