@@ -49,7 +49,7 @@ let readdir = require('util').promisify(require('fs').readdir),
         .set('views', 'web/rutas')
         .use(express.static(__dirname + '/web')) // Carga el directorio raíz
         .use(express.static(__dirname + '/web/css')) // Carga el directorio que contiene los CSS
-        .get('/', async (req, res) => res.render('index', { client })) // Directorio principal
+        .get('/', (req, res) => res.render('index', { client })) // Directorio principal
         .get('/support', (q, s) => s.redirect('https://discordapp.com/invite/wyVHNYc')) // Redirección support
         .get('/invite', (q, s) => s.redirect('https://discordapp.com/oauth2/authorize?client_id=477950798949646336&scope=bot&permissions=829811958&response_type=code&redirect_uri=https://noa.wwmon.xyz/support')) // Redirección invite
         .get('/dbl', (q, s) => s.redirect('https://top.gg/bot/477950798949646336')) // Redirección dbl
