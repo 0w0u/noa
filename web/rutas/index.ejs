@@ -77,11 +77,11 @@
       <div class="header__stats-container">
         <div class="stats">
           <span class="stats-icon"><i class="fas fa-heart"></i> </span>
-          <span class="stats-count"><% client.dbl.getBot(client.config.botID).then(x => x.points); %></span>
+          <span class="stats-count"><%= client.dbl.getBot(client.config.botID).then(function(x){return x.points}); %></span> <!-- esto es lo q no sirve arreglenlo pls -->
         </div>
         <div class="stats">
           <span class="stats-icon"><i class="fas fa-server"></i> </span>
-          <span class="stats-count"><% client.guilds.cache.size; %></span>
+          <span class="stats-count"><%= client.guilds.cache.size; %></span>
         </div>
       </div>
       <div class="header__contact">
