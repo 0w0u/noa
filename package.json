@@ -1,7 +1,7 @@
 {
   "name": "noa",
-  "version": "3.1.68",
-  "description": "Noa Discord Bot",
+  "version": "3.1.7",
+  "description": "Noa es un bot uwu",
   "main": "index.js",
   "scripts": {
     "start": "node --optimize_for_size --max_old_space_size=1536 --gc_interval=100 index-shard.js",
@@ -35,7 +35,7 @@
     "yandex-translate-api": "^1.0.1"
   },
   "repository": {
-    "url": "https://glitch.com/@ai-mon"
+    "url": "https://noa.wwmon.xyz/github"
   },
   "license": "MIT",
   "devDependencies": {
