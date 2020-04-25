@@ -25,7 +25,7 @@ module.exports = class event {
       }
       message.prefix = message.guild ? data.guild.prefix : client.config.prefix;
       if (message.author) {
-        if (client.afk.get(message.author.id)) client.afk.delete(message.author.id), message.channel.send(client.message({ emoji: 'green', razón: '¡bienvenido de nuevo!', message }));
+        if (client.afk.get(message.author.id)) client.afk.delete(message.author.id), message.channel.send(client.message({ emoji: 'green', razón: '¡bienvenid@ de nuevo!', message }));
       }
       //if (message.guild) {}
       //if (message.member) {}
