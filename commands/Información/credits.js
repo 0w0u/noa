@@ -23,15 +23,15 @@ module.exports = class command extends require('../../base/models/Command.js') {
         designDevsaider = await client.users.fetch('280985817097306113'),
         donateMixedxx = await client.users.fetch('348683994474217472'),
         donateJunt = await client.users.fetch('501174560151044106'),
-        publiRogue = await client.users.fetch('456567119794929684'),
+        publiRogue = await client.users.fetch('494150648426790913'),
         botKae = await client.users.fetch('431638353189011517');
       embed
-        .setAuthor('Contribuidores al desarrollo de ' + client.config.bot, client.user.displayAvatarURL())
-        .addField('» Desarrolladores', `~ ${devJavi.tag}\n~ ${devMon.tag}\n~ ${devGameboy.tag}`, true)
-        .addField('» Diseñadores', `~ ${designDino.tag}\n~ ${devGameboy.tag}\n~ ${designDevsaider.tag}`, true)
-        .addField('» Donadores', `~ ${devMon.tag}\n~ ${donateMixedxx.tag}\n~ ${devGameboy.tag}\n~ ${donateJunt.tag}`, true)
-        .addField('» Publicista', `~ ${devMon.tag}\n~ ${publiRogue.tag}`, true)
-        .addField('» Bot aliado', `~ ${botKae.tag}`, true)
+        .setTitle(client.message({ emoji: 'heart', razón: 'Contribuidores al desarrollo de ' + client.config.bot, message }))
+        .addField('• Desarrolladores', `~ ${devJavi.tag}\n~ ${devMon.tag}\n~ ${devGameboy.tag}`, true)
+        .addField('• Diseñadores', `~ ${designDino.tag}\n~ ${devGameboy.tag}\n~ ${designDevsaider.tag}`, true)
+        .addField('• Donadores', `~ ${devMon.tag}\n~ ${donateMixedxx.tag}\n~ ${devGameboy.tag}\n~ ${donateJunt.tag}`, true)
+        .addField('• Publicista', `~ ${devMon.tag}\n~ ${publiRogue.tag}`, true)
+        .addField('• Bot aliado', `~ ${botKae.tag}`, true)
         .setColor(client.fns.selectColor('lightcolors'));
       message.channel.send({ embed });
     } catch (e) {

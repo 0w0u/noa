@@ -16,7 +16,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
     let client = this.client;
     try {
       let msg = await message.channel.send(client.fns.reply('generating', message));
-      embed.setAuthor('Woof! ▼・ᴥ・▼', 'https://i.imgur.com/22903G7.png').setColor(client.fns.selectColor('lightcolors'));
+      embed.setTitle(client.message({ emoji: ':dog:', razón: 'aquí tienes un lindo perrito ▼・ᴥ・▼', message })).setColor(client.fns.selectColor('lightcolors'));
       if (!args[0]) {
         let img = await require('node-superfetch').get('https://random.dog/woof.json?filter=mp4,webm');
         embed.setImage(img.body.url);

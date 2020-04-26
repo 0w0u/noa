@@ -5,7 +5,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       description: 'Genera la imagen de un lindo conejo 🐰',
       usage: (prefix) => `\`${prefix}bunny\``,
       examples: (prefix) => `\`${prefix}bunny\``,
-      enabled: true,
+      enabled: false,
       aliases: ['conejo', 'conejito'],
       botPermissions: [],
       memberPermissions: [],

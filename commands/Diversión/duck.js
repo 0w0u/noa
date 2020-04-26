@@ -17,7 +17,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let img = await require('node-superfetch').get('https://random-d.uk/api/v1/random?type=gif'),
         msg = await message.channel.send(client.fns.reply('generating', message));
-      embed.setColor(client.fns.selectColor('lightcolors')).setAuthor('¡Cuack! ( ՞ ਊ ՞ )', 'https://i.imgur.com/GUsoS5P.png').setImage(img.body.url);
+      embed
+        .setColor(client.fns.selectColor('lightcolors'))
+        .setTitle(client.message({ emoji: ':duck:', razón: 'aquí tienes un lindo patito ( ՞ ਊ ՞ )', message }))
+        .setImage(img.body.url);
       msg.edit('** **', { embed });
     } catch (e) {
       client.err({

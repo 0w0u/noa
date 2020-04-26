@@ -20,13 +20,19 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs anímate y escribe el texto que dará un giro', usage: this.help.usage(message.prefix), message }));
       else {
         message.channel.send(
-          args
-            .join(' ')
-            .split('')
-            .map((c) => c.charCodeAt(0) - OFFSET)
-            .map((c) => mapping[c] || ' ')
-            .reverse()
-            .join('')
+          client.message({
+            emoji: 'green',
+            razón:
+              'aquí está tu mensaje invertido:\n' +
+              args
+                .join(' ')
+                .split('')
+                .map((c) => c.charCodeAt(0) - OFFSET)
+                .map((c) => mapping[c] || ' ')
+                .reverse()
+                .join(''),
+            message,
+          })
         );
       }
     } catch (e) {

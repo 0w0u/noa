@@ -30,8 +30,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
             color = { Bug: 'GREEN', Dark: 'BLACK', Dragon: 'RED', Electric: '#FFD700', Fairy: '#9400D3', Fighting: '#FF391E', Fire: 'ORANGE', Flying: '#FF391E', Ghost: '#4A518D', Grass: '#00FF00', Ground: '#8B4513', Ice: '#01A9DB', Normal: '#696969', Poison: '#564471', Psychic: '#FE2E2E', Rock: '#989899', Steel: 'SLATE', Water: '#00BFFF' },
             huevo = { Bug: 'Bicho', Ditto: 'Ditto', Dragon: 'Dragon', Fairy: 'Hada', Field: 'Campo', Flying: 'Volador', Grass: 'Planta', 'Gender unknown': 'Género desconocido', 'Human-Like': 'Similar al humano', Mineral: 'Mineral', Monster: 'Monstruo', Amorphous: 'Amorfo', Undiscovered: 'No descubierto', 'Water 1': 'Agua I', 'Water 2': 'Agua II', 'Water 3': 'Agua III' };
           embed
-            .setTitle(`Principal: __**${poke.name} | #${poke.number} | Generación ${poke.gen}**__`)
-            .addField('Descripción:', res.text)
+            .setTitle(client.message({ emoji: 'green', razón: 'aquí tengo un resultado de tu búsqueda', message }))
+            .setDescription(`Principal: __**${poke.name} | #${poke.number} | Generación ${poke.gen}**__\n${res.text}`)
             .addField('Tipo:', Array.isArray(poke.types) ? poke.types.map((tipos) => tipo[tipos]).join('\n ') : tipo[poke.types], true)
             .addField('Especie:', poke.species, true)
             .addField('Habilidades:', `• Normal: \`${poke.abilities.normal}\` \n• Oculta: \`${poke.abilities.hidden.length <= 0 ? 'Ninguna' : poke.abilities.hidden.join(', ')}\``, true)

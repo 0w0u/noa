@@ -17,7 +17,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
     try {
       let img = await require('node-superfetch').get('https://randomfox.ca/floof/'),
         msg = await message.channel.send(client.fns.reply('generating', message));
-      embed.setColor(client.fns.selectColor('lightcolors')).setAuthor('¡Zorros!', 'https://i.imgur.com/FzagKZr.png').setImage(img.body.image);
+      embed
+        .setColor(client.fns.selectColor('lightcolors'))
+        .setTitle(client.message({ emoji: ':fox:', razón: 'aquí tienes un lindo zorrito', message }))
+        .setImage(img.body.image);
       msg.edit('** **', { embed });
     } catch (e) {
       client.err({

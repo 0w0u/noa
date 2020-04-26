@@ -5,7 +5,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       description: 'Genera un lindo pájaro 🐦',
       usage: (prefix) => `\`${prefix}bird\``,
       examples: (prefix) => `\`${prefix}bird\``,
-      enabled: true,
+      enabled: false,
       aliases: ['pájaro'],
       botPermissions: [],
       memberPermissions: [],

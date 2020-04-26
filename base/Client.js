@@ -68,9 +68,9 @@ module.exports = class client extends Client {
       noargs = ['faltan argumentos', 'parece que te faltan palabras', 'creo que se te han perdido argumentos'];
     emoji = emoji.toLowerCase();
     razón = razón.split(/ +/g);
-    if (emoji === 'green') s += '<:au_MiscGreenTick:599396703732498452>';
-    else if (emoji === 'gray') s += '<:au_MiscGrayTick:599396703774310419>';
-    else if (emoji === 'red') s += '<:au_MiscRedTick:599396704193740838>';
+    if (emoji === 'green') s += '<:ncGreenTick:703837866022666301>';
+    else if (emoji === 'gray') s += '<:ncGrayTick:703838163793084416>';
+    else if (emoji === 'red') s += '<:ncRedTick:703837937850384414>';
     else if (emoji === 'heart') s += ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣️', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟'][Math.floor(Math.random() * 16)];
     else if (emoji === 'noidea') s += ['🥴', '😕', '🙄'][Math.floor(Math.random() * 3)];
     else if (emoji === 'sad') s += ['😞', '😔', '😟', '🙁', '😣', '😫', '😦', '😧', '😪'][Math.floor(Math.random() * 9)];
