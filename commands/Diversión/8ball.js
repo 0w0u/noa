@@ -18,7 +18,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs pregúntale algo a la bola mágica', usage: this.help.usage(message.prefix), message }));
       else {
         let b8 = Math.floor(Math.random() * 3) + 1;
-        embed.setTitle(client.message({ emoji: ':8ball:', razón: 'la bola mágica', message })).addField('Has preguntado:', args.join(' '));
+        embed.setTitle(client.message({ emoji: '<:nc8ball:704033563062042756>', razón: 'la bola mágica', message })).addField('Has preguntado:', args.join(' '));
         if (b8 === 1) {
           embed.setColor(client.fns.selectColor('green')).addField('Mi respuesta es:', client.fns.ball8('yes', 'text')).setImage(client.fns.ball8('yes', 'gif'));
           message.channel.send({ embed });

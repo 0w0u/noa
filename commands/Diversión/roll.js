@@ -55,7 +55,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       } else {
         embed
           .setColor(client.fns.selectColor('blue'))
-          .setDescription(message.author.username + ', tiraste el dado, y cayó: 9... Rompiste el juego!')
+          .setDescription(message.author.username + ', tiraste el dado, y cayó: 9... ¡Rompiste el juego!')
           .setImage('https://i.imgur.com/to3YV2i.png');
         message.channel.send({ embed });
       }

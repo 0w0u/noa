@@ -19,31 +19,33 @@ module.exports = class command extends require('../../base/models/Command.js') {
       else if (args.join(' ').length > 150) message.channel.send(client.message({ emoji: 'red', razón: 'no puedo calificar tal estupidez, mejor pon algo más corto', message }));
       else {
         let punt = Math.floor(Math.random() * 11),
-          stars = '';
+          stars = '',
+          y = '<:ncStarY:704004689703993435>',
+          b = '<:ncStarB:704004736189464587>';
         if (punt === 0) {
-          stars = '<:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${b} ${b} ${b} ${b} ${b} ${b} ${b} ${b} ${b} ${b}`;
         } else if (punt === 1) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${b} ${b} ${b} ${b} ${b} ${b} ${b} ${b} ${b}`;
         } else if (punt === 2) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${b} ${b} ${b} ${b} ${b} ${b} ${b} ${b}`;
         } else if (punt === 3) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${b} ${b} ${b} ${b} ${b} ${b} ${b}`;
         } else if (punt === 4) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${y} ${b} ${b} ${b} ${b} ${b} ${b}`;
         } else if (punt === 5) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${y} ${y} ${b} ${b} ${b} ${b} ${b}`;
         } else if (punt === 6) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${y} ${y} ${y} ${b} ${b} ${b} ${b}`;
         } else if (punt === 7) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${y} ${y} ${y} ${y} ${b} ${b} ${b}`;
         } else if (punt === 8) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${y} ${y} ${y} ${y} ${y} ${b} ${b}`;
         } else if (punt === 9) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarB:703841793455685692>';
+          stars = `${y} ${y} ${y} ${y} ${y} ${y} ${y} ${y} ${y} ${b}`;
         } else if (punt === 10) {
-          stars = '<:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426> <:ncStarY:703841636316217426>';
+          stars = `${y} ${y} ${y} ${y} ${y} ${y} ${y} ${y} ${y} ${y}`;
         }
-        message.channel.send(client.message({ emoji: '<:ncStarY:703841636316217426>', razón: `creo que \`${args.join(' ').replace(/`/g, '')}\` se merece una puntuación de ${stars} (${punt}) estrellas`, message }));
+        message.channel.send(client.message({ emoji: y, razón: `creo que \`${args.join(' ').replace(/`/g, '')}\` se merece una puntuación de ${stars} (${punt}) estrellas`, message }));
       }
     } catch (e) {
       client.err({
