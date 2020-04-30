@@ -24,8 +24,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (i.content.toLowerCase().includes('sí') || i.content.toLowerCase().includes('si')) {
           embed.setColor(client.fns.selectColor('lightcolors')).setAuthor(`${message.author.tag} envió una sugerencia`, message.author.displayAvatarURL()).setDescription(args.join(' ')).setFooter(`Sugerencia envíada desde ${message.guild.name}`, message.guild.iconURL());
           let msg = await client.channels.cache.get('669009316191404037').send({ embed });
-          msg.react('487031865577046026');
-          msg.react('487031865165873172');
+          msg.react('<:ncGreenCheck:704037885980180621>');
+          msg.react('<:ncRedCheck:704038127915761794>');
           message.channel.send(client.message({ emoji: 'green', razón: 'sugerencia enviada correctamente', message }));
         } else if (i.content.toLowerCase().includes('no')) {
           message.channel.send(client.message({ emoji: 'gray', razón: 'está bien, cancelando operación', message }));

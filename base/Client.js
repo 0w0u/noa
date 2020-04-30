@@ -68,10 +68,10 @@ module.exports = class client extends Client {
       noargs = ['faltan argumentos', 'parece que te faltan palabras', 'creo que se te han perdido argumentos'];
     emoji = emoji.toLowerCase();
     razón = razón.split(/ +/g);
-    if (emoji === 'green') s += '<:au_MiscGreenTick:599396703732498452>';
-    else if (emoji === 'gray') s += '<:au_MiscGrayTick:599396703774310419>';
-    else if (emoji === 'red') s += '<:au_MiscRedTick:599396704193740838>';
-    else if (emoji === 'heart') s += ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣️', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟'][Math.floor(Math.random() * 16)];
+    if (emoji === 'green') s += '<:ncGreenCheck:704037885980180621>';
+    else if (emoji === 'gray') s += '<:ncGrayCheck:704037907132055682>';
+    else if (emoji === 'red') s += '<:ncRedCheck:704038127915761794>';
+    else if (emoji === 'heart') s += ['<:ncHeartI:704035947146248242>', '<:ncHeartII:704036010765451306>', '<:ncHeartIII:704036090239123468>', '<:ncHeartIV:704039144774434970>', '<:ncHeartIX:704039552599326832>', '<:ncHeartV:704039230858592276>', '<:ncHeartVI:704039341248348250>', '<:ncHeartVII:704039389894017025>', '<:ncHeartVIII:704039443178324078>', '<:ncHeartX:704039587806314588>', '<:ncHeartXI:704039772955344967>', '<:ncHeartXII:704039923002638407>', '<:ncHeartXIII:704040055072620564>', '<:ncHeartXIV:704040231112015992>', '<:ncHeartXIX:704040473857360015>', '<:ncHeartXV:704040272664723559>', '<:ncHeartXVI:704040305183293440>', '<:ncHeartXVII:704040352847495199>', '<:ncHeartXVIII:704040383038095440>', '<:ncHeartXX:704040510074912798>', '<:ncHeartXXI:704040566551478282>'][Math.floor(Math.random() * 21)];
     else if (emoji === 'noidea') s += ['🥴', '😕', '🙄'][Math.floor(Math.random() * 3)];
     else if (emoji === 'sad') s += ['😞', '😔', '😟', '🙁', '😣', '😫', '😦', '😧', '😪'][Math.floor(Math.random() * 9)];
     else s += emoji;

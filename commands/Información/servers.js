@@ -15,12 +15,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
-      embed
-        .setColor(client.fns.selectColor('lightcolors'))
-        .setAuthor('Servidores de ' + client.config.bot, client.user.avatarURL())
-        .setDescription('Actualmente estoy en **' + client.guilds.cache.size + '** servidores y con **' + client.userCount.toLocaleString() + '** usuarios ❤')
-        .setFooter('¡Gracias por apoyar!', message.author.avatarURL());
-      message.channel.send({ embed });
+      message.channel.send(client.message({ emoji: 'heart', razón: `servidores de ${client.config.bot}\n**${client.guilds.cache.size.toLocaleString()}** servidores y **${client.userCount.toLocaleString()}** usuarios`, message }));
     } catch (e) {
       client.err({
         type: 'command',
