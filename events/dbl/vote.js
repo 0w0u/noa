@@ -6,7 +6,6 @@ module.exports = class event {
     let client = this.client;
     try {
       let user = await client.users.fetch(vote.user),
-        uwu = await client.dbl.getBot(client.config.botID),
         config = require('../../config.js'),
         embed = new (require('discord.js').MessageEmbed)()
           .setColor(client.fns.selectColor('lightcolors'))
@@ -14,7 +13,7 @@ module.exports = class event {
           .setTitle('<:upvote:651571911632879626> | ¡Un usuario ha votado por ' + config.bot + '!')
           .setDescription('¡Tú también vota por ' + config.bot + ' [haciendo clic aquí](https://top.gg/bot/' + config.botID + '/vote)!')
           .addField('• Usuario', `~ Tag: **${user.tag}**\n~ ID: **${user.id}**`)
-          .addField('• Total de votos', `~ Este mes: **${uwu.monthlyPoints}**\n~ Desde siempre: **${uwu.points}**`)
+          .addField('• Total de votos', `~ Este mes: **${client.dbl.noaMP}**\n~ Desde siempre: **${client.dbl.noaP}**`)
           .setTimestamp()
           .addField('• Multiplicador', client.dbl.isWeekend() ? '¡Fin de semana, tu voto cuenta x2!' : 'Sólamente los fines de semana');
       if (vote.type === 'test') embed.setFooter('(Voto de prueba)');
