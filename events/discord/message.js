@@ -7,7 +7,6 @@ module.exports = class event {
       cooldowns = client.cooldowns,
       data = {},
       embed = new (require('discord.js').MessageEmbed)(),
-      errE = await client.emojis.cache.get('599396704193740838'),
       Weez = require('weez'),
       weez = new Weez.WeezAPI(client.config.weezKey);
     try {
@@ -16,6 +15,9 @@ module.exports = class event {
         number += x.memberCount;
       });
       client.userCount = number;
+      let dblV = await client.dbl.getBot(client.config.botID);
+      client.monthlyVotes = dblV.monthlyPoints;
+      client.votes = dblV.points;
       client.weez = weez;
       if (message.author.bot) return;
       data.user = await client.findOrCreateUser({ id: message.author.id });
