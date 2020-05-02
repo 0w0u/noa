@@ -6,9 +6,6 @@ module.exports = class event {
     let client = this.client;
     try {
       console.log(`¡Webhook listo! ${hook.path}`);
-      let dblV = await client.dbl.getBot(client.config.botID);
-      client.monthlyVotes = dblV.monthlyPoints;
-      client.votes = dblV.points;
     } catch (e) {
       client.err({
         type: 'event',
