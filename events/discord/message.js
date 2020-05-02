@@ -15,9 +15,6 @@ module.exports = class event {
         number += x.memberCount;
       });
       client.userCount = number;
-      let dblV = await client.dbl.getBot(client.config.botID);
-      client.monthlyVotes = dblV.monthlyPoints;
-      client.votes = dblV.points;
       client.weez = weez;
       if (message.author.bot) return;
       data.user = await client.findOrCreateUser({ id: message.author.id });
