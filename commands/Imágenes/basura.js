@@ -1,10 +1,10 @@
 module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
-      name: 'sepia',
-      description: 'Genera una imagen con un avatar y un efecto sepia',
+      name: 'basura',
+      description: 'Genera una imagen con un avatar de un meme de Gravity Falls',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix}sepia\``,
+      examples: (prefix) => `\`${prefix + this.help.name} mon#0010\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/sepia?url=${url}`);
+        img = await client.weez.basura(url);
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.raw));
+      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'basura.png'));
     } catch (e) {
       client.err({
         type: 'command',

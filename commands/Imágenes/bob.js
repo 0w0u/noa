@@ -4,7 +4,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       name: 'bob',
       description: 'Genera una imagen con un avatar donde estará en un cuadro, pintado por Bob Ross',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix}bob\``,
+      examples: (prefix) => `\`${prefix + this.help.name}\``,
       enabled: true,
       cooldown: 5,
       aliases: ['bobross'],
@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/bobross?url=${url}`);
+        img = await client.weez.bob(url);
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.raw));
+      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'bob.png'));
     } catch (e) {
       client.err({
         type: 'command',

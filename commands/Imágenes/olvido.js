@@ -1,10 +1,10 @@
 module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
-      name: 'posterize',
-      description: 'Genera un filtro de imagen que posteriza un avatar',
+      name: 'olvido',
+      description: 'Olvida a esa persona o cosa que tanto quieres o querías',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix}posterize\``,
+      examples: (prefix) => `\`${prefix + this.help.name}\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/posterize?url=${url}`);
+        img = await client.weez.olvido(url);
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.raw));
+      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'olvido.png'));
     } catch (e) {
       client.err({
         type: 'command',

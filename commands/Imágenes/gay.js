@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/gay?url=${url}`);
+        img = await client.weez.rainbow(url);
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.raw));
+      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'gay.png'));
     } catch (e) {
       client.err({
         type: 'command',

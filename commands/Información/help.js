@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .addField('• Prefijo', 'Para utilizar mis comandos debes poner el prefijo **`' + message.prefix + '`** antes de cada uno\nTambién podrás mencionar a ' + client.config.bot + ' como prefijo (' + client.user.toString() + ' help)')
           .addField('• Ayuda', 'Puedes ver la ayuda detallada de algún comando usando `' + message.prefix + 'help <comando>`')
           .addField('• Lista de comandos', 'Si quieres ver mi lista de comandos, utiliza **`' + message.prefix + 'commands`** y recibirás la lista de comandos por mensaje privado o **`' + message.prefix + 'commands --nodm`** para que lo manden en el mismo canal')
-          .addField('• Enlaces:', '[Invítame <:ncHeartXV:704040272664723559>](https://noa.wwmon.xyz/invite) | [Soporte ❓](https://noa.wwmon.xyz/support) | [Donaciones <:ncHeartXXI:704040566551478282>](https://noa.wwmon.xyz/donate) | [DBL 🤖](https://noa.wwmon.xyz/dbl) | [Vota 📥](https://noa.wwmon.xyz/vote) | [Web (WIP) 🌐](https://noa.wwmon.xyz/)')
+          .addField('• Enlaces:', '[Invítame ❤️](https://noa.wwmon.xyz/invite) | [Soporte ❓](https://noa.wwmon.xyz/support) | [Donaciones 💝](https://noa.wwmon.xyz/donate) | [DBL 🤖](https://noa.wwmon.xyz/dbl) | [Vota 📥](https://noa.wwmon.xyz/vote) | [Web (WIP) 🌐](https://noa.wwmon.xyz/)')
           .setImage(client.config.banner)
           .setFooter('Desarrollado por: ' + o.tag + ' y ' + mon.tag)
           .setTimestamp();
