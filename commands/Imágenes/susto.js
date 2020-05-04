@@ -1,10 +1,10 @@
 module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
-      name: 'pixelate',
-      description: 'Genera un filtro de imagen que vuelve pixelado un avatar',
+      name: 'susto',
+      description: 'Asústate con el avatar de alguien o alguna otra imagen',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix}pixelate\``,
+      examples: (prefix) => `\`${prefix + this.help.name}\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/pixelate?url=${url}`);
+        img = await client.weez.susto(url);
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.raw));
+      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'susto.png'));
     } catch (e) {
       client.err({
         type: 'command',

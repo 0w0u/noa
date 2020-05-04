@@ -1,10 +1,10 @@
 module.exports = class command extends require('../../base/models/Command.js') {
   constructor(client) {
     super(client, {
-      name: 'blur',
-      description: 'Genera una imagen con un avatar que tiene desenfoque',
+      name: 'lolice',
+      description: '',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix}blur\``,
+      examples: (prefix) => `\`${prefix + this.help.name}\``,
       enabled: true,
       cooldown: 5,
       aliases: [],
@@ -55,10 +55,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
           }
         }
       }
-      let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await require('node-superfetch').get(`https://eclyssia-api.tk/api/v1/blur?url=${url}`);
+      let { body } = await require('node-superfetch').get(`https://nekobot.xyz/api/imagegen?type=lolice&url=${url}`),
+        msg = await message.channel.send(client.fns.reply('generating', message));
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img.raw));
+      message.channel.send({ files: [body.message] });
     } catch (e) {
       client.err({
         type: 'command',

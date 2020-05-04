@@ -10,7 +10,7 @@ module.exports = class event {
         embed = new (require('discord.js').MessageEmbed)()
           .setColor(client.fns.selectColor('lightcolors'))
           .setThumbnail(user.displayAvatarURL())
-          .setTitle('<:upvote:651571911632879626> | ¡Un usuario ha votado por ' + config.bot + '!')
+          .setTitle('<:ncHeartXV:704040272664723559> ~ ¡Un usuario ha votado por ' + config.bot + '!')
           .setDescription('¡Tú también vota por ' + config.bot + ' [haciendo clic aquí](https://top.gg/bot/' + config.botID + '/vote)!')
           .addField('• Usuario', `~ Tag: **${user.tag}**\n~ ID: **${user.id}**`)
           .addField('• Total de votos', `~ Este mes: **${client.dbl.noaMP}**\n~ Desde siempre: **${client.dbl.noaP}**`)

@@ -67,6 +67,7 @@ module.exports = class client extends Client {
       s = '',
       noargs = ['faltan argumentos', 'parece que te faltan palabras', 'creo que se te han perdido argumentos'];
     emoji = emoji.toLowerCase();
+    if (typeof razón === 'object') razón = razón[Math.floor(Math.random() * razón.length)];
     razón = razón.split(/ +/g);
     if (emoji === 'green') s += '<:ncGreenCheck:704037885980180621>';
     else if (emoji === 'gray') s += '<:ncGrayCheck:704037907132055682>';

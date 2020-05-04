@@ -25,10 +25,10 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (message.mentions.channels.first()) message.mentions.channels.array().forEach((x) => (texto = texto.replace(`<#${x.id}>`, `#${x.name}`)));
         if (texto.includes('#')) texto = texto.replace('#', '%23');
         if (texto.includes('&')) texto = texto.replace('&', '%26');
-        let img = await require('node-superfetch').get(`https://nekobot.xyz/api/imagegen?type=clyde&text=${texto}`),
+        let { body } = await require('node-superfetch').get(`https://nekobot.xyz/api/imagegen?type=clyde&text=${texto}`),
           msg = await message.channel.send(client.fns.reply('generating', message));
         msg.delete();
-        message.channel.send({ files: [img.body.message] });
+        message.channel.send({ files: [body.message] });
       }
     } catch (e) {
       client.err({

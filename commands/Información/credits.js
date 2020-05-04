@@ -26,7 +26,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         publiRogue = await client.users.fetch('494150648426790913'),
         botKae = await client.users.fetch('431638353189011517');
       embed
-        .setTitle(client.message({ emoji: 'heart', razón: 'Contribuidores al desarrollo de ' + client.config.bot, message }))
+        .setTitle(client.message({ emoji: 'heart', razón: 'contribuidores al desarrollo de ' + client.config.bot, message }))
         .addField('• Desarrolladores', `~ ${devJavi.tag}\n~ ${devMon.tag}\n~ ${devGameboy.tag}`, true)
         .addField('• Diseñadores', `~ ${designDino.tag}\n~ ${devGameboy.tag}\n~ ${designDevsaider.tag}`, true)
         .addField('• Donadores', `~ ${devMon.tag}\n~ ${donateMixedxx.tag}\n~ ${devGameboy.tag}\n~ ${donateJunt.tag}`, true)

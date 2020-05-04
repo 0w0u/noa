@@ -3,8 +3,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
     super(client, {
       name: '',
       description: '',
-      usage: (prefix) => `\`${prefix}\``,
-      examples: (prefix) => `\`${prefix}\``,
+      usage: (prefix) => `\`${prefix + this.help.name}\``,
+      examples: (prefix) => `\`${prefix + this.help.name}\``,
       enabled: true,
       ownerOnly: false,
       guildOnly: false,
