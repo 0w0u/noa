@@ -6,7 +6,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
       usage: (prefix) => `\`${prefix + this.help.name} <[habilitar|enable]|[deshabilitar|disable]> [[[canal|channel] <#canal>]|[[mensaje|message] <texto>]|[[imagen|image] <fondo|color-fondo|color-texto|texto>]]\``,
       examples: (prefix) => `\`${prefix + this.help.name} enable message ¡Bienvenido {user}! Espero que disfrutes tu estancia en **{server}**\``,
       enabled: true,
-      ownerOnly: true,
       cooldown: 3,
       aliases: ['setjoin', 'setw'],
       botPermissions: [],
