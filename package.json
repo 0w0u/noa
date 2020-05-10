@@ -4,7 +4,7 @@
   "description": "Noa es un bot uwu",
   "main": "index.js",
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=1536 --gc_interval=100 index-shard.js",
+    "start": "node index-shard.js",
     "compile:sass": "sass --watch web/sass:web/css"
   },
   "engines": {
