@@ -1,10 +1,10 @@
 {
   "name": "noa",
-  "version": "3.2.0",
+  "version": "3.2.01",
   "description": "Noa es un bot uwu",
   "main": "index.js",
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=7372 --gc_interval=100 index-shard.js",
+    "start": "node --optimize_for_size --max_old_space_size=7372 index-shard.js",
     "compile:sass": "sass --watch web/sass:web/css"
   },
   "engines": {
@@ -36,7 +36,7 @@
     "yandex-translate-api": "^1.0.1"
   },
   "repository": {
-    "url": "https://noa.wwmon.xyz/github"
+    "url": "https://noabot.xyz/github"
   },
   "devDependencies": {
     "sass": "^1.26.5"

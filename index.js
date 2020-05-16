@@ -6,6 +6,35 @@ let readdir = require('util').promisify(require('fs').readdir),
   server = http.createServer(app),
   port = 80,
   dbl = new (require('dblapi.js'))(client.config.dblKey, { webhookServer: server, webhookAuth: client.config.dblSkey }),
+  web = async () => {
+    try {
+      let DBLEvents = await readdir('./events/dbl');
+      DBLEvents.forEach((ev) => {
+        ev = ev.split('.');
+        dbl.webhook.on(ev[0], (...args) => new (require(`./events/dbl/${ev[0]}.js`))(client).run(...args));
+        console.log(`[D] El evento ${ev[0]}DBL cargó con éxito`);
+      });
+      app
+        .set('view engine', 'ejs')
+        .set('views', 'web/rutas')
+        .use(express.static(__dirname + '/web')) // Carga el directorio raíz
+        .use(express.static(__dirname + '/web/css')) // Carga el directorio que contiene los CSS
+        .get('/', (req, res) => res.render('index', { client })) // Directorio principal
+        .get('/support', (q, s) => s.redirect('https://discordapp.com/invite/wyVHNYc')) // Redirección support
+        .get('/invite', (q, s) => s.redirect('https://discordapp.com/oauth2/authorize?client_id=477950798949646336&scope=bot&permissions=829811958&response_type=code&redirect_uri=https://noabot.xyz/support')) // Redirección invite
+        .get('/dbl', (q, s) => s.redirect('https://top.gg/bot/477950798949646336')) // Redirección dbl
+        .get('/vote', (q, s) => s.redirect('https://top.gg/bot/477950798949646336/vote')) // Redirección dbl vote
+        .get('/github', (q, s) => s.redirect('https://github.com/wwmon/noa')) // Redirección github
+        .get('/donate', (q, s) => s.redirect('https://buymeacoff.ee/noa')) // Redirección buymeacoffee
+        .use((req, res, next) => res.status(404).render('404')); // 404 not found
+      server.listen(port, () => {
+        console.log(`Escuchando en ${port}`);
+      });
+      return 'La configuración de la web ha cargado con éxito';
+    } catch (e) {
+      console.error(e);
+    }
+  },
   init = async () => {
     try {
       let Commands = await readdir('./commands'),
@@ -32,35 +61,6 @@ let readdir = require('util').promisify(require('fs').readdir),
       else console.log('Ha ocurrido un error conectando con la base de datos');
       client.dbl = dbl;
       return 'La configuración inicial del bot ha cargado con éxito';
-    } catch (e) {
-      console.error(e);
-    }
-  },
-  web = async () => {
-    try {
-      let DBLEvents = await readdir('./events/dbl');
-      DBLEvents.forEach((ev) => {
-        ev = ev.split('.');
-        dbl.webhook.on(ev[0], (...args) => new (require(`./events/dbl/${ev[0]}.js`))(client).run(...args));
-        console.log(`[D] El evento ${ev[0]}DBL cargó con éxito`);
-      });
-      app
-        .set('view engine', 'ejs')
-        .set('views', 'web/rutas')
-        .use(express.static(__dirname + '/web')) // Carga el directorio raíz
-        .use(express.static(__dirname + '/web/css')) // Carga el directorio que contiene los CSS
-        .get('/', (req, res) => res.render('index', { client })) // Directorio principal
-        .get('/support', (q, s) => s.redirect('https://discordapp.com/invite/wyVHNYc')) // Redirección support
-        .get('/invite', (q, s) => s.redirect('https://discordapp.com/oauth2/authorize?client_id=477950798949646336&scope=bot&permissions=829811958&response_type=code&redirect_uri=https://noa.wwmon.xyz/support')) // Redirección invite
-        .get('/dbl', (q, s) => s.redirect('https://top.gg/bot/477950798949646336')) // Redirección dbl
-        .get('/vote', (q, s) => s.redirect('https://top.gg/bot/477950798949646336/vote')) // Redirección dbl vote
-        .get('/github', (q, s) => s.redirect('https://github.com/wwmon/noa')) // Redirección github
-        .get('/donate', (q, s) => s.redirect('https://buymeacoff.ee/noa')) // Redirección buymeacoffee
-        .use((req, res, next) => res.status(404).render('404')); // 404 not found
-      server.listen(port, () => {
-        console.log(`Escuchando en ${port}`);
-      });
-      return 'La configuración de la web ha cargado con éxito';
     } catch (e) {
       console.error(e);
     }

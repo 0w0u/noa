@@ -20,8 +20,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setColor(client.fns.selectColor('lightcolors'))
         .setAuthor('Invitación de ' + client.config.bot, client.user.displayAvatarURL())
         .setDescription('Veo que estas interesado por agregarme a tu servidor >.<\n¡Por aquí abajito te dejo algunos enlaces para que me puedas invitar!')
-        .addField('<:DBL:489519574698426369> Discord Bot List', '[¡Clic aquí!](https://noa.wwmon.xyz/dbl)', true)
-        .addField('🔗 Enlace Directo', '[¡Clic aquí!](https://noa.wwmon.xyz/invite)', true)
+        .addField('<:DBL:489519574698426369> Discord Bot List', '[¡Clic aquí!](https://noabot.xyz/dbl)', true)
+        .addField('🔗 Enlace Directo', '[¡Clic aquí!](https://noabot.xyz/invite)', true)
         .setFooter(client.config.bot + ' | Recuerda que para invitarme necesitas tener el permiso de: Administrar el servidor', message.author.displayAvatarURL());
       message.channel.send({ embed });
     } catch (e) {

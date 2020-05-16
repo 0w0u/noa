@@ -43,7 +43,7 @@ module.exports = class event {
             desc = desc.replace('{server}', member.guild.name);
             desc = desc.replace('{server:count}', member.guild.memberCount);
             let { body } = await get(`https://weez.pw/api/bienvenida?fondo=${image.fondo}&avatar=${member.user.displayAvatarURL()}&h1=${title}&h2=${desc}&color=${image.colorTexto.replace('#', '')}`).set('clave', client.config.weezKey);
-            channel.send({ files: [body.message] });
+            console.log(body.message);
           }
         }
       }
