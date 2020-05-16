@@ -16,6 +16,23 @@ module.exports = class command extends require('../../base/models/Command.js') {
   async run(message, args, data, embed) {
     let client = this.client;
     try {
+      if (!data.guild.welcome) {
+        data.guild.welcome = {
+          enabled: false,
+          message: {
+            enabled: true,
+            text: '¡Bienvenido **{user:name}** a **{server}**!',
+          },
+          image: {
+            enabled: false,
+            fondo: 'https://media.discordapp.net/attachments/674813833063301120/706576389251268650/ezgif.com-crop_waifu2x_art_scale_tta_2.png',
+            colorTexto: '#8C1489',
+            título: '¡Bienvenido {user:name}!',
+            descripción: 'Espero disfrutes tu estancia',
+          },
+        };
+      }
+      if (!data.guild.welcome.channel) data.guild.welcome.channel = undefined;
       if (!args[0]) message.channel.send(client.message({ emoji: 'red', razón: 'noargs necesitás proporcionar una opción', usage: this.help.usage(message.prefix), message }));
       else if (args[0].toLowerCase() === 'habilitar' || args[0].toLowerCase() === 'enable') {
         if (!args[1]) {

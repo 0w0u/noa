@@ -21,40 +21,6 @@ module.exports = class event {
       if (message.guild) {
         data.guild = await client.findOrCreateGuild({ id: message.guild.id });
         data.member = await client.findOrCreateMember({ id: message.member.user.id, guildID: message.guild.id });
-        if (!data.guild.welcome) {
-          data.guild.welcome = {
-            enabled: false,
-            message: {
-              enabled: true,
-              text: '¡Bienvenido **{user:name}** a **{server}**!',
-            },
-            image: {
-              enabled: false,
-              fondo: 'https://media.discordapp.net/attachments/674813833063301120/706576389251268650/ezgif.com-crop_waifu2x_art_scale_tta_2.png',
-              colorTexto: '#8C1489',
-              título: '¡Bienvenido {user:name}!',
-              descripción: 'Espero disfrutes tu estancia',
-            },
-          };
-        }
-        if (!data.guild.goodbye) {
-          data.guild.goodbye = {
-            enabled: false,
-            message: {
-              enabled: true,
-              text: '¡Adiós **{user:name}**! ¡Te extrañaremos!',
-            },
-            image: {
-              enabled: false,
-              fondo: 'https://media.discordapp.net/attachments/674813833063301120/706576389251268650/ezgif.com-crop_waifu2x_art_scale_tta_2.png',
-              colorTexto: '#8C1489',
-              título: '¡Adiós {user:name}!',
-              descripción: '¡Te extrañaremos!',
-            },
-          };
-        }
-        if (!data.guild.welcome.channel) data.guild.welcome.channel = undefined;
-        if (!data.guild.goodbye.channel) data.guild.goodbye.channel = undefined;
       }
       message.prefix = message.guild ? data.guild.prefix : client.config.prefix;
       if (message.author) {
@@ -89,7 +55,7 @@ module.exports = class event {
       }
       timestamps.set(message.author.id, now);
       setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-      if (data.user.blacklist.bl === true) return message.channel.send(client.message({ emoji: 'red', razón: `¡estás en lista negra del bot! Si crees que esto es un error, dirígete al servidor de soporte <https://noa.wwmon.xyz/support>`, message }));
+      if (data.user.blacklist.bl === true) return message.channel.send(client.message({ emoji: 'red', razón: `¡estás en lista negra del bot! Si crees que esto es un error, dirígete al servidor de soporte <https://noabot.xyz/support>`, message }));
       if (!cmd.config.botPermissions.includes('SEND_MESSAGES' || 'EMBED_LINKS')) cmd.config.botPermissions.push('SEND_MESSAGES', 'EMBED_LINKS');
       if (!cmd.config.enabled) return message.channel.send(client.message({ emoji: 'red', razón: 'este comando no se encuentra habilitado', message }));
       if (cmd.help.category === 'Moderación' && !client.config.owners.includes(message.author.id)) return message.channel.send(client.message({ emoji: 'red', razón: 'el módulo de moderación está deshabilitado por el momento', message }));
@@ -101,7 +67,7 @@ module.exports = class event {
         message.channel.send(client.message({ emoji: 'red', razón: 'antes de volvernos locos, dirígete a un canal NSFW, por mientras te dejo un gatito', message }), { files: [attach] });
         return;
       }
-      if (cmd.config.voteOnly && !(await client.dbl.hasVoted(message.author.id))) return message.channel.send(client.message({ emoji: 'red', razón: `necesitas votar por ${client.config.bot} en \`top.gg\` para tener acceso a este comando <https://noa.wwmon.xyz/vote/>`, message }));
+      if (cmd.config.voteOnly && !(await client.dbl.hasVoted(message.author.id))) return message.channel.send(client.message({ emoji: 'red', razón: `necesitas votar por ${client.config.bot} en \`top.gg\` para tener acceso a este comando <https://noabot.xyz/vote/>`, message }));
       if (message.guild) {
         let a = [];
         cmd.config.memberPermissions.forEach((p) => {

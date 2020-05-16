@@ -27,7 +27,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .addField('• Prefijo', 'Para utilizar mis comandos debes poner el prefijo **`' + message.prefix + '`** antes de cada uno\nTambién podrás mencionar a ' + client.config.bot + ' como prefijo (' + client.user.toString() + ' help)')
           .addField('• Ayuda', 'Puedes ver la ayuda detallada de algún comando usando `' + message.prefix + 'help <comando>`')
           .addField('• Lista de comandos', 'Si quieres ver mi lista de comandos, utiliza **`' + message.prefix + 'commands`** y recibirás la lista de comandos por mensaje privado o **`' + message.prefix + 'commands --nodm`** para que lo manden en el mismo canal')
-          .addField('• Enlaces:', '[Invítame ❤️](https://noa.wwmon.xyz/invite) | [Soporte ❓](https://noa.wwmon.xyz/support) | [Donaciones 💝](https://noa.wwmon.xyz/donate) | [DBL 🤖](https://noa.wwmon.xyz/dbl) | [Vota 📥](https://noa.wwmon.xyz/vote) | [Web (WIP) 🌐](https://noa.wwmon.xyz/)')
+          .addField('• Enlaces:', '[Invítame ❤️](https://noabot.xyz/invite) | [Soporte ❓](https://noabot.xyz/support) | [Donaciones 💝](https://noabot.xyz/donate) | [DBL 🤖](https://noabot.xyz/dbl) | [Vota 📥](https://noabot.xyz/vote) | [Web (WIP) 🌐](https://noabot.xyz/)')
           .setImage(client.config.banner)
           .setFooter('Desarrollado por: ' + o.tag + ' y ' + mon.tag)
           .setTimestamp();
@@ -39,7 +39,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (ayu.config.cooldown === 0) ayu.config.cooldown = 2.5;
         embed
           .setTitle('Información del comando: ' + (ayu.help.name[0].toUpperCase() + ayu.help.name.slice(1)))
-          .addField('• Descripción', ayu.help.description.length < 1 ? '**Sin descripción**\nSi ves esto, por favor reportalo en mi servidor de soporte: https://noa.wwmon.xyz/support' : ayu.help.description)
+          .addField('• Descripción', ayu.help.description.length < 1 ? '**Sin descripción**\nSi ves esto, por favor reportalo en mi servidor de soporte: https://noabot.xyz/support' : ayu.help.description)
           .addField('• Uso', ayu.help.usage(message.prefix))
           .addField('• Ejemplo', ayu.help.examples(message.prefix).length === `${message.prefix.length + 2}` ? 'Ninguno' : ayu.help.examples(message.prefix))
           .addField('• Alias(es)', ayu.config.aliases.length < 1 ? 'Ningúno' : `\`${ayu.config.aliases.join('`, `')}\``, true)

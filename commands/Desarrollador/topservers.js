@@ -30,8 +30,8 @@ module.exports = class command extends require('../../base/models/Command.js') {
         .setFooter(`Página ${page} de ${pages.length}`)
         .setDescription(pages[page - 1]);
       let msg = await message.channel.send({ embed });
-      msg.react('<:ncForward:704010183340457996>');
-      msg.react('<:ncBackward:704011171803430934>');
+      msg.react('704010183340457996');
+      msg.react('704011171803430934');
       let backwards = msg.createReactionCollector((reaction, user) => reaction.emoji.name === '⏪' && user.id === message.author.id, { time: 60000 }),
         forwards = msg.createReactionCollector((reaction, user) => reaction.emoji.name === '⏩' && user.id === message.author.id, { time: 60000 });
       backwards.on('collect', (r) => {
