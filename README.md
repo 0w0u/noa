@@ -3,7 +3,7 @@
 [![shieldDiscord](https://img.shields.io/discord/470667860360822794?color=f8bbd0&label=Noa&style=for-the-badge)](https://noabot.xyz/support)
 [![shieldGitHub](https://img.shields.io/github/stars/wwmon/noa?color=efb810&label=Stars&style=for-the-badge)](https://noabot.xyz/github)
 
-> Noa es un bot multipropósito blablabla
+> Noa es un bot multipropósito dedicado a la diversión de servidores y alguna que otra 'ayuda' con el servicio de administración
 
 ## Enlaces útiles
 
