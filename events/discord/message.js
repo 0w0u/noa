@@ -10,11 +10,6 @@ module.exports = class event {
       Weez = require('weez'),
       weez = new Weez.WeezAPI(client.config.weezKey);
     try {
-      let number = 0;
-      client.guilds.cache.forEach((x) => {
-        number += x.memberCount;
-      });
-      client.userCount = number;
       client.weez = weez;
       if (message.author.bot) return;
       data.user = await client.findOrCreateUser({ id: message.author.id });
@@ -49,8 +44,7 @@ module.exports = class event {
         let expirationTime = timestamps.get(message.author.id) + cooldownAmount;
         if (now < expirationTime) {
           let timeLeft = (expirationTime - now) / 1000;
-          let msg = await message.channel.send(client.message({ emoji: 'red', razón: `por favor espera ${timeLeft.toFixed(1)} segundo(s) antes de seguir utilizando el comando \`${cmd.help.name}\``, message }));
-          return;
+          message.channel.send(client.message({ emoji: 'red', razón: `por favor espera ${timeLeft.toFixed(1)} segundo(s) antes de seguir utilizando el comando \`${cmd.help.name}\``, message }));
         }
       }
       timestamps.set(message.author.id, now);

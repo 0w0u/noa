@@ -21,7 +21,7 @@ let readdir = require('util').promisify(require('fs').readdir),
         .use(express.static(__dirname + '/web/css')) // Carga el directorio que contiene los CSS
         .get('/', (req, res) => res.render('index', { client })) // Directorio principal
         .get('/support', (q, s) => s.redirect('https://discordapp.com/invite/wyVHNYc')) // Redirección support
-        .get('/invite', (q, s) => s.redirect('https://discordapp.com/oauth2/authorize?client_id=477950798949646336&scope=bot&permissions=829811958&response_type=code&redirect_uri=https://noabot.xyz/support')) // Redirección invite
+        .get('/invite', (q, s) => s.redirect('https://discordapp.com/oauth2/authorize?client_id=477950798949646336&scope=bot&permissions=829811958&response_type=code&redirect_uri=' + client.config.domain + '/support')) // Redirección invite
         .get('/dbl', (q, s) => s.redirect('https://top.gg/bot/477950798949646336')) // Redirección dbl
         .get('/vote', (q, s) => s.redirect('https://top.gg/bot/477950798949646336/vote')) // Redirección dbl vote
         .get('/github', (q, s) => s.redirect('https://github.com/wwmon/noa')) // Redirección github

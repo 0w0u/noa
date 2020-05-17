@@ -5,6 +5,11 @@ module.exports = class event {
   async run(member) {
     let client = this.client;
     try {
+      let number = 0;
+      client.guilds.cache.forEach((x) => {
+        number += x.memberCount;
+      });
+      client.userCount = number;
       let guild = await client.findOrCreateGuild({ id: member.guild.id });
       if (guild.goodbye.enabled) {
         let goodbye = guild.goodbye,
