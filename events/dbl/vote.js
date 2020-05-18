@@ -13,7 +13,7 @@ module.exports = class event {
           .setTitle('💞 ~ ¡Un usuario ha votado por ' + config.bot + '!')
           .setDescription('¡Tú también vota por ' + config.bot + ' [haciendo clic aquí](https://top.gg/bot/' + config.botID + '/vote)!')
           .addField('• Usuario', `~ Tag: **${user.tag}**\n~ ID: **${user.id}**`)
-          .addField('• Total de votos', `~ Este mes: **${client.dbl.vMPoints.toLocaleString()}**\n~ Desde siempre: **${client.vPoints.toLocaleString()}**`)
+          .addField('• Total de votos', `~ Este mes: **${client.vMPoints.toLocaleString()}**\n~ Desde siempre: **${client.vPoints.toLocaleString()}**`)
           .setTimestamp()
           .addField('• Multiplicador', client.dbl.isWeekend() ? '¡Fin de semana, tu voto cuenta x2!' : 'Sólamente los fines de semana');
       if (vote.type === 'test') embed.setFooter('(Voto de prueba)');
