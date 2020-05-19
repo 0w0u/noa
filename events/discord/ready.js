@@ -15,11 +15,11 @@ module.exports = class event {
       setInterval(() => {
         client.user.setActivity(elementos[Math.floor(elementos.length * Math.random())]);
       }, 30000);
-      let dbl = await require('node-superfetch')
+      let { body } = await require('node-superfetch')
         .get('https://top.gg/api/bots/' + client.config.botID)
         .set('Authorization', client.config.dblKey);
-      client.vMPoints = dbl.body.monthlyPoints;
-      client.vPoints = dbl.body.points;
+      client.vMPoints = body.monthlyPoints;
+      client.vPoints = body.points;
     } catch (e) {
       client.err({
         type: 'event',

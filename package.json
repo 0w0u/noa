@@ -1,10 +1,10 @@
 {
   "name": "noa",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "Noa es un bot uwu",
   "main": "index.js",
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=7372 index-shard.js",
+    "start": "node --optimize_for_size --max_old_space_size=7372 index.shard.js",
     "compile:sass": "sass --watch web/sass:web/css"
   },
   "engines": {
@@ -17,9 +17,9 @@
     "cowsay": "^1.4.0",
     "cpu-stat": "^2.0.1",
     "dblapi.js": "^2.4.0",
-    "discord-oauth2": "^2.1.0",
+    "discord-oauth2": "^2.2.0",
     "discord.js": "^12.2.0",
-    "ejs": "^3.1.2",
+    "ejs": "^3.1.3",
     "express": "^4.17.1",
     "gif-search": "^2.1.0",
     "isgd": "^1.1.3",
@@ -27,12 +27,11 @@
     "mathjs": "^7.0.0",
     "moment": "^2.25.1",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.9.14",
+    "mongoose": "^5.9.15",
     "ms": "^2.1.2",
     "node-superfetch": "^0.1.10",
     "socket.io": "^2.3.0",
     "weather-js": "^2.0.0",
-    "weez": "^1.5.7",
     "yandex-translate-api": "^1.0.1"
   },
   "repository": {

@@ -7,6 +7,10 @@ module.exports = class event {
     try {
       let user = await client.users.fetch(vote.user),
         config = require('../../config.js'),
+        { body } = await require('node-superfetch')
+          .get('https://top.gg/api/bots/' + client.config.botID)
+          .set('Authorization', client.config.dblKey),
+        wknd = await require('node-superfetch').get('https://top.gg/api/weekend').set('Authorization', client.config.dblKey),
         embed = new (require('discord.js').MessageEmbed)()
           .setColor(client.fns.selectColor('lightcolors'))
           .setThumbnail(user.displayAvatarURL())
@@ -15,9 +19,11 @@ module.exports = class event {
           .addField('• Usuario', `~ Tag: **${user.tag}**\n~ ID: **${user.id}**`)
           .addField('• Total de votos', `~ Este mes: **${client.vMPoints.toLocaleString()}**\n~ Desde siempre: **${client.vPoints.toLocaleString()}**`)
           .setTimestamp()
-          .addField('• Multiplicador', client.dbl.isWeekend() ? '¡Fin de semana, tu voto cuenta x2!' : 'Sólamente los fines de semana');
+          .addField('• Multiplicador', wknd.body.is_weekend ? '¡Fin de semana, tu voto cuenta x2!' : 'Sólamente los fines de semana');
       if (vote.type === 'test') embed.setFooter('(Voto de prueba)');
       client.votes.send(embed);
+      client.vMPoints = body.monthlyPoints;
+      client.vPoints = body.points;
     } catch (e) {
       client.err({
         type: 'event',

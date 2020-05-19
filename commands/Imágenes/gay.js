@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await client.weez.rainbow(url);
+        { body } = await get(`https://weez.pw/api/rainbow?avatar=${url}`).set('clave', client.config.weezKey);
+      message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'gay.png')] });
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'gay.png'));
     } catch (e) {
       client.err({
         type: 'command',
