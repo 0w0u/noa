@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await client.weez.triggered(url);
+        { body } = await get(`https://weez.pw/api/triggered?avatar=${url}`).set('clave', client.config.weezKey);
+      message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'trigger.gif')] });
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'triggered.gif'));
     } catch (e) {
       client.err({
         type: 'command',

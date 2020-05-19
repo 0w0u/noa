@@ -32,7 +32,6 @@
     "node-superfetch": "^0.1.10",
     "socket.io": "^2.3.0",
     "weather-js": "^2.0.0",
-    "weez": "^1.6.0",
     "yandex-translate-api": "^1.0.1"
   },
   "repository": {

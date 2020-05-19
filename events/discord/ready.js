@@ -20,9 +20,6 @@ module.exports = class event {
         .set('Authorization', client.config.dblKey);
       client.vMPoints = body.monthlyPoints;
       client.vPoints = body.points;
-      let Weez = require('weez'),
-        weez = new Weez.WeezAPI(client.config.weezKey);
-      client.weez = weez;
     } catch (e) {
       client.err({
         type: 'event',

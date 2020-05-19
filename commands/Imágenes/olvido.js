@@ -56,9 +56,9 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        img = await client.weez.olvido(url);
+        { body } = await get(`https://weez.pw/api/olvido?avatar=${url}`).set('clave', client.config.weezKey);
+      message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'olvido.png')] });
       msg.delete();
-      message.channel.send(new (require('discord.js').MessageAttachment)(img, 'olvido.png'));
     } catch (e) {
       client.err({
         type: 'command',
