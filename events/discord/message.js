@@ -6,23 +6,16 @@ module.exports = class event {
     let client = this.client,
       cooldowns = client.cooldowns,
       data = {},
-      embed = new (require('discord.js').MessageEmbed)(),
-      Weez = require('weez'),
-      weez = new Weez.WeezAPI(client.config.weezKey);
+      embed = new (require('discord.js').MessageEmbed)();
     try {
-      client.weez = weez;
       if (message.author.bot) return;
       data.user = await client.findOrCreateUser({ id: message.author.id });
-      if (message.guild) {
+      if (message.member) {
         data.guild = await client.findOrCreateGuild({ id: message.guild.id });
         data.member = await client.findOrCreateMember({ id: message.member.user.id, guildID: message.guild.id });
       }
       message.prefix = message.guild ? data.guild.prefix : client.config.prefix;
-      if (message.author) {
-        if (client.afk.get(message.author.id)) client.afk.delete(message.author.id), message.channel.send(client.message({ emoji: 'green', razón: '¡bienvenid@ de nuevo!', message }));
-      }
-      //if (message.guild) {}
-      //if (message.member) {}
+      if (client.afk.get(message.author.id)) client.afk.delete(message.author.id), message.channel.send(client.message({ emoji: 'green', razón: '¡bienvenid@ de nuevo!', message }));
       if (message.mentions.users.first()) {
         let hijo = client.afk.get(message.mentions.users.first().id);
         if (hijo) message.channel.send(client.message({ emoji: 'red', razón: 'el usuario que has mencionado está AFK por: ' + hijo.reason, message }));
