@@ -47,7 +47,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       async function send(user) {
-        message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
         if (user === message.author) return message.channel.send(client.message({ emoji: 'sad', razón: 'no me gusta que te muerdas', message }));
         else if (user === client.user) return message.channel.send(client.message({ emoji: '<:noaMonGun:672934974319493150>', razón: 'ni lo intentes', message }));
         embed

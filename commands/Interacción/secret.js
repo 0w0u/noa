@@ -47,7 +47,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       async function send(user) {
-        message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
         if (user === message.author) return message.channel.send(client.message({ emoji: 'red', razón: 'no te puedes contar un secreto a ti mism@', message }));
         else if (user === client.user) return message.channel.send(client.message({ emoji: 'red', razón: 'no soy esa clase de bots que guardan secretos...', message }));
         embed
@@ -56,17 +55,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setImage(client.fns.gifs(help.name));
         message.channel.send({ embed });
       }
-      /*
-      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
-      if (message.mentions.users.first() === message.author) return message.channel.send(client.message({ emoji: 'red', razón: 'no te puedes contar un secreto a ti mism@', usage: this.help.usage(message.prefix), message }));
-      if (message.mentions.users.first() === client.user) return message.channel.send(client.message({ emoji: 'red', razón: 'no soy esa clase de bots que guardan secretos...', usage: this.help.usage(message.prefix), message }));
-      if (message.mentions.users.size < 1) return message.channel.send(client.message({ emoji: 'red', razón: 'noargs ¿a quién le contarás este secreto?', usage: this.help.usage(message.prefix), message }));
-      embed
-        .setColor(client.fns.selectColor('lightcolors'))
-        .setDescription('**' + message.author.username + '** le dijo un secreto a **' + message.mentions.users.first().username + '**')
-        .setImage(client.fns.gifs(this.help.name));
-      message.channel.send({ embed });
-      */
     } catch (e) {
       client.err({
         type: 'command',

@@ -47,7 +47,7 @@ module.exports = class client extends Client {
   err(data) {
     let embed = new MessageEmbed().setColor(this.fns.selectColor('lightcolors')).setDescription(`\`\`\`js\n${data.error}\n\`\`\``);
     if (data.type === 'command') {
-      data.message.channel.send(this.message({ emoji: 'red', razón: `ha ocurrido un error\nPor favor repórtalo en mi servidor de soporte <${this.config.support}>`, message: data.message }));
+      data.message.channel.send(this.message({ emoji: 'red', razón: `ha ocurrido un error\nPor favor repórtalo en mi servidor de soporte <${this.config.domain}/support>`, message: data.message }));
       embed.setTitle(`\`comando\`: Error en \`${data.name}\``);
     } else if (data.type === 'event') {
       embed.setTitle(`\`evento\`: Error en \`${data.name}\``);

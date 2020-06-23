@@ -22,7 +22,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (message.mentions.roles.first()) message.mentions.roles.array().forEach((x) => (texto = texto.replace(`<@&${x.id}>`, `@${x.name}`)));
         if (message.mentions.channels.first()) message.mentions.channels.array().forEach((x) => (texto = texto.replace(`<#${x.id}>`, `#${x.name}`)));
         let msg = await message.channel.send(client.fns.reply('generating', message)),
-          { body } = await get(`https://weez.pw/api/logro?texto=${texto}`).set('clave', client.config.weezKey);
+          { body } = await require('node-superfetch').get(`https://weez.pw/api/logro?texto=${texto}`).set('clave', client.config.weezKey);
         message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'logro.png')] });
         msg.delete();
       }
