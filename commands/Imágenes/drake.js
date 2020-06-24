@@ -4,7 +4,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       name: 'drake',
       description: 'Genera el meme de Drake "Yes / No" con tu avatar y el de otro usuario mencionado',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix}drake @mon#0010\``,
+      examples: (prefix) => `\`${prefix}drake @mon#0001\``,
       enabled: true,
       cooldown: 4,
       aliases: [],
@@ -56,7 +56,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        { body } = await get(`https://weez.pw/api/drake?si=${message.author.displayAvatarURL()}&no=${url}`).set('clave', client.config.weezKey);
+        { body } = await require('node-superfetch').get(`https://weez.pw/api/drake?si=${message.author.displayAvatarURL()}&no=${url}`).set('clave', client.config.weezKey);
       message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'drake.png')] });
       msg.delete();
     } catch (e) {

@@ -56,7 +56,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       let msg = await message.channel.send(client.fns.reply('generating', message)),
-        { body } = await get(`https://weez.pw/api/bob?op1=${url}`).set('clave', client.config.weezKey);
+        { body } = await require('node-superfetch').get(`https://weez.pw/api/bob?op1=${url}`).set('clave', client.config.weezKey);
       message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'bob.png')] });
       msg.delete();
     } catch (e) {

@@ -4,7 +4,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       name: 'wanted',
       description: 'Genera un avatar con un avatar en un postér de "El más búscado"',
       usage: (prefix) => `\`${prefix}wanted [@usuario]\``,
-      examples: (prefix) => `\`${prefix}wanted\``,
+      examples: (prefix) => `\`${prefix}wanted mon#0001\``,
       enabled: false,
       cooldown: 5,
       aliases: [],
