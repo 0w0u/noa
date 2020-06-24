@@ -49,7 +49,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
         }
       }
       async function send(user) {
-        message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
         if (user === message.author) return message.channel.send(client.message({ emoji: 'red', razón: `si solamente quieres saludar usa \`${message.prefix}hello ^^\``, message }));
         else if (user === client.user) return message.channel.send(client.message({ emoji: 'heart', razón: 'holiii~', message }));
         embed
@@ -58,17 +57,6 @@ module.exports = class command extends require('../../base/models/Command.js') {
           .setImage(client.fns.gifs(help.name));
         message.channel.send({ embed });
       }
-      /*
-      message.channel.send(client.message({ emoji: ':microbe:', razón: '¡evita transmitir el **covid-19**!', message }));
-      if (message.mentions.users.first() === message.author) return message.channel.send(client.message({ emoji: 'heart', razón: `si solamente quieres saludar usa \`${message.prefix}hello ^^\``, usage: this.help.usage(message.prefix), message }));
-      if (message.mentions.users.first() === client.user) return message.channel.send(client.message({ emoji: 'heart', razón: 'holiii~', usage: this.help.usage(message.prefix), message }));
-      if (message.mentions.users.size < 1) return message.channel.send(client.message({ emoji: 'red', razón: 'noargs menciona a esa persona que quieres ', usage: this.help.usage(message.prefix), message }));
-      embed
-        .setColor(client.fns.selectColor('lightcolors'))
-        .setDescription('**' + message.author.username + '** saluda a **' + message.mentions.users.first().username + '**')
-        .setImage(client.fns.gifs(this.help.name));
-      message.channel.send({ embed });
-      */
     } catch (e) {
       client.err({
         type: 'command',
