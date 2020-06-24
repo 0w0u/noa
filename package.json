@@ -1,6 +1,6 @@
 {
   "name": "noa",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "Noa es un bot uwu",
   "main": "index.js",
   "scripts": {
