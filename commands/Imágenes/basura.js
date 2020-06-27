@@ -4,7 +4,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
       name: 'basura',
       description: 'Genera una imagen con un avatar de un meme de Gravity Falls',
       usage: (prefix) => `\`${prefix + this.help.name} [@usuario|+imagen]\``,
-      examples: (prefix) => `\`${prefix + this.help.name} mon#0010\``,
+      examples: (prefix) => `\`${prefix + this.help.name} mon#0001\``,
       enabled: true,
       cooldown: 5,
       aliases: [],

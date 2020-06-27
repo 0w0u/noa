@@ -28,7 +28,7 @@ module.exports = class command extends require('../../base/models/Command.js') {
         if (texto.includes('#')) texto = texto.replace('#', '%23');
         if (texto.includes('&')) texto = texto.replace('&', '%26');
         let msg = await message.channel.send(client.fns.reply('generating', message)),
-          { body } = await get(`https://weez.pw/api/trump?texto=${text}`).set('clave', client.config.weezKey);
+          { body } = await require('node-superfetch').get(`https://weez.pw/api/trump?texto=${texto}`).set('clave', client.config.weezKey);
         message.channel.send({ files: [new (require('discord.js').MessageAttachment)(body, 'trump.png')] });
         msg.delete();
       }
