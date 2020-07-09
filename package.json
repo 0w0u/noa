@@ -27,7 +27,7 @@
     "mathjs": "^7.0.2",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.9.20",
+    "mongoose": "^5.9.22",
     "ms": "^2.1.2",
     "node-superfetch": "^0.1.10",
     "socket.io": "^2.3.0",
@@ -38,6 +38,6 @@
     "url": "https://noabot.xyz/github"
   },
   "devDependencies": {
-    "sass": "^1.26.9"
+    "sass": "^1.26.10"
   }
 }
